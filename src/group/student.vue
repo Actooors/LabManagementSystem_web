@@ -12,7 +12,7 @@
     name: "student",
     components: {
       HeadBar
-    }
+    },
   }
 </script>
 

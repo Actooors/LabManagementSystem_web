@@ -50,14 +50,17 @@
     data() {
       return {
         username: '沐雨之风',
-        activeIndex: '1',
+        activeIndex: ''
       }
     },
     methods: {
       handleSelect(key, keyPath) {
+        this.activeIndex = key
         this.$router.push({name: key})
-        console.log(key, keyPath);
       }
+    },
+    created() {
+      this.activeIndex = this.$router.currentRoute.name;
     }
   }
 </script>
