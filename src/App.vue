@@ -10,7 +10,3 @@
     name: 'App'
   }
 </script>
-
-<style>
-  @import 'common/css/reset.css';
-</style>

@@ -1,12 +1,19 @@
 <template>
-
-  <router-view></router-view>
+  <div>
+    <head-bar></head-bar>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "student"
+  import HeadBar from 'components/headBar/headBar'
+
+  export default {
+    name: "student",
+    components: {
+      HeadBar
     }
+  }
 </script>
 
 <style scoped>
