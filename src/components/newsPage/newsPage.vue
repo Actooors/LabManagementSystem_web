@@ -5,7 +5,9 @@
         <div class="card-head-container">
           <a :href="item.url" class="card-title-link"><h1 v-text="item.title" class="card-title"></h1></a>
           <div class="card-article-props">
-            <p><span class="el-icon-date" /><time :datetime="item.time">发表于{{item.time.split('T')[0]}}</time></p>
+            <p><span class="el-icon-date"/>
+              <time :datetime="item.time">发表于{{item.time.split('T')[0]}}</time>
+            </p>
             <p>By {{item.author}}</p>
           </div>
         </div>
@@ -13,7 +15,9 @@
           <div class="card-image" v-if="item.imgurl">
             <img v-lazy="item.imgurl">
           </div>
-          <div class="card-content" v-text="item.overview"></div>
+          <div class="card-content">
+            <p class="content-para" v-text="item.overview" v-once></p>
+          </div>
         </div>
       </el-card>
     </div>
@@ -23,6 +27,8 @@
 </template>
 
 <script>
+  import shave from 'shave'
+
   export default {
     name: "newsPage",
     data() {
@@ -37,7 +43,6 @@
           '概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述' +
           '这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是' +
           '概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述',
-
         }, {
           title: '恭喜恭喜恭喜你',
           url: 'https://www.baidu.com',
@@ -48,6 +53,23 @@
           '这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是' +
           '概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述'
         }]
+      }
+    },
+    mounted() {
+      this.shaveIt()
+      var timer = null
+      let that = this
+      window.onresize = () => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          that.shaveIt()
+        }, 100)
+      }
+    },
+    methods: {
+      shaveIt() {
+        let maxheight = 283
+        shave('.content-para', maxheight);
       }
     }
   }

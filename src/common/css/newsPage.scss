@@ -2,6 +2,14 @@
 
 $color-deepBlue: #3E5D71;
 $color-lightBlue: #6E87AA;
+@media screen and (min-width: 1024px) {
+  /*电脑端*/
+  .root-wrapper {
+    position: relative;
+    top: 61px;
+  }
+}
+
 .content {
   position: relative;
   padding: {
@@ -45,7 +53,7 @@ $color-lightBlue: #6E87AA;
     }
     .card-inner-container {
       display: flex;
-      max-height: 280px;
+      max-height: 330px;
       border-top: 1px solid $--border-color-base;
       padding-top: .8em;
       margin-top: .5em;
@@ -64,9 +72,7 @@ $color-lightBlue: #6E87AA;
         flex: {
           shrink: 10;
         }
-        overflow: hidden;
         min-width: 8em;
-        text-overflow: ellipsis;
         margin: 1.2em 1.2em 1.2em 0.8em;
         font-size: $--font-size-large
       }
