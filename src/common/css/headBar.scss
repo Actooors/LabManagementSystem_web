@@ -1,0 +1,21 @@
+.align-right {
+  /*text-align: right;*/
+  float: right
+}
+
+.HeaderRight {
+  font-size: 16px;
+}
+
+@media screen and (min-width: 1024px) {
+  /*电脑端*/
+  .HeadBar {
+    position: fixed;
+    top:0;
+    left: 0;
+    right:0;
+    z-index: 500;
+    padding: 0 5em;
+  }
+}
+
