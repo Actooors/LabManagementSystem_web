@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Login from 'group/login'
 import Student from 'group/student'
 import NewsPage from 'components/newsPage/newsPage'
-
+import MainPage from 'components/mainPage/mainPage'
 Vue.use(Router)
 
 export default new Router({
@@ -22,8 +22,8 @@ export default new Router({
         redirect: {name: 'index'},
       }, {
         path: 'index',
-        name: 'index',
-        component: NewsPage
+        name: 'mainPage',
+        component: MainPage
       }, {
         path: 'news',
         name: 'newsPage',

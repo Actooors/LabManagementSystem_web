@@ -8,10 +8,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 import FastClick from 'fastclick'
 import 'normalize.css'
 import VueLazyload from 'vue-lazyload'
-
+import $ from "jquery"
+import './assets/css/bootstrap.min.css'
+import './assets/js/bootstrap.min'
 
 Vue.use(VueLazyload)
-
+// Vue.use(Bootstrap);
 Vue.use(Element)
 Vue.config.productionTip = false
 
