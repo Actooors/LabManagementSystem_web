@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div id="myCarousel" class="carousel slide" style="margin-top: 10%">
+  <div id="myCarousel" class="carousel slide">
     <!-- 轮播（Carousel）指标 -->
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -8,15 +8,15 @@
       <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
     <!-- 轮播（Carousel）项目 -->
-    <div class="carousel-inner">
+    <div id="carousel" class="carousel-inner">
       <div class="item active">
-        <img src="slide3.png" alt="First slide">
+        <img src="../../assets/img/鬼怪.jpg" alt="First slide">
       </div>
       <div class="item">
-        <img src="/src/assets/img/鬼怪.jpg" alt="Second slide">
+        <img src="../../assets/img/鬼怪.jpg" alt="Second slide">
       </div>
       <div class="item">
-        <img src="/src/assets/img/鬼怪.jpg" alt="Third slide">
+        <img src="../../assets/img/鬼怪.jpg" alt="Third slide">
       </div>
     </div>
     <!-- 轮播（Carousel）导航 -->
@@ -38,8 +38,13 @@ export default {
 }
 </script>
 <style scoped>
-
-
+img{
+ width:100%
+}
+#carousel{
+  height:500px;
+  overflow: hidden;
+}
 
 </style>
 
