@@ -1,18 +1,23 @@
 <template>
   <div>
     <carousel :style="carouselStyle"></carousel>
+    <div class="container">
+      <div class="col-md-4 col-md-offset-8">
+        <calender></calender>
+      </div>
+    </div>
     <!--<p>lll</p>-->
   </div>
 
 </template>
 
 <script>
-
   import Carousel from 'components/carousel/carousel'
-
+  import Calender from 'components/calender/calender';
   export default {
     name: "mainPage",
     components: {
+      Calender,
       Carousel
     },
     data() {
@@ -44,6 +49,7 @@
   }
 </script>
 <style scoped>
-
-
+.container{
+  margin-top: 20px;
+}
 </style>
