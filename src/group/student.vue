@@ -1,6 +1,6 @@
 <template>
   <div>
-    <head-bar></head-bar>
+    <head-bar :key-height="headBarKeyHeight"></head-bar>
     <router-view></router-view>
     <footer-bar></footer-bar>
   </div>
@@ -16,6 +16,11 @@
       FooterBar,
       HeadBar
     },
+    computed: {
+      headBarKeyHeight() {
+        return this.$route.name === 'mainPage' ? window.innerHeight : -1
+      }
+    }
   }
 </script>
 

@@ -7,6 +7,24 @@
       </div>
     </div>
     <!--<p>lll</p>-->
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
   </div>
 
 </template>
@@ -28,9 +46,9 @@
     methods: {
       carouselFitScreen() {
         let screenHeight = window.innerHeight;
-        let headbarHeight = document.getElementById('headbar').offsetHeight;
+        // let headbarHeight = document.getElementById('headbar').offsetHeight;
         // console.log(screenHeight, headbarHeight)
-        this.carouselStyle = 'height: ' + (screenHeight - headbarHeight).toString() + 'px;';
+        this.carouselStyle = 'height: ' + screenHeight.toString() + 'px';
         // console.log(this.carouselStyle)
       }
     },

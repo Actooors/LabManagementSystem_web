@@ -1,0 +1,39 @@
+#headbar ul {
+  li, li > * {
+    font-size: 18px;
+    background: unset !important;
+    text-decoration: none;
+
+  }
+  li{
+    &:hover {
+      background: rgba(255, 255, 255, .3) !important;
+    }
+    &:active {
+      color: #0f0f0f;
+    }
+  }
+}
+
+.is-active {
+  background: rgba(255, 255, 255, .15) !important;
+} #headbar ul {
+    li, li > * {
+      font-size: 18px;
+      background: unset !important;
+      text-decoration: none;
+
+    }
+    li{
+      &:hover {
+        background: rgba(255, 255, 255, .3) !important;
+      }
+      &:active {
+        color: #0f0f0f;
+      }
+    }
+    .is-active {
+      background: rgba(255, 255, 255, .15) !important;
+    }
+  }
+

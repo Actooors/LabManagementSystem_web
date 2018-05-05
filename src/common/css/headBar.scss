@@ -7,17 +7,25 @@
   font-size: 16px;
 }
 
+.headbar {
+  height: 60px;
+}
+
+.HeadBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: 0;
+  border-bottom: 0;
+  z-index: 500;
+  background-color: rgb(84, 92, 100);
+}
+
+
 @media screen and (min-width: 1024px) {
   /*电脑端*/
   .HeadBar {
-    position: relative;
-    top:0;
-    left: 0;
-    right:0;
-    z-index: 500;
     padding: 0 5em;
-    margin-bottom: 0;
-    border-bottom: 0;
   }
 }
-
