@@ -6,7 +6,7 @@
           <div class="col-md-4 hidden-sm hidden-xs">
             <img src="../../assets/img/shu.jpg"/>
           </div>
-          <div class="col-md-8 hidden-sm hidden-xs">
+          <div class="col-md-8 hidden-sm hidden-xs ">
             <p>
               <a target="_blank" href="http://www.ces.shu.edu.cn/Default.aspx">
                 School of Computer Engineering and Science Shanghai University
@@ -43,8 +43,8 @@ export default {
     left: 0;
     right: 0;
     /*bottom: 0px;*/
+    border-top: 1px solid gray;
     position: absolute;
-    border-top:1px solid gray;
     padding-top:10px;
 }
 a{
@@ -63,6 +63,9 @@ a{
   .center{
     display: flex;
     align-items: center;
+  }
+  p:last-child{
+    margin-bottom: 0px;
   }
 
 </style>

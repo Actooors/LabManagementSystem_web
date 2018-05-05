@@ -34,15 +34,16 @@
     data() {
       return {
         imageurls: [
-          require('../../assets/img/鬼怪海浪.jpg'),
-          require('../../assets/img/鬼怪.jpg')
+          require('../../assets/img/shu1.jpg'),
+          require('../../assets/img/shu2.jpg'),
+          require('../../assets/img/shu3.jpg')
         ],
       }
 
     },
     computed: {
       backgrounds() {
-        var arr = []
+        var arr = [];
         for (let item in this.imageurls) {
           let obj = {background: `url(${this.imageurls[item]}) no-repeat center center`}
           arr.push(obj)
@@ -63,7 +64,7 @@
 
 
   .carousel {
-    overflow: hidden;
+    /*overflow: hidden;*/
     height: 100%;
   }
 
