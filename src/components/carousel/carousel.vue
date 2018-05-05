@@ -1,22 +1,17 @@
 <template>
-<div>
-  <div id="myCarousel" class="carousel slide">
-    <!-- 轮播（Carousel）指标 -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <!-- 轮播（Carousel）项目 -->
-    <div id="carousel" class="carousel-inner">
-      <div class="item active">
-        <img src="../../assets/img/鬼怪.jpg" alt="First slide">
-      </div>
-      <div class="item">
-        <img src="../../assets/img/鬼怪.jpg" alt="Second slide">
-      </div>
-      <div class="item">
-        <img src="../../assets/img/鬼怪.jpg" alt="Third slide">
+  <div>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- 轮播（Carousel）指标 -->
+      <ol class="carousel-indicators">
+        <li v-for="(background,index) in backgrounds"
+             :class="{'active':index===0}"
+            data-target="#myCarousel" :data-slide-to="index"></li>
+      </ol>
+      <!-- 轮播（Carousel）项目 -->
+      <div class="carousel-inner">
+        <div v-for="(background,index) in backgrounds"
+        :class="{'item':true,'active':index===0}"
+        :style="background"></div>
       </div>
     </div>
     <!-- 轮播（Carousel）导航 -->
@@ -29,22 +24,52 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-  </div>
 </template>
 <script>
-export default {
-  name:"carousel",
 
-}
+  // document.getElementById("myCarousel").carousel('cycle', {interval: 2000});
+  // // console.log($(window).height())
+  export default {
+    name: "carousel",
+    data() {
+      return {
+        imageurls: [
+          require('../../assets/img/鬼怪海浪.jpg'),
+          require('../../assets/img/鬼怪.jpg')
+        ],
+      }
+
+    },
+    computed: {
+      backgrounds() {
+        var arr = []
+        for (let item in this.imageurls) {
+          let obj = {background: `url(${this.imageurls[item]}) no-repeat center center`}
+          arr.push(obj)
+        }
+        return arr
+      }
+    },
+    // methods:{
+    //         height:
+    // }
+    //
+  }
+  // window.onresize = () => {
+  //   this.screenHeight = 'height:' + $(window).height() + 'px';
+  // }
 </script>
 <style scoped>
-img{
- width:100%
-}
-#carousel{
-  height:500px;
-  overflow: hidden;
-}
+
+
+  .carousel {
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .carousel-inner, .carousel-inner .item {
+    height: 100%;
+  }
 
 </style>
 

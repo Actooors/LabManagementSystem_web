@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="headbar">
     <el-menu
       :default-active="activeIndex"
       class="HeadBar"
@@ -9,7 +9,7 @@
       text-color="#fff"
       active-text-color="#ffd04b">
       <!--index与router的name相同-->
-      <el-menu-item index="index">首页</el-menu-item>
+      <el-menu-item index="mainPage">首页</el-menu-item>
       <el-menu-item index="newsPage">新闻</el-menu-item>
       <el-submenu index="2">
         <template slot="title">话题</template>
