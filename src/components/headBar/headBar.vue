@@ -68,7 +68,7 @@
         this.$router.push({name: key})
       },
       adjustHeadBarOnScroll() {
-        let scrollTop = document.body.scrollTop + document.documentElement.scrollTop
+        let scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
         // console.log(document.body.scrollTop, document.documentElement.scrollTop)
         if (this.solid && scrollTop <= this.keyHeight) {
           this.solid = false

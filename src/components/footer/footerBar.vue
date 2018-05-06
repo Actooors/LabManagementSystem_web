@@ -36,7 +36,7 @@ export default {
 
 <style scoped>
 #footer{
-    margin: 300px auto 0 auto;
+    margin: 0px auto 0 auto;
     text-align: center;
     height: 180px;
     width: 85%;

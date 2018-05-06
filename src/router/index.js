@@ -4,8 +4,9 @@ import Login from 'group/login'
 import Student from 'group/student'
 import NewsPage from 'components/newsPage/newsPage'
 import MainPage from 'components/mainPage/mainPage'
-Vue.use(Router)
+import contactUsPage from  'components/contactUsPage/contactUsPage'
 
+Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
@@ -28,6 +29,10 @@ export default new Router({
         path: 'news',
         name: 'newsPage',
         component: NewsPage
+      },{
+        path: 'contactus',
+        name: 'contactUsPage',
+        component: contactUsPage
       }]
     }
   ]

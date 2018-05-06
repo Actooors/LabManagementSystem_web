@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000" data-pause="none">
       <!-- 轮播（Carousel）指标 -->
       <ol class="carousel-indicators">
         <li v-for="(background,index) in backgrounds"
@@ -26,7 +26,6 @@
   </div>
 </template>
 <script>
-
   // document.getElementById("myCarousel").carousel('cycle', {interval: 2000});
   // // console.log($(window).height())
   export default {

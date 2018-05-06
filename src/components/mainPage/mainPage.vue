@@ -13,16 +13,15 @@
                     <img
                       :src="url">
                   </div>
-                  <div class="col-xs-8">
+                  <div class="col-xs-8 content">
                       {{content}}
                   </div>
                 </div>
-
               </li>
             </ul>
           </div>
           <div class="col-xs-12 line">
-          <div class="col-xs-4 col-xs-offset-7 calender">
+          <div class="col-xs-6 col-xs-offset-6 calender">
             <calender></calender>
           </div>
           </div>
@@ -128,7 +127,7 @@
   }
   li{
     list-style-type: none;
-    padding:2px;
+    padding:10px;
     color: gray;
   }
   ul{
@@ -148,9 +147,15 @@
   .calender{
     margin-top: 20px;
     padding:20px ;
+    right:0px
 
   }
   .line{
     border-top: 1px solid gray;
+  }
+
+  .content{
+    font-family:"Microsoft YaHei UI Light";
+    line-height: 30px;
   }
 </style>
