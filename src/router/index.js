@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from 'group/login'
+import Login from 'components/login/login'
 import Student from 'group/student'
 import NewsPage from 'components/newsPage/newsPage'
 import MainPage from 'components/mainPage/mainPage'
+
 Vue.use(Router)
 
 export default new Router({
@@ -29,6 +30,11 @@ export default new Router({
         name: 'newsPage',
         component: NewsPage
       }]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })
