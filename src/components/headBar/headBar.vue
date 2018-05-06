@@ -25,7 +25,9 @@
           <el-menu-item index="2-4-3">选项3</el-menu-item>
         </el-submenu>
       </el-submenu>
-      <el-menu-item index="3">消息中心</el-menu-item>
+      <el-menu-item index="notifications">
+        <router-link :to="{name: 'notifications'}">消息中心<span class="badge">5</span></router-link>
+      </el-menu-item>
       <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
 
       <menu-item-cus item="5" class="align-right" :click-enable=false>
@@ -49,8 +51,8 @@
     components: {
       MenuItemCus
     },
-    props:{
-      keyHeight:{
+    props: {
+      keyHeight: {
         type: Number,
         default: -1
       }
@@ -77,8 +79,8 @@
         }
       }
     },
-    watch:{
-      keyHeight(){
+    watch: {
+      keyHeight() {
         this.adjustHeadBarOnScroll()
       }
     },
