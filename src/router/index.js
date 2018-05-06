@@ -4,6 +4,7 @@ import Login from 'components/login/login'
 import Student from 'group/student'
 import NewsPage from 'components/newsPage/newsPage'
 import MainPage from 'components/mainPage/mainPage'
+import Notifications from 'components/notifications/notifications'
 
 Vue.use(Router)
 
@@ -29,6 +30,10 @@ export default new Router({
         path: 'news',
         name: 'newsPage',
         component: NewsPage
+      }, {
+        path: 'notifications',
+        name: 'notifications',
+        component: Notifications
       }]
     },
     {

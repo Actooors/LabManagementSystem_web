@@ -12,7 +12,12 @@ import $ from "jquery"
 import './assets/css/bootstrap.min.css'
 import './assets/js/bootstrap.min'
 
-Vue.use(VueLazyload)
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: 'dist/error.png',
+  loading: 'dist/loading.gif',
+  attempt: 1,
+})
 // Vue.use(Bootstrap);
 Vue.use(Element)
 Vue.config.productionTip = false
