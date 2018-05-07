@@ -6,6 +6,7 @@ import NewsPage from 'components/newsPage/newsPage'
 import MainPage from 'components/mainPage/mainPage'
 import contactUsPage from  'components/contactUsPage/contactUsPage'
 import Notifiations from 'components/notifications/notifications'
+import Error404 from 'components/error/error404'
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -26,7 +27,10 @@ export default new Router({
         name: 'mainPage',
         component: MainPage
       }, {
-        path: 'news',
+        path: 'news',//动态路由匹配
+        redirect: 'news/labnews'
+      }, {
+        path: 'news/:subpath',//动态路由匹配
         name: 'newsPage',
         component: NewsPage
       },{
@@ -43,6 +47,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '*',
+      name: 'error404',
+      component: Error404
     }
   ]
 })

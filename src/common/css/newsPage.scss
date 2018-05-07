@@ -10,6 +10,14 @@ $color-lightBlue: #6E87AA;
   }
 }
 
+@media screen and (max-width: 449px) {
+  /*手机端*/
+  .root-wrapper {
+    position: relative;
+    top: 181px;
+  }
+}
+
 .content {
   position: relative;
   transition: transform .3s ease-in;
@@ -21,12 +29,13 @@ $color-lightBlue: #6E87AA;
     left: auto;
     right: auto;
   }
-  max-width: 1024px;
+  max-width: 80%;
+  .breadcrumb {
+    background-color: white;
+    margin-top: 2em;
+  }
   .newscard {
-    margin: {
-      top: 2em;
-      bottom: 2em;
-    }
+    margin: 2em auto;
     &:hover {
       transform: translate3d(-1%, -1%, 0);
     }
@@ -34,6 +43,7 @@ $color-lightBlue: #6E87AA;
       color: $color-lightBlue;
       text-decoration: none;
       display: inline-grid;
+      transition: color .15s ease-in;
       &:hover {
         color: $color-deepBlue;
       }
@@ -93,8 +103,12 @@ $color-lightBlue: #6E87AA;
 
 .sidebar {
   position: fixed;
+  z-index: 1;
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 }
 
 .moveRight {
-  transform: translateX(100px);
+  transform: translateX(150px);
 }

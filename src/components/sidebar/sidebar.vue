@@ -1,23 +1,11 @@
 <template>
   <div>
-    <el-menu default-active="1-4-1" class="sidebar-menu" @open="handleOpen" @close="handleClose"
+    <el-menu default-active="1-4-1" class="sidebar-menu" @select="handleSelect"
              :collapse="isCollapse" @mouseover.native="handleMouseOverMenu(false)"
              @mouseout.native="handleMouseOverMenu(true)">
-      <el-menu-item index="1">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航一</span>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-document"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
+      <el-menu-item v-for="(item,index) in itemList" :index="index.toString()" :key="index.key">
+        <i :class="item.iconClass" style="font-size: 14px"></i>
+        <span slot="title" style="font-size: 12px">{{item.title}}</span>
       </el-menu-item>
     </el-menu>
 
@@ -26,36 +14,51 @@
 
 <script>
   export default {
+    props: {
+      mouseover: {
+        type: Function,
+        require: false
+      },
+      itemList: {
+        type: Array,
+        default() {
+          return [{
+            iconClass: 'el-icon-document',
+            title: '侧边栏标题',
+            routePath: '/'
+          }, {
+            iconClass: 'el-icon-document',
+            title: '侧边栏标题',
+            routePath: '/'
+          }, {
+            iconClass: 'el-icon-document',
+            title: '侧边栏标题',
+            routePath: '/'
+          }]
+        }
+      }
+    },
     data() {
       return {
         isCollapse: true
       };
     },
-    props: {
-      mouseover: {
-        type: Function,
-        require: false
-      }
-    },
     methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
+      handleSelect(index) {
+        this.$router.push({path: this.itemList[parseInt(index)].routePath})
       },
       handleMouseOverMenu(out) {
         this.isCollapse = out
         this.$emit('mouseover', out)
       }
+    },
 
-    }
   }
 </script>
 
 <style lang="scss">
   .sidebar-menu:not(.el-menu--collapse) {
-    width: 200px;
+    width: 250px;
     /*min-height: 400px;*/
   }
 
