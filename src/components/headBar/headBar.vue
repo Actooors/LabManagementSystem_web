@@ -10,7 +10,6 @@
       style="transition: background-color .5s ease-in-out"
       id="headbar-ul"
     >
-      <!--index与router的name相同-->
       <el-menu-item index="/student/index">首页</el-menu-item>
       <el-submenu index="1" :show-timeout=50 :hide-timeout=50>
         <template slot="title">新闻</template>

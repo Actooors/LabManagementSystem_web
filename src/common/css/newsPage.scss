@@ -2,19 +2,16 @@
 
 $color-deepBlue: #3E5D71;
 $color-lightBlue: #6E87AA;
-@media screen and (min-width: 450px) {
-  /*电脑端*/
-  .root-wrapper {
-    position: relative;
-    top: 61px;
-  }
-}
 
-@media screen and (max-width: 449px) {
-  /*手机端*/
-  .root-wrapper {
-    position: relative;
-    top: 181px;
+.page-wrapper {
+  margin-bottom: 10em;
+  position: relative;
+  @media screen and (max-width: 624px) {
+    /*手机端*/
+    top: 100px;
+  }
+  @media screen and (min-width: 625px) {
+    top: 61px;
   }
 }
 
@@ -33,71 +30,6 @@ $color-lightBlue: #6E87AA;
   .breadcrumb {
     background-color: white;
     margin-top: 2em;
-  }
-  .newscard {
-    margin: 2em auto;
-    &:hover {
-      transform: translate3d(-1%, -1%, 0);
-    }
-    .card-title-link {
-      color: $color-lightBlue;
-      text-decoration: none;
-      display: inline-grid;
-      transition: color .15s ease-in;
-      &:hover {
-        color: $color-deepBlue;
-      }
-      .card-title {
-        border-left: 4px solid $color-deepBlue;
-        font-size: 2em;
-        margin: .1em 0;
-        padding: {
-          left: 1em;
-          right: 1em;
-        }
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-    }
-    .card-article-props {
-      display: flex;
-      justify-content: flex-end;
-      p {
-        margin: 0 1em 0 0;
-      }
-    }
-    .card-inner-container {
-      display: flex;
-      justify-content: space-between;
-      max-height: 160px;
-      border-top: 1px solid $--border-color-base;
-      padding-top: .8em;
-      margin-top: .5em;
-      .card-image {
-        //float:right;
-        display: inline-block;
-        position: relative;
-        overflow: hidden;
-        height: 160px;
-        //display: flex;
-        img {
-          //max-width: 100%;
-          height: 100%;
-        }
-      }
-      .card-content {
-        position: relative;
-        overflow: hidden;
-        flex: {
-          shrink: 10;
-        }
-        min-width: 8em;
-        max-width: 30em;
-        margin: 0 .8em;
-        font-size: $--font-size-large
-      }
-    }
   }
 }
 
