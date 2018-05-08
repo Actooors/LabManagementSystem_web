@@ -10,10 +10,15 @@
       style="transition: background-color .5s ease-in-out"
       id="headbar-ul"
     >
-      <!--index与router的name相同-->
-      <el-menu-item index="mainPage">首页</el-menu-item>
-      <el-menu-item index="newsPage">新闻</el-menu-item>
-      <el-submenu index="2">
+      <el-menu-item index="/student/index">首页</el-menu-item>
+      <el-submenu index="1" :show-timeout=50 :hide-timeout=50>
+        <template slot="title">新闻</template>
+        <el-menu-item index="/student/news/labnews">实验室动态</el-menu-item>
+        <el-menu-item index="/student/news/academic">学界重要新闻</el-menu-item>
+        <el-menu-item index="/student/news/others">其他新闻</el-menu-item>
+      </el-submenu>
+
+      <el-submenu index="2" :show-timeout=50 :hide-timeout=50>
         <template slot="title">话题</template>
         <el-menu-item index="2-1">选项1</el-menu-item>
         <el-menu-item index="2-2">选项2</el-menu-item>
@@ -67,7 +72,7 @@
     methods: {
       handleSelect(key, keyPath) {
         this.activeIndex = key
-        this.$router.push({name: key})
+        this.$router.push({path: key})
       },
       adjustHeadBarOnScroll() {
         let scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
@@ -85,7 +90,7 @@
       }
     },
     created() {
-      this.activeIndex = this.$router.currentRoute.name;
+      this.activeIndex = this.$route.fullPath;
     },
     mounted() {
       this.adjustHeadBarOnScroll()

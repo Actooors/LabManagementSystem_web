@@ -1,26 +1,18 @@
 <template>
-  <div class="root-wrapper">
-    <sidebar class="sidebar" @mouseover="handleMouseOverMenu"></sidebar>
+  <div class="page-wrapper">
+    <sidebar class="sidebar"
+             @mouseover="handleMouseOverMenu"
+             :itemList="sideNewsList"
+             v-model="activeSidebarMenuItem"></sidebar>
     <div class="content" ref="content">
-      <el-card shadow="hover" class="newscard" v-for="(item,index) of items" :key="item.value">
-        <div class="card-head-container">
-          <a :href="item.url" class="card-title-link"><h1 v-text="item.title" class="card-title"></h1></a>
-          <div class="card-article-props">
-            <p><span class="el-icon-date"/>
-              <time :datetime="item.time">发表于{{item.time.split('T')[0]}}</time>
-            </p>
-            <p>By {{item.author}}</p>
-          </div>
-        </div>
-        <div class="card-inner-container">
-          <div class="card-content">
-            <p class="content-para" v-text="item.overview" v-once></p>
-          </div>
-          <div class="card-image" v-if="item.imgurl">
-            <img v-lazy="item.imgurl">
-          </div>
-        </div>
-      </el-card>
+      <div class="breadcrumb">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item>新闻</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{path: '/student/news/'+$route.params.newstype}">{{newsType}}</el-breadcrumb-item>
+          <el-breadcrumb-item v-if="this.$route.params.hasOwnProperty('newsid')">新闻详情</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
+      <router-view></router-view>
     </div>
   </div>
 
@@ -38,31 +30,21 @@
     },
     data() {
       return {
-        items: [{
-          title: '热烈庆祝实验室网站顺利开发热烈庆祝实验室网站顺利开热烈庆祝实验室网站顺利开发热烈庆祝实验室网站顺利开发发',
-          url: 'https://www.baidu.com',
-          time: '2018-04-17T05:18:00.000Z',
-          author: '莫之章',
-          imgurl: 'http://dmis.shu.edu.cn/assets/images/595x240/03.jpg',
-          overview: '这是很简单的概述',
+        newsType: '',
+        sideNewsList: [{
+          iconClass: 'el-icon-document',
+          title: '我们不一样，每个人都有不同的境遇',
+          routePath: '/student/news/labnews/100001'
         }, {
-          title: '恭喜恭喜恭喜你',
-          url: 'https://www.baidu.com',
-          time: '2018-04-17T05:18:00.000Z',
-          author: '李瑞轩',
-          imgurl: 'http://dmis.shu.edu.cn/assets/images/595x240/03.jpg',
-          overview: '这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是' +
-          '概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述' +
-          '这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是' +
-          '概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述这是概述'
+          iconClass: 'el-icon-document',
+          title: '金冬寒提出宝贵指导意见',
+          routePath: '/'
         }, {
-          title: '凉凉',
-          url: 'https://www.baidu.com',
-          time: '2018-04-17T05:18:00.000Z',
-          author: '李瑞轩',
-          imgurl: 'http://dmis.shu.edu.cn/assets/images/640x480/02.jpg',
-          overview: '完了，凉凉了'
-        }]
+          iconClass: 'el-icon-document',
+          title: '实验室获国家科技进步二等奖hhhhhh',
+          routePath: '/'
+        }],
+        activeSidebarMenuItem: ''
       }
     },
     mounted() {
@@ -76,6 +58,17 @@
       }
       this.$Lazyload.$on('loaded', () => {
         this.shaveIt()
+      })
+    },
+    beforeCreate() {
+      let newsTypes = ['labnews', 'academic', 'others'];
+      let newsNames = ['实验室动态', '学界重要新闻', '其他新闻'];
+      let index;
+      if ((index = newsTypes.indexOf(this.$route.params.newstype)) === -1) {
+        this.$router.replace('/404')
+      }
+      this.$nextTick(() => {
+        this.newsType = newsNames[index]
       })
     },
     methods: {
@@ -94,6 +87,9 @@
         }
       }
     },
+    beforeUpdate() {
+      this.activeSidebarMenuItem = this.$route.fullPath
+    }
   }
 </script>
 
@@ -101,3 +97,8 @@
   @import '../../common/css/newsPage';
 </style>
 
+<style>
+  .is-link {
+    font-weight: normal !important;
+  }
+</style>
