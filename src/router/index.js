@@ -11,13 +11,16 @@ import NewsOverview from 'components/newsPage/newsOverview'
 import NewsContent from 'components/newsPage/newsContent'
 
 Vue.use(Router)
-export default new Router({
+let router = new Router({
   mode: 'history',
   routes: [
     {
       path: '/',
       name: 'root',
-      component: Login
+      component: Login,
+      meta: {
+        title: "登录 - 上海大学视觉实验室"
+      }
     },
     {
       path: '/student',
@@ -29,11 +32,14 @@ export default new Router({
         {
           path: 'index',
           name: 'mainPage',
-          component: MainPage
+          component: MainPage,
         },
         {
           path: 'news',//动态路由匹配
           component: NewsPage,
+          meta: {
+            title: "新闻 - 上海大学视觉实验室"
+          },
           children: [{
             path: '',
             redirect: {path: 'labnews'}
@@ -72,3 +78,21 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  let defaultTitle = "上海大学视觉实验室"
+  let customTitle = false
+  for (let i = to.matched.length - 1; i >= 0; i--) {
+    if (to.matched[i].meta.hasOwnProperty('title')) {
+      document.title = to.matched[i].meta.title
+      customTitle = true
+      break
+    }
+  }
+  if (!customTitle) {
+    document.title = defaultTitle
+  }
+  next()
+})
+
+export default router;

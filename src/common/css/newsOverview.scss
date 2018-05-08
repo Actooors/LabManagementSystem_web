@@ -6,8 +6,7 @@ $color-lightBlue: #6E87AA;
   margin: 2em auto;
   &:hover {
     position: relative;
-    transform: translate3d(-1%, -1%, 0);
-    left: -1%;
+    transform: translate3d(-10px, -4px, 0);//奇数像素将导致模糊
   }
   .card-title-link {
     color: $color-lightBlue;
