@@ -44,7 +44,9 @@
           title: '实验室获国家科技进步二等奖hhhhhh',
           routePath: '/'
         }],
-        activeSidebarMenuItem: ''
+        activeSidebarMenuItem: '',
+        newsTypes: ['labnews', 'academic', 'others'],
+        newsNames: ['实验室动态', '学界重要新闻', '其他新闻']
       }
     },
     mounted() {
@@ -60,16 +62,8 @@
         this.shaveIt()
       })
     },
-    beforeCreate() {
-      let newsTypes = ['labnews', 'academic', 'others'];
-      let newsNames = ['实验室动态', '学界重要新闻', '其他新闻'];
-      let index;
-      if ((index = newsTypes.indexOf(this.$route.params.newstype)) === -1) {
-        this.$router.replace('/404')
-      }
-      this.$nextTick(() => {
-        this.newsType = newsNames[index]
-      })
+    created() {
+      this.updateComponents()
     },
     methods: {
       shaveIt() {
@@ -85,10 +79,20 @@
             this.$refs.content.classList.remove('moveRight')
           }
         }
+      },
+      updateComponents() {
+        //面包屑
+        let index;
+        if ((index = this.newsTypes.indexOf(this.$route.params.newstype)) === -1) {
+          this.$router.replace('/404')
+        }
+        this.newsType = this.newsNames[index]
+        //侧边栏
+        this.activeSidebarMenuItem = this.$route.fullPath
       }
     },
     beforeUpdate() {
-      this.activeSidebarMenuItem = this.$route.fullPath
+      this.updateComponents()
     }
   }
 </script>
