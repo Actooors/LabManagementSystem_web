@@ -22,6 +22,7 @@
 <script>
   import shave from 'shave'
   import Sidebar from 'components/sidebar/sidebar'
+  import axios from 'axios'
 
   export default {
     name: "newsPage",
@@ -30,46 +31,14 @@
     },
     data() {
       return {
-        newsType: '',
-        sideNewsList: [{
-          iconClass: 'el-icon-document',
-          title: '我们不一样，每个人都有不同的境遇',
-          routePath: '/student/news/labnews/100001'
-        }, {
-          iconClass: 'el-icon-document',
-          title: '金冬寒提出宝贵指导意见',
-          routePath: '/'
-        }, {
-          iconClass: 'el-icon-document',
-          title: '实验室获国家科技进步二等奖hhhhhh',
-          routePath: '/'
-        }],
+        newsType: "",
+        sideNewsList: [],
         activeSidebarMenuItem: '',
         newsTypes: ['labnews', 'academic', 'others'],
         newsNames: ['实验室动态', '学界重要新闻', '其他新闻']
       }
     },
-    mounted() {
-      var timer = null
-      this.shaveIt()
-      window.onresize = () => {
-        clearTimeout(timer)
-        timer = setTimeout(() => {
-          this.shaveIt()
-        }, 100)
-      }
-      this.$Lazyload.$on('loaded', () => {
-        this.shaveIt()
-      })
-    },
-    created() {
-      this.updateComponents()
-    },
     methods: {
-      shaveIt() {
-        let maxheight = 160
-        shave('.content-para', maxheight);
-      },
       handleMouseOverMenu(out) {
         let hasMoveRight = this.$refs.content.classList.contains('moveRight')
         if (!(out ^ hasMoveRight)) {
@@ -86,10 +55,59 @@
         if ((index = this.newsTypes.indexOf(this.$route.params.newstype)) === -1) {
           this.$router.replace('/404')
         }
-        this.newsType = this.newsNames[index]
-        //侧边栏
-        this.activeSidebarMenuItem = this.$route.fullPath
+        this.$nextTick(() => {
+          this.newsType = this.newsNames[index]
+          //侧边栏
+          // process.env.NODE_ENV === "development" && console.log('update', this.$route.fullPath, this.activeSidebarMenuItem)
+          this.activeSidebarMenuItem = this.$route.fullPath
+        })
+      },
+      shaveIt() {
+        let maxheight = 160
+        shave('.content-para', maxheight);
+      },
+      initShave() {
+        var timer = null
+        this.shaveIt()
+        window.onresize = () => {
+          clearTimeout(timer)
+          timer = setTimeout(() => {
+            this.shaveIt()
+          }, 100)
+        }
+        this.$Lazyload.$on('loaded', () => {
+          this.shaveIt()
+        })
+      },
+      loadData() {
+        //侧边栏数据
+        let cfg = {
+          url: '/api/news',
+          method: 'post',
+          data: {
+            type: 'matter'
+          }
+        }
+        axios(cfg)
+          .then((response) => {
+            if (response.data.code === 'SUCCESS' && response.data.data !== null) {
+              console.log(response.data.data)
+              this.sideNewsList = response.data.data
+            } else {
+              process.env.NODE_ENV === 'development' && console.log('loadDataError', response)
+            }
+          })
+          .catch((error) => {
+            process.env.NODE_ENV === 'development' && console.log(error)
+          })
       }
+    },
+    mounted() {
+      this.initShave()
+      this.loadData()
+    },
+    created() {
+      this.updateComponents()
     },
     beforeUpdate() {
       this.updateComponents()

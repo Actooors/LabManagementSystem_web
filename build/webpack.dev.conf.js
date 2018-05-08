@@ -12,20 +12,82 @@ const portfinder = require('portfinder')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
-
+// 添加mock数据
+const express = require('express')
+const app = express()
+var apiRoutes = express.Router()
+var news = require('../mock/news')
+var bodyParser = require('body-parser')
+var jsonParser = bodyParser.json()
+var urlencodedParser = bodyParser.urlencoded({extended: false})
+app.use(jsonParser);
+app.use(urlencodedParser);
+app.use('/api', apiRoutes)
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+    rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap, usePostCSS: true})
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    //添加mock数据
+    before(app) {
+      app.all('/api/news', jsonParser, (req, res) => {
+        let body = Object.keys(req.body).length ? req.body : req.query
+        if (!body || !Object.keys(body).length) {
+          res.json({
+            code: "FAILED",
+            message: "无此类型数据",
+            data: null
+          })
+        }
+        process.env.NODE_ENV === 'development' && console.log("/api/news", body, req.query)
+        if (body.hasOwnProperty('type') && news.hasOwnProperty(body.type)) {
+          res.json({
+            code: "SUCCESS",
+            message: null,
+            data: news[body.type]
+          })
+        } else {
+          res.json({
+            code: "FAILED",
+            message: "无此类型数据",
+            data: null
+          })
+        }
+      })
+      app.all('/api/article', jsonParser, (req, res) => {
+        let body = Object.keys(req.body).length ? req.body : req.query
+        if (!body || !Object.keys(body).length) {
+          res.json({
+            code: "FAILED",
+            message: "无此类型数据",
+            data: null
+          })
+        }
+        process.env.NODE_ENV === 'development' && console.log("/api/article", body, req.query)
+        if (body.hasOwnProperty('newsid') && body.hasOwnProperty('type') && body.newsid && news.articles.hasOwnProperty(body.newsid) &&
+          news.articles[body.newsid].hasOwnProperty('type') && news.articles[body.newsid].type === body.type) {
+          res.json({
+            code: "SUCCESS",
+            message: null,
+            data: news.articles[body.newsid]
+          })
+        } else {
+          res.json({
+            code: "FAILED",
+            message: "Not found",
+            data: null
+          })
+        }
+      })
+    },
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
+        {from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html')},
       ],
     },
     hot: true,
@@ -35,7 +97,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     port: PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
     overlay: config.dev.errorOverlay
-      ? { warnings: false, errors: true }
+      ? {warnings: false, errors: true}
       : false,
     publicPath: config.dev.assetsPublicPath,
     proxy: config.dev.proxyTable,
@@ -85,8 +147,8 @@ module.exports = new Promise((resolve, reject) => {
           messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
         },
         onErrors: config.dev.notifyOnErrors
-        ? utils.createNotifierCallback()
-        : undefined
+          ? utils.createNotifierCallback()
+          : undefined
       }))
 
       resolve(devWebpackConfig)
