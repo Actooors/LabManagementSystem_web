@@ -54,7 +54,9 @@
     //         height:
     // }
     //
+
   }
+
   // window.onresize = () => {
   //   this.screenHeight = 'height:' + $(window).height() + 'px';
   // }

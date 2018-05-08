@@ -25,6 +25,9 @@
             <calender></calender>
           </div>
           </div>
+          <div>
+            <video src="" > </video>
+          </div>
         </div>
       </div>
     </div>
@@ -91,13 +94,13 @@
     },
     mounted() {
       this.carouselFitScreen();
+
       var timer = null
       window.onresize = () => {
         clearTimeout(timer);
         timer = setTimeout(() => {
           this.carouselFitScreen();
         }, 100);
-
       }
 
     }
