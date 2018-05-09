@@ -8,6 +8,7 @@
   overflow: hidden;
   @media screen and (min-width: 1100px) {
     height: 500px;
+    min-height: 75%;
   }
   @media screen and (max-width: 1099px) {
     height: 1024px;
@@ -27,6 +28,9 @@
     position: absolute;
     width: 80%;
     height: 90%;
+    @media screen and (min-height: 850px) and (min-width: 1100px) {
+      width: $page-wrapper-min-width + 100px;
+    }
     top: 0;
     bottom: 0;
     left: 0;
@@ -37,7 +41,7 @@
     padding: 2em;
     .username {
       font-size: 32px;
-      @media screen and (max-width: 1099px) {
+      @media screen and (max-width: 1099px), screen and (min-height: 850px) and (min-width: 1100px) {
         text-align: center;
       }
       @media screen and (min-width: 1100px) {
@@ -51,6 +55,9 @@
     .profile {
       @media screen and (min-width: 1100px) {
         display: flex;
+        @media screen and (min-height: 850px) {
+          justify-content: center;
+        }
       }
       align-items: center;
       margin: auto 0;
@@ -75,7 +82,9 @@
       .profile-text {
         @media screen and (min-width: 1100px) {
           margin: 0 .5em;
-          flex: 1;
+          @media screen and (max-height: 849px) {
+            flex: 1;
+          }
           display: flex;
         }
         @media screen and (max-width: 1099px) {
@@ -113,11 +122,9 @@
             }
           }
           .text-label-big {
-            @extend .text-label;
             font-size: 18px;
           }
           .text-value-big {
-            @extend .text-value;
             background: rgba(255, 255, 255, .5);
             border-radius: 5px;
             padding: 1em;
@@ -132,8 +139,33 @@
           }
         }
       }
-
     }
 
+    @media screen and (min-height: 850px) and (min-width: 1100px) {
+      #big-col-right {
+        display: none;
+      }
+      #big-col-bottom {
+        margin: 0 auto;
+        max-width: 550px;
+        .text-label-big {
+          font-size: 18px;
+        }
+        .text-value-big {
+          background: rgba(255, 255, 255, .5);
+          border-radius: 5px;
+          padding: 1em;
+          height: 200px;
+          max-width: 600px;
+          //overflow: hidden;
+          overflow-y: auto;
+        }
+      }
+    }
+    @media screen and (max-height: 849px), screen and (max-width: 1099px) {
+      #big-col-bottom {
+        display: none;
+      }
+    }
   }
 }
