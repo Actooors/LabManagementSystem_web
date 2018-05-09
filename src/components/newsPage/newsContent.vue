@@ -19,6 +19,7 @@
 <script>
   // import 'common/katex/katex.min'
   import axios from 'axios'
+  import store from 'store/store'
 
   export default {
     name: "newsContent",
@@ -47,6 +48,7 @@
           .then((response) => {
             if (response.data.code === "SUCCESS" && response.data.data !== null) {
               this.newsInfo = response.data.data
+              document.title = `${response.data.data.title} - ${store.state.defaultTitle}`
             } else {
               process.env.NODE_ENV === "development" && console.log(response.data)
               // this.$router.replace({name: 'error404'})

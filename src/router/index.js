@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from 'store/store'
 import Login from 'components/login/login'
 import Student from 'group/student'
 import NewsPage from 'components/newsPage/newsPage'
@@ -9,8 +10,11 @@ import Notifiations from 'components/notifications/notifications'
 import Error404 from 'components/error/error404'
 import NewsOverview from 'components/newsPage/newsOverview'
 import NewsContent from 'components/newsPage/newsContent'
+import Profile from 'components/profile/profile'
 
 Vue.use(Router)
+let defaultTitle = store.state.defaultTitle
+
 let router = new Router({
   mode: 'history',
   routes: [
@@ -19,7 +23,7 @@ let router = new Router({
       name: 'root',
       component: Login,
       meta: {
-        title: "登录 - 上海大学视觉实验室"
+        title: `登录 - ${defaultTitle}`
       }
     },
     {
@@ -38,7 +42,7 @@ let router = new Router({
           path: 'news',//动态路由匹配
           component: NewsPage,
           meta: {
-            title: "新闻 - 上海大学视觉实验室"
+            title: `新闻 - ${defaultTitle}`
           },
           children: [{
             path: '',
@@ -64,6 +68,11 @@ let router = new Router({
           path: 'notifications',
           name: 'notifications',
           component: Notifiations
+        },
+        {
+          path: 'profile',
+          name: 'profile',
+          component: Profile
         }]
     },
     {
@@ -74,13 +83,15 @@ let router = new Router({
     {
       path: '*',
       name: 'error404',
-      component: Error404
+      component: Error404,
+      meta: {
+        title: 'Not found'
+      }
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  let defaultTitle = "上海大学视觉实验室"
   let customTitle = false
   for (let i = to.matched.length - 1; i >= 0; i--) {
     if (to.matched[i].meta.hasOwnProperty('title')) {

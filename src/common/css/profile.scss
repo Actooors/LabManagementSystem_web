@@ -1,0 +1,139 @@
+.page-wrapper {
+  $page-wrapper-min-width: 768px;
+  //margin-bottom: 10em;
+  position: relative;
+  background: url("../../common/image/texture.jpg");
+  background-size: 100% 100%;
+  min-width: $page-wrapper-min-width;
+  overflow: hidden;
+  @media screen and (min-width: 1100px) {
+    height: 500px;
+  }
+  @media screen and (max-width: 1099px) {
+    height: 1024px;
+  }
+  @media screen and (max-width: 624px) {
+    /*手机端*/
+    top: 100px;
+    margin-bottom: 100px;
+  }
+  @media screen and (min-width: 625px) {
+    top: 60px;
+    margin-bottom: 60px;
+  }
+  .container-content {
+    background-color: rgba(255, 255, 255, .7);
+    min-width: $page-wrapper-min-width - 10px;
+    position: absolute;
+    width: 80%;
+    height: 90%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 3px solid rgba(255, 255, 255, .05);
+    border-radius: .5em;
+    padding: 2em;
+    .username {
+      font-size: 32px;
+      @media screen and (max-width: 1099px) {
+        text-align: center;
+      }
+      @media screen and (min-width: 1100px) {
+        padding-left: 15px;
+      }
+    }
+    hr {
+      border-top: 1px solid black;
+      margin: 10px;
+    }
+    .profile {
+      @media screen and (min-width: 1100px) {
+        display: flex;
+      }
+      align-items: center;
+      margin: auto 0;
+      height: 310px;
+      .avatar {
+        flex-shrink: 0.6;
+        //flex:2;
+        border-radius: 10px;
+        overflow: hidden;
+        width: 256px;
+        //height: 256px;
+        @media screen and (min-width: 1100px) {
+          margin: 0 .5em;
+        }
+        @media screen and (max-width: 1099px) {
+          margin: 1em auto;
+        }
+        .avatar-img {
+          width: 100%;
+        }
+      }
+      .profile-text {
+        @media screen and (min-width: 1100px) {
+          margin: 0 .5em;
+          flex: 1;
+          display: flex;
+        }
+        @media screen and (max-width: 1099px) {
+          margin: 1em auto;
+        }
+        .profile-text-col {
+          &:first-child {
+            flex: 2;
+          }
+          &:nth-child(2) {
+            flex: 3;
+          }
+          margin: 0 1em;
+          .profile-text-row {
+            display: flex;
+            @media screen and (max-width: 1099px) {
+              justify-content: center;
+              .text-value {
+                width: 165px;
+              }
+            }
+            .text-label, .text-value {
+              font-size: 16px;
+              line-height: 42px;
+              white-space: nowrap;
+            }
+            .text-label {
+              width: 4.2em;
+              text-align: justify;
+              text-align-last: justify;
+            }
+            .text-value:before {
+              content: "";
+              margin-right: 1em;
+            }
+          }
+          .text-label-big {
+            @extend .text-label;
+            font-size: 18px;
+          }
+          .text-value-big {
+            @extend .text-value;
+            background: rgba(255, 255, 255, .5);
+            border-radius: 5px;
+            padding: 1em;
+            height: 200px;
+            max-width: 500px;
+            //overflow: hidden;
+            overflow-y: auto;
+          }
+          @media screen and (max-width: 1099px) {
+            margin: 0 auto;
+            max-width: 500px;
+          }
+        }
+      }
+
+    }
+
+  }
+}
