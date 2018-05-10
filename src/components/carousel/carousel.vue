@@ -11,7 +11,7 @@
       <div class="carousel-inner">
         <div v-for="(background,index) in backgrounds"
         :class="{'item':true,'active':index===0}"
-        :style="background"></div>
+        :style="background" ></div>
       </div>
     </div>
     <!-- 轮播（Carousel）导航 -->
@@ -44,7 +44,7 @@
       backgrounds() {
         var arr = [];
         for (let item in this.imageurls) {
-          let obj = {background: `url(${this.imageurls[item]}) no-repeat center center`}
+          let obj = {background: `url(${this.imageurls[item]})  center center / cover no-repeat`}
           arr.push(obj)
         }
         return arr

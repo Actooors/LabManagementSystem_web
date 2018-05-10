@@ -33,7 +33,7 @@
       <el-menu-item index="notifications">
         <router-link :to="{name: 'notifications'}">消息中心<span class="badge">5</span></router-link>
       </el-menu-item>
-      <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+      <el-menu-item index="/student/contactus">联系我们</el-menu-item>
 
       <menu-item-cus item="5" class="align-right" :click-enable=false>
         <div class="HeaderRight">{{username}}</div>

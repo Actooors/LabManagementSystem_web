@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div id="memberItroduction">
     <div class="container">
       <div id="leader" >
@@ -27,12 +28,10 @@
         </div>
       </div>
       <div class="line"></div>
-      <div id="teachers">
-        <div class="col-xs-4 col-xs-offset-4" style="text-align: center">
+      <div id="teachers" class="container-fluid">
+        <div class="col-xs-12" style="text-align: center">
           <span class="title2">参与研发教师成员</span>
         </div>
-        <div class="col-xs-4 col-xs-offset-8"></div>
-        <div class="row">
           <div v-for="(member,index) in this.teachers">
             <div class="col-xs-3">
               <!--<div><img src="this.member.headshoturl"/></div>-->
@@ -51,14 +50,12 @@
             </div>
           </div>
         </div>
-      </div>
+
       <div class="line"></div>
-      <div id="member">
-        <div class="col-xs-4 col-xs-offset-4" style="text-align: center">
+      <div id="member" class="container-fluid">
+        <div class="col-xs-12" style="text-align: center">
           <span class="title2">参与研发学生成员</span>
         </div>
-        <div class="col-xs-4 col-xs-offset-8"></div>
-        <div class="row">
           <div v-for="(member,index) in this.member">
             <div class="col-xs-3">
               <!--<div><img src="this.member.headshoturl"/></div>-->
@@ -77,14 +74,19 @@
             </div>
           </div>
         </div>
+      <div class="line"></div>
+      <mymap></mymap>
+        </div>
       </div>
 
-    </div>
   </div>
 </template>
 
 <script>
+  import Mymap from "../map/mymap";
+
   export default {
+    components: {Mymap},
     name: "member-itroduction",
     data(){
       return{

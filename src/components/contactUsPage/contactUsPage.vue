@@ -1,8 +1,7 @@
 <template>
-    <div>
+    <div style="background-color:gainsboro">
       <head-bar ref="headbar"></head-bar>
       <member-itroduction ></member-itroduction>
-      <map></map>
       <footer-bar class="footerinterval"></footer-bar>
     </div>
 </template>
@@ -11,11 +10,11 @@
     import HeadBar from "../headBar/headBar";
     import FooterBar from "../footer/footerBar";
     import MemberItroduction from "../memberIntroduction/memberItroduction";
-    import Map from "../map/map";
+    import Mymap from "../map/mymap";
 
     export default {
       components: {
-        Map,
+        Mymap,
         MemberItroduction,
         FooterBar,
         HeadBar},
