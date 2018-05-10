@@ -40,7 +40,7 @@
         <div slot="title">
           <p>这是title</p>
           <p>hello</p>
-          <a href="https://www.baidu.com" style="color: #fff">个人设置</a>
+          <a href="/student/profile" class="link">个人资料</a>
         </div>
       </menu-item-cus>
     </el-menu>

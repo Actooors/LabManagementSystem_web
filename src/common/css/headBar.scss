@@ -7,6 +7,14 @@
   font-size: 16px;
 }
 
+.link{
+  color: #5b99b4;
+  font-weight: bold;
+  &:hover{
+    color: #C6D9EC;
+  }
+}
+
 .HeadBar {
   position: fixed;
   top: 0;

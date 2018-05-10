@@ -3,7 +3,8 @@
     <el-menu :default-active="activeMenuItem" class="sidebar-menu"
              :collapse="isCollapse" @mouseover.native="handleMouseOverMenu(false)"
              @mouseout.native="handleMouseOverMenu(true)" router>
-      <el-menu-item v-for="(item,index) in itemList" :index="item.routePath" :key="index.key" class="menu-item">
+      <el-menu-item v-for="(item,index) in itemList" :index="`/student/news/${item.type}/${item.newsId}`"
+                    :key="index.key" class="menu-item">
         <i :class="item.iconClass" style="font-size: 14px;"></i>
         <span slot="title" style="font-size: 12px">{{item.title}}</span>
       </el-menu-item>
@@ -26,17 +27,20 @@
         type: Array,
         default() {
           return [{
-            iconClass: 'el-icon-document',
-            title: '侧边栏标题',
-            routePath: '/'
+            "iconClass": "el-icon-document",
+            "title": "侧边栏标题",
+            "type": "academic",
+            "newsId": "100001"
           }, {
-            iconClass: 'el-icon-document',
-            title: '侧边栏标题',
-            routePath: '/'
+            "iconClass": "el-icon-document",
+            "title": "侧边栏标题",
+            "type": "labnews",
+            "newsId": "100002"
           }, {
-            iconClass: 'el-icon-document',
-            title: '侧边栏标题',
-            routePath: '/'
+            "iconClass": "el-icon-document",
+            "title": "侧边栏标题",
+            "type": "labnews",
+            "newsId": "100003"
           }]
         }
       }
@@ -44,6 +48,7 @@
     watch: {
       value(val) {
         if (val) {
+          // process.env.NODE_ENV === "development" && console.log('sidebar - update:', val, `/student/news/${this.itemList[0].type}/${this.itemList[0].newsId}`)
           this.activeMenuItem = val
         }
       },
