@@ -13,6 +13,38 @@
       </header>
       <div class="article-content" v-html="newsInfo.content" ref="content"></div>
     </article>
+    <CollapsePanel class="sidebar-right"
+                   @click.native="handleOnMouseClick(false,'title');handleOnMouseClick(false,'type')">
+      <div class="panelContent">
+        <div class="panel-row" @click="handleOnMouseClick(true,'title')">
+          <p class="panel-para" v-if="panelEditable.title===false">
+            <label class="labelfont">标题</label>{{newsInfo.title}}
+          </p>
+          <el-input class="panel-para"
+                    size="mini"
+                    v-model="panelInfo.title"
+                    v-else>
+            <label slot="prefix" class="panel-label">标题</label>
+          </el-input>
+        </div>
+        <div class="panel-row" @click="handleOnMouseClick(true,'type')">
+          <p class="panel-para" v-if="panelEditable.type===false">
+            <label class="labelfont">分类</label>{{newsMap[panelInfo.type]}}
+          </p>
+          <div style="display: flex; height:35px" v-else>
+            <label class="labelfont">分类</label>
+            <Select v-model="panelInfo.type" style="width:125px;height:35px;">
+              <Option v-for="(key,val) in newsMap" :value="val" :key="key">{{ key }}</Option>
+            </Select>
+          </div>
+        </div>
+        <div class="bottom-operaton">
+          <el-button size="mini" @click="handleClickSaveBtn">保存修改</el-button>
+          <el-button size="mini" @click="handleClickEditBtn">编辑文章</el-button>
+        </div>
+      </div>
+    </CollapsePanel>
+
   </div>
 </template>
 
@@ -20,18 +52,38 @@
   // import 'common/katex/katex.min'
   import axios from 'axios'
   import store from 'store/store'
-
+  import {mapState} from 'vuex'
+  import CollapsePanel from 'base/collapsePanel/collapsePanel'
+  import {Option, Select} from 'iview'
+  // import ElInputCus from 'base/inputCus/inputCus'
   export default {
+    store,
     name: "newsContent",
+    components: {
+      CollapsePanel,
+      Select,
+      Option
+    },
     data() {
       return {
-        newsType: '',
         newsInfo: {
           title: '',
           author: '',
           datetime: '',
           content: ''
-        }
+        },
+        panelEditable: {
+          title: false,
+          type: false
+        },
+        panelInfo: {
+          title: '',
+          type: ''
+        },
+        clickTimer: {
+          title: null,
+          type: null
+        },
       }
     },
     methods: {
@@ -48,7 +100,9 @@
           .then((response) => {
             if (response.data.code === "SUCCESS" && response.data.data !== null) {
               this.newsInfo = response.data.data
-              document.title = `${response.data.data.title} - ${store.state.defaultTitle}`
+              this.panelInfo.type =  response.data.data.type
+              this.panelInfo.title = response.data.data.title
+              document.title = `${response.data.data.title} - ${this.defaultTitle}`
             } else {
               process.env.NODE_ENV === "development" && console.log(response.data)
               // this.$router.replace({name: 'error404'})
@@ -59,16 +113,43 @@
             process.env.NODE_ENV === "development" && console.log(error)
             // this.$router.replace({name: 'error404'})
           })
+      },
+      handleOnMouseEnterPanel(enter, component) {
+        this.panelEditable[component] = enter
+      },
+      handleOnMouseClick(state, component) {
+        if (this.clickTimer[component] && state === false) {
+          return
+        }
+        console.log(state, component[component])
+        clearTimeout(this.clickTimer[component])
+        this.clickTimer[component] = setTimeout(() => {
+          this.panelEditable[component] = state
+          this.clickTimer[component] = null
+        }, 10)
+      },
+      handleClickSaveBtn(){
+        this.$notify({
+          title: '提示',
+          message: "文章已成功保存！"
+        })
+        console.log("点击了保存")
+      },
+      handleClickEditBtn(){
+        
       }
     },
     mounted() {
       // katex.render("L_{0m}^{k+1}=\\min\\{L_{01}^k+l_{1m},L_{02}^k+l_{2m},L_{03}^k+l_{3m},...,L_{0(n-1)}^k+l_{(n-1)m}\\}", this.$refs.content);
       this.loadData()
+      console.log(this.newsMap)
+
     },
     computed: {
       watchNeeds() {
         return this.$route.params.newstype + this.$route.params.newsid
-      }
+      },
+      ...mapState(['defaultTitle', 'newsMap'])
     },
     watch: {
       watchNeeds() {
@@ -86,4 +167,24 @@
 </style>
 <style>
   @import '../../common/katex/katex.min.css';
+
+  .el-input__inner {
+    padding-left: 42px !important;
+  }
+
+  .ivu-select-single {
+    height: 35px !important;
+    display: flex;
+    align-items: center;
+  }
+
+  .ivu-select-selected-value, .ivu-select-selected-value {
+    height: 28px !important;
+  }
+
+  .ivu-select-selection {
+    height: 28px !important;
+    width: 125px;
+  }
 </style>
+

@@ -1,0 +1,31 @@
+$color-border: #E6E6E6;
+
+.collapse-panel {
+  min-height: 50px;
+  min-width: 50px;
+  background: white;
+  border: 1px solid $color-border;
+  //overflow: hidden;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+  .panel-content {
+    padding: 10px;
+  }
+}
+
+.is-collapsed {
+  width: 50px;
+  height: 50px;
+  overflow: hidden; //气死偶嘞，如果不加这个使用transition动画就会出问题
+  text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
+  .collapse-icon {
+    font-size: 16px;
+    line-height: 50px;
+  }
+}
