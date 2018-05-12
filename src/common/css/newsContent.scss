@@ -2,7 +2,7 @@ $color-border: #E6E6E6;
 $line-height: 35px;
 .labelfont {
   line-height: $line-height;
-  height:$line-height;
+  height: $line-height;
   margin-right: 1em;
   margin-bottom: 0;
   font-size: 12px;
@@ -54,9 +54,9 @@ $line-height: 35px;
           margin-right: 1em;
         }
       }
-      .panel-row{
+      .panel-row {
         display: table;
-        height:$line-height;
+        height: $line-height;
       }
       .bottom-operaton {
         margin-top: 1em;
@@ -67,4 +67,15 @@ $line-height: 35px;
       }
     }
   }
+  .edit-window {
+    height: 100%
+  }
+}
+
+.wrapper, #edit-window {
+  height: 100%;
+}
+
+.editor {
+  height: 80%;
 }

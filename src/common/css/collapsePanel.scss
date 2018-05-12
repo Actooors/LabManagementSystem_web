@@ -1,6 +1,7 @@
 $color-border: #E6E6E6;
 
 .collapse-panel {
+  position: relative;
   min-height: 50px;
   min-width: 50px;
   background: white;
@@ -12,7 +13,22 @@ $color-border: #E6E6E6;
   -o-transition: all .5s;
   transition: all .5s;
   .panel-content {
-    padding: 10px;
+    padding: 15px 10px;
+  }
+  .btn-close {
+    position: absolute;
+    right: -12px;
+    top: -18px;
+    font-size: 24px;
+    color: rgba(210, 65, 71, .35);
+    -webkit-transition: color .5s ease-out;
+    -moz-transition: color .5s ease-out;
+    -ms-transition: color .5s ease-out;
+    -o-transition: color .5s ease-out;
+    transition: color .5s ease-out;
+    &:hover {
+      color: rgb(210, 65, 71)
+    }
   }
 }
 

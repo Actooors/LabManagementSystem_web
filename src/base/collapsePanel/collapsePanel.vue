@@ -2,6 +2,8 @@
   <div :class="{'collapse-panel':true,'is-collapsed':isCollapse}"
        @mouseenter="isCollapse=false"
        @mouseleave="isCollapse=true">
+    <span class="btn-close icon-guanbi iconfont icon" v-if="showClose && isCollapse===false"
+          @click="$emit('onclose')"></span>
     <i :class="`${iconClass} collapse-icon`" v-show="isCollapse"></i>
     <div class="panel-content" v-show="isCollapse===false">
       <slot></slot>
@@ -17,6 +19,13 @@
       iconClass: {
         type: String,
         default: "el-icon-edit-outline"
+      },
+      showClose: {
+        type: Boolean,
+        default: false
+      },
+      onclose: {
+        type: Function
       }
     },
     data() {
