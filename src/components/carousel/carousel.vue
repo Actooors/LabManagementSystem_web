@@ -44,16 +44,7 @@
       backgrounds() {
         var arr = [];
         for (let item in this.imageurls) {
-        <<<<<<<
-          HEAD
-          let obj = {background: `url(${this.imageurls[item]})  center center / cover no-repeat`}
-          === === =
-            let
-          obj = {background: `url(${this.imageurls[item]}) no-repeat center center / cover`}
-            >>> >>> > fix
-        :
-          轮播图在高分辨率无法cover;
-          add: profile在不同宽度和高度下的响应式布局
+          let obj = {background: `url(${this.imageurls[item]}) no-repeat center center / cover`}
           arr.push(obj)
         }
         return arr
