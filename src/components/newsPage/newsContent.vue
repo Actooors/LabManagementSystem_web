@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div id="nornal-window" v-if="editMode===false">
+    <div id="nornal-window" v-show="editMode===false">
       <article class="article">
         <header class="article-info clearfix">
           <h1 class="title">{{newsInfo.title}}</h1>
@@ -15,9 +15,9 @@
         <div class="article-content" v-html="newsInfo.content" ref="content"></div>
       </article>
     </div>
-    <div id="edit-window" v-else>
+    <div id="edit-window" v-if="editMode">
       <quillEditor
-        v-model="editContent" class="editor">
+        v-model="editContent" style="height: 90%">
       </quillEditor>
     </div>
     <CollapsePanel class="sidebar-right"
@@ -161,7 +161,10 @@
       },
       handleClickEditBtn() {
         this.editMode = !this.editMode
-        this.editContent = this.editContent !== null ? this.editContent : this.newsInfo.content
+        if (this.editMode) {
+          this.editContent = this.editContent !== null ? this.editContent : this.newsInfo.content
+          this.setEditorHeight()
+        }
       },
       handleOnClickClosePanel() {
         this.$confirm('此操作将删除这篇文章, 是否继续?', '提示', {
@@ -179,12 +182,31 @@
             message: '已取消删除'
           });
         });
+      },
+      setEditorHeight() {
+        // document.getElementById()
+        this.$nextTick(() => {
+          let e = document.getElementById('edit-window')
+          if (e)
+            e.style.height = `${window.innerHeight - 200}px`;
+        })
       }
     },
     mounted() {
       // katex.render("L_{0m}^{k+1}=\\min\\{L_{01}^k+l_{1m},L_{02}^k+l_{2m},L_{03}^k+l_{3m},...,L_{0(n-1)}^k+l_{(n-1)m}\\}", this.$refs.content);
       this.loadData()
       // console.log(this.newsMap)
+      var timer = null
+
+
+      window.onresize = () => {
+        if (!this.editMode)
+          return
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          this.setEditorHeight()
+        }, 100)
+      }
 
     },
     computed: {
@@ -227,9 +249,5 @@
   .ivu-select-selection {
     height: 28px !important;
     width: 125px;
-  }
-
-  html, html > body, #app, #app > div, .page-wrapper, .page-wrapper > .content {
-    height: 100%;
   }
 </style>
