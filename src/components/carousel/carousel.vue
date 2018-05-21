@@ -4,14 +4,14 @@
       <!-- 轮播（Carousel）指标 -->
       <ol class="carousel-indicators">
         <li v-for="(background,index) in backgrounds"
-             :class="{'active':index===0}"
+            :class="{'active':index===0}"
             data-target="#myCarousel" :data-slide-to="index"></li>
       </ol>
       <!-- 轮播（Carousel）项目 -->
       <div class="carousel-inner">
         <div v-for="(background,index) in backgrounds"
-        :class="{'item':true,'active':index===0}"
-        :style="background" ></div>
+             :class="{'item':true,'active':index===0}"
+             :style="background"></div>
       </div>
     </div>
     <!-- 轮播（Carousel）导航 -->
@@ -44,7 +44,7 @@
       backgrounds() {
         var arr = [];
         for (let item in this.imageurls) {
-          let obj = {background: `url(${this.imageurls[item]})  center center / cover no-repeat`}
+          let obj = {background: `url(${this.imageurls[item]}) no-repeat center center / cover`}
           arr.push(obj)
         }
         return arr

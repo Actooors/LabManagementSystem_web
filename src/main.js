@@ -11,6 +11,7 @@ import VueLazyload from 'vue-lazyload'
 import $ from "jquery"
 import './assets/css/bootstrap.min.css'
 import './assets/js/bootstrap.min'
+import 'iview/dist/styles/iview.css'
 
 Vue.use(VueLazyload, {
   preLoad: 1.3,

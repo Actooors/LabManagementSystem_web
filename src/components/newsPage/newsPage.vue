@@ -23,8 +23,11 @@
   import shave from 'shave'
   import Sidebar from 'components/sidebar/sidebar'
   import axios from 'axios'
+  import store from 'store/store'
+  import {mapState} from 'vuex'
 
   export default {
+    store,
     name: "newsPage",
     components: {
       Sidebar
@@ -33,11 +36,10 @@
       return {
         newsType: "",
         sideNewsList: [],
-        activeSidebarMenuItem: '',
-        newsTypes: ['labnews', 'academic', 'others'],
-        newsNames: ['实验室动态', '学界重要新闻', '其他新闻']
+        activeSidebarMenuItem: ''
       }
     },
+    computed: mapState(['newsMap']),
     methods: {
       handleMouseOverMenu(out) {
         let hasMoveRight = this.$refs.content.classList.contains('moveRight')
@@ -51,12 +53,11 @@
       },
       updateComponents() {
         //面包屑
-        let index;
-        if ((index = this.newsTypes.indexOf(this.$route.params.newstype)) === -1) {
+        if (!this.newsMap.hasOwnProperty(this.$route.params.newstype)) {
           this.$router.replace('/404')
         }
         this.$nextTick(() => {
-          this.newsType = this.newsNames[index]
+          this.newsType = this.newsMap[this.$route.params.newstype]
           //侧边栏
           // process.env.NODE_ENV === "development" && console.log('update', this.$route.fullPath, this.activeSidebarMenuItem)
           this.activeSidebarMenuItem = this.$route.fullPath
