@@ -8,32 +8,40 @@ $color-lightBlue: #6E87AA;
     position: relative;
     transform: translate3d(-10px, -4px, 0);//奇数像素将导致模糊
   }
-  .card-title-link {
-    color: $color-lightBlue;
-    text-decoration: none;
-    display: inline-grid;
-    transition: color .15s ease-in;
-    &:hover {
-      color: $color-deepBlue;
-    }
-    .card-title {
-      border-left: 4px solid $color-deepBlue;
-      font-size: 2em;
-      margin: .1em 0;
-      padding: {
-        left: 1em;
-        right: 1em;
+  .card-head-container{
+    .card-title{
+      display: flex;
+      justify-content: space-between;
+      .card-title-link {
+        color: $color-lightBlue;
+        text-decoration: none;
+        display: inline-grid;
+        transition: color .15s ease-in;
+        &:hover {
+          color: $color-deepBlue;
+        }
+        .card-title {
+          border-left: 4px solid $color-deepBlue;
+          font-size: 2em;
+          margin: .1em 0;
+          padding: {
+            left: 1em;
+            right: 1em;
+          }
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
       }
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
+
+      margin-bottom:1em;
     }
-  }
-  .card-article-props {
-    display: flex;
-    justify-content: flex-end;
-    p {
-      margin: 0 1em 0 0;
+    .card-article-props {
+      display: flex;
+      justify-content: flex-end;
+      p {
+        margin: 0 1em 0 0;
+      }
     }
   }
   .card-inner-container {

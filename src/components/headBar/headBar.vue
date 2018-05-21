@@ -49,7 +49,7 @@
 </template>
 
 <script>
-  import MenuItemCus from '../../base/menuItemCus/menuItemCus'
+  import MenuItemCus from 'base/menuItemCus/menuItemCus'
 
   export default {
     name: "head-bar",
