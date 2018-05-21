@@ -55,16 +55,16 @@
 
 <script>
   import $ from "jquery"
-  import "../../assets/js/date.js"
-  $(function () {
-    $("#monitor td button").click(function(){
-      $(this).addClass('mark1')
-        .parent().siblings().children('button').removeClass('mark1');
-    });
-
-  });
+  import DATE from "../../assets/js/date"
   export default {
   name:"calender",
+    mounted(){
+      $("#monitor td button").click(function(){
+        $(this).addClass('mark1')
+          .parent().siblings().children('button').removeClass('mark1');
+      });
+      DATE();
+    }
 }
 </script>
 <style scoped>

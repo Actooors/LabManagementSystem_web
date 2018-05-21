@@ -46,10 +46,13 @@
       }
     },
     watch: {
+      // 第二个参数可以省略
       value(val) {
         if (val) {
           // process.env.NODE_ENV === "development" && console.log('sidebar - update:', val, `/student/news/${this.itemList[0].type}/${this.itemList[0].newsId}`)
           this.activeMenuItem = val
+          console.log("val")
+          console.log(val)
         }
       },
       activeMenuItem(val) {

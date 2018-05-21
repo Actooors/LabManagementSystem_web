@@ -25,6 +25,7 @@
     name: "newsContent",
     data() {
       return {
+        // 利用vue-router传参
         newsType: '',
         newsInfo: {
           title: '',

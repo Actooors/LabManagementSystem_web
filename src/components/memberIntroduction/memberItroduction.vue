@@ -57,7 +57,7 @@
           <span class="title2">参与研发学生成员</span>
         </div>
           <div v-for="(member,index) in this.member">
-            <div class="col-xs-3">
+            <div class="col-xs-3" style="position: relative">
               <!--<div><img src="this.member.headshoturl"/></div>-->
               <div style="-webkit-border-radius: 50%;overflow: hidden">
                 <div :style="{background:'url(' + member.headshoturl+ ') center center'}" class="headshot" id="memberhead">
@@ -204,7 +204,6 @@
   }
   .headshot{
     width:100%;
-    height:100%;
   }
   #memberhead div{
     padding: 70% 0% 10% 50%;

@@ -47,7 +47,7 @@ let router = new Router({
           children: [{
             path: '',
             redirect: {path: 'labnews'}
-          },
+            },
             {
               path: ':newstype',
               name: 'newsPage',

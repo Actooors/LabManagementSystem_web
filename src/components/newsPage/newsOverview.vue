@@ -45,6 +45,7 @@
           .then((response) => {
             if (response.data.code === 'SUCCESS' && response.data.data !== null) {
               this.newsList = response.data.data
+              // console.log(response)
             } else {
               process.env.NODE_ENV === 'development' && console.log('loadDataError', response)
             }

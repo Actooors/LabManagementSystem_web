@@ -12,9 +12,14 @@
   import BMap from 'BMap'
   export default {
         name: "mymap",
+    data(){
+          return{
+          map: ''
+          }
+    },
       mounted() {
         //创建和初始化地图函数：
-        // var map;
+
         this.initMap();
       },
       methods: {
@@ -27,24 +32,24 @@
         this.setMapEvent();//设置地图事件
         this.addMapControl();//向地图添加控件
         this.addMapOverlay();//向地图添加覆盖物
-    },
-    createMap(){
-     var map = new BMap.Map("map");
-      map.centerAndZoom(new BMap.Point(121.406808,31.323843),19);
-    },
-    setMapEvent(){
-      map.enableScrollWheelZoom=true;
-      map.enableKeyboard=true;
-      map.enableDragging=true;
-      map.enableDoubleClickZoom=true
-    },
-    addClickHandler(target,window){
-      target.addEventListener("click",function(){
-        target.openInfoWindow(window);
-      });
-    },
-    addMapOverlay(){
-      var markers = [
+      },
+      createMap(){
+        this.map = new BMap.Map("map");
+        this.map.centerAndZoom(new BMap.Point(121.406808,31.323843),19);
+      },
+      setMapEvent(){
+        this.map.enableScrollWheelZoom=true;
+        this.map.enableKeyboard=true;
+        this.map.enableDragging=true;
+        this.map.enableDoubleClickZoom=true
+      },
+      addClickHandler(target,window){
+        target.addEventListener("click",function(){
+          target.openInfoWindow(window);
+        });
+      },
+      addMapOverlay(){
+        var markers = [
         {content:"No. 99, Baoshan District Road, Shanghai",title:"College of computer engineering and science, Shanghai University",imageOffset: {width:0,height:3},position:{lat:31.323755,lng:121.406422}},
       ];
       for(var index = 0; index < markers.length; index++ ){
@@ -60,19 +65,19 @@
         };
         var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
         marker.setLabel(label);
-        addClickHandler(marker,infoWindow);
-        map.addOverlay(marker);
+        this.addClickHandler(marker,infoWindow);
+        this.map.addOverlay(marker);
       };
     },
     //向地图添加控件
     addMapControl(){
       var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
       scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
-      map.addControl(scaleControl);
+      this.map.addControl(scaleControl);
       var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
-      map.addControl(navControl);
+      this.map.addControl(navControl);
       var overviewControl = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:false});
-      map.addControl(overviewControl);
+      this.map.addControl(overviewControl);
     },
     }
     }
