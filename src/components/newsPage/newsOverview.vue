@@ -30,6 +30,9 @@
         </div>
       </div>
     </el-card>
+    <div class="floatButton" v-if="identity===3">
+      <button @click="handleOnClickPlusButton" class="el-icon-plus"></button>
+    </div>
   </div>
 </template>
 
@@ -86,6 +89,9 @@
       },
       handleOnClickEditButton(path) {
         this.$router.push({path: path, query: {mode: '1'}})
+      },
+      handleOnClickPlusButton() {
+        this.$router.push({name: 'newNews'})
       }
     },
     mounted() {

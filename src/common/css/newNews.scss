@@ -1,0 +1,32 @@
+.page-wrapper {
+  margin-bottom: 10em;
+  position: relative;
+  @media screen and (max-width: 624px) {
+    /*手机端*/
+    top: 100px;
+  }
+  @media screen and (min-width: 625px) {
+    top: 61px;
+  }
+}
+
+.form-wrapper {
+  margin-top: 2em;
+  padding: 3em 3em 5em 3em;
+  background: whitesmoke;
+  border-radius: 5px;
+
+}
+.form-item {
+  margin-left: 1.25em;
+}
+.bread-crumb {
+  margin:{
+    top:3em;
+    left:.3em;
+  }
+}
+.news-submit{
+  width:80px;
+  margin-top:1.5em;
+}

@@ -11,6 +11,8 @@ import Error404 from 'components/error/error404'
 import NewsOverview from 'components/newsPage/newsOverview'
 import NewsContent from 'components/newsPage/newsContent'
 import Profile from 'components/profile/profile'
+import NewNews from 'components/newNews/newNews'
+import Topic from 'components/topic/topic'
 
 Vue.use(Router)
 let defaultTitle = store.state.defaultTitle
@@ -47,7 +49,7 @@ let router = new Router({
           children: [{
             path: '',
             redirect: {path: 'labnews'}
-            },
+          },
             {
               path: ':newstype',
               name: 'newsPage',
@@ -58,6 +60,11 @@ let router = new Router({
               name: 'newsContent',
               component: NewsContent
             }]
+        },
+        {
+          path: 'newnews',
+          name: 'newNews',
+          component: NewNews
         },
         {
           path: 'contactus',
@@ -73,6 +80,11 @@ let router = new Router({
           path: 'profile',
           name: 'profile',
           component: Profile
+        },
+        {
+          path: 'topic',
+          name: 'topic',
+          component: Topic
         }]
     },
     {
