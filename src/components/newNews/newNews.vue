@@ -18,7 +18,7 @@
                          :key="index.value"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="新闻内容" style="margin-bottom:0"></el-form-item>
+          <el-form-item v-model="form.content" label="新闻内容" style="margin-bottom:0"></el-form-item>
           <quillEditor class="form-item" style="background-color: white"></quillEditor>
           <el-button size="small" class="form-item news-submit" type="primary" @click="handleOnSubmit">发布</el-button>
         </el-form>
@@ -43,7 +43,8 @@
       return {
         form: {
           title: '',
-          type: ''
+          type: '',
+          content: ''
         },
         newsTypeList: {
           "num": 3,

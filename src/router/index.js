@@ -13,6 +13,7 @@ import NewsContent from 'components/newsPage/newsContent'
 import Profile from 'components/profile/profile'
 import NewNews from 'components/newNews/newNews'
 import Topic from 'components/topic/topic'
+import NewTopic from 'components/newTopic/newTopic'
 
 Vue.use(Router)
 let defaultTitle = store.state.defaultTitle
@@ -85,6 +86,10 @@ let router = new Router({
           path: 'topic',
           name: 'topic',
           component: Topic
+        }, {
+          path: 'newtopic',
+          name: 'newTopic',
+          component: NewTopic
         }]
     },
     {

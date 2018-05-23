@@ -17,6 +17,7 @@ const express = require('express')
 const app = express()
 var apiRoutes = express.Router()
 var news = require('../mock/news')
+var topicList = require('../mock/topicList')
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({extended: false})
@@ -82,7 +83,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             data: null
           })
         }
-      })
+      }),
+        app.get('/api/topiclist', (req, res) => {
+          res.json({
+            code: "SUCCESS",
+            message: null,
+            data: topicList
+          })
+        })
     },
     clientLogLevel: 'warning',
     historyApiFallback: {
