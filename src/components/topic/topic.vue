@@ -22,7 +22,7 @@
               <li class="meta-list-item">
                 <router-link :to="{name:'profile'}">{{item.author}}</router-link>
               </li>
-              <li class="meta-list-item">{{item.time}}</li>
+              <li class="meta-list-item">{{rTime(item.time)}}</li>
               <li class="meta-list-item">{{item.theme}}</li>
             </ul>
             <div class="topic-title">
@@ -51,6 +51,7 @@
 <script>
   import ClipboardJS from 'clipboard'
   import axios from 'axios'
+  import relativeTime from '../../common/js/relativeTime'
 
   export default {
     name: "topic",
@@ -80,6 +81,9 @@
       },
       handleOnClickCommentButton(index) {
 
+      },
+      rTime(t) {
+        return relativeTime(t)
       }
     },
     created() {

@@ -1,14 +1,11 @@
-$-color-gray: rgb(178, 186, 194);
-$-color-gray-light: #edeeef;
-$-color-gray-hover: #F7F8FA;
-$-color-gray-hover-light: #FCFCFC;
+@import 'varies';
+
 $-font-size-icon: 14px;
 .page-wrapper {
   margin-bottom: 5em;
   padding-bottom: 5em;
   position: relative;
-  background: #F4F5F5;
-  //background: floralwhite;
+  background: $-color-background;
   @media screen and (max-width: 624px) {
     /*手机端*/
     top: 100px;
@@ -25,7 +22,7 @@ $-font-size-icon: 14px;
     height: 50px;
     width: 700px;
     display: flex;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 2px $-color-shadow;
     img {
       height: 100%;
       margin-right: 20px;

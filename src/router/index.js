@@ -14,6 +14,7 @@ import Profile from 'components/profile/profile'
 import NewNews from 'components/newNews/newNews'
 import Topic from 'components/topic/topic'
 import NewTopic from 'components/newTopic/newTopic'
+import TopicContent from 'components/topicContent/topicContent'
 
 Vue.use(Router)
 let defaultTitle = store.state.defaultTitle
@@ -90,6 +91,10 @@ let router = new Router({
           path: 'newtopic',
           name: 'newTopic',
           component: NewTopic
+        }, {
+          path: 'topic/:topicid',
+          name: 'topicContent',
+          component: TopicContent
         }]
     },
     {
