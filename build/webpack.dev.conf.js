@@ -102,11 +102,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           })
         }
         process.env.NODE_ENV === 'development' && console.log("/api/topic", body, req.query)
-        if (body.hasOwnProperty('topicid') && body.topicid && topic.hasOwnProperty(body.topicid)) {
+        if (body.hasOwnProperty('topicId') && body.topicId && topic.hasOwnProperty(body.topicId)) {
           res.json({
             code: "SUCCESS",
             message: null,
-            data: topic[body.topicid]
+            data: topic[body.topicId]
           })
         } else {
           res.json({

@@ -143,7 +143,10 @@
         newsType: '',
         newsInfo: {
           title: '',
-          author: '',
+          author: {
+            name:'',
+            uid: 1,
+          },
           authorAvatar: '',
           datetime: '',
           content: ''
@@ -168,6 +171,7 @@
         commentExtend: false,
         commentContent: '',
         commentList: [{
+          commentId: 0,
           avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
           username: '徐文',
           content: '看完了, 我说没鸽吧. 嗯……我觉得这个话题还是阔以',
@@ -175,6 +179,7 @@
           like: 18,
           liked: false
         }, {
+          commentId: 1,
           avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
           username: '徐文',
           content: '等我好好看看这个话题哈, 别着急, 我读得比较慢, 你先等我一下, 我一定不鸽你, 我看完就回复, 真的. 从前有座山山上有座庙庙里有个老和尚和小和尚在讲故事.',
@@ -182,6 +187,7 @@
           like: 37,
           liked: false
         }, {
+          commentId: 2,
           avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
           username: '徐文',
           content: '等我好好看看这个话题哈, 别着急, 我读得比较慢, 你先等我一下, 我一定不鸽你, 我看完就回复, 真的. 从前有座山山上有座庙庙里有个老和尚和小和尚在讲故事.',
@@ -189,6 +195,7 @@
           like: 37,
           liked: false
         }, {
+          commentId: 3,
           avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
           username: '徐文',
           content: '等我好好看看这个话题哈, 别着急, 我读得比较慢, 你先等我一下, 我一定不鸽你, 我看完就回复, 真的. 从前有座山山上有座庙庙里有个老和尚和小和尚在讲故事.',
@@ -196,6 +203,7 @@
           like: 37,
           liked: false
         }, {
+          commentId: 4,
           avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
           username: '徐文',
           content: '等我好好看看这个话题哈, 别着急, 我读得比较慢, 你先等我一下, 我一定不鸽你, 我看完就回复, 真的. 从前有座山山上有座庙庙里有个老和尚和小和尚在讲故事.',
@@ -203,6 +211,7 @@
           like: 37,
           liked: false
         }, {
+          commentId: 5,
           avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
           username: '徐文',
           content: '等我好好看看这个话题哈, 别着急, 我读得比较慢, 你先等我一下, 我一定不鸽你, 我看完就回复, 真的. 从前有座山山上有座庙庙里有个老和尚和小和尚在讲故事.',
@@ -210,6 +219,7 @@
           like: 37,
           liked: false
         }, {
+          commentId: 6,
           avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
           username: '徐文',
           content: '等我好好看看这个话题哈, 别着急, 我读得比较慢, 你先等我一下, 我一定不鸽你, 我看完就回复, 真的. 从前有座山山上有座庙庙里有个老和尚和小和尚在讲故事.',
@@ -225,7 +235,7 @@
           url: '/api/topic',
           method: 'get',
           params: {
-            topicid: this.$route.params.topicid
+            topicId: this.$route.params.topicid
           }
         }).then((response) => {
           if (response.data.code === "SUCCESS" && response.data.data !== null) {

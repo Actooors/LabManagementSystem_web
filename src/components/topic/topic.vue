@@ -14,19 +14,19 @@
       </div>
 
       <ul class="topic-list">
-        <router-link :to="{path: item.url}" v-for="(item,index) in topicList" :key="item.value"
+        <router-link :to="{path: `/student/topic/${item.topicId}`}" v-for="(item,index) in topicList" :key="item.value"
                      @mouseenter.native="hoverTopic=index"
                      @mouseleave.native="hoverTopic=-1">
           <li class="topic-list-item">
             <ul class="meta-list">
               <li class="meta-list-item">
-                <router-link :to="{name:'profile'}">{{item.author}}</router-link>
+                <router-link :to="{name:'profile'}">{{item.author.name}}</router-link>
               </li>
               <li class="meta-list-item">{{rTime(item.time)}}</li>
               <li class="meta-list-item">{{item.theme}}</li>
             </ul>
             <div class="topic-title">
-              <router-link :to="{path:item.url}">{{item.title}}</router-link>
+              <router-link :to="{path:`/student/topic/${item.topicId}`}">{{item.title}}</router-link>
             </div>
             <ul class="topic-action-list">
               <li class="topic-action-list-item" @click="handleOnClickLikeButton(index)">
@@ -37,7 +37,8 @@
                 <i :class="{'icon-pinglun2 iconfont icon':true,commented:item.commented}"></i>
                 <span>{{item.comment}}</span>
               </li>
-              <li class="share-item" v-show="hoverTopic===index" :data-clipboard-text="item.url">
+              <li class="share-item" v-show="hoverTopic===index"
+                  :data-clipboard-text="`/student/topic/${item.topicId}`">
                 <i class="icon-xiazai8 iconfont icon"></i>
               </li>
             </ul>
