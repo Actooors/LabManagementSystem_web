@@ -46,6 +46,8 @@
 </template>
 
 <script>
+  import axios from 'axios'
+
   export default {
     name: "profile",
     data() {
@@ -71,6 +73,20 @@
         // console.log(`height:${this.$refs.containerContent.offsetHeight - 460}px`)
         this.introStyle = `height:${this.$refs.containerContent.offsetHeight - 470}px`
       }
+    },
+    created() {
+      let query = this.$route.query
+      let uid = null
+      if (query.hasOwnProperty('uid')) {
+        uid = query.uid
+      }
+      // axios({
+      //   url: '',
+      //   method: '',
+      //   query: {uid: uid}
+      // }).then((response) => {
+      //
+      // })
     },
     mounted() {
       let timer = null

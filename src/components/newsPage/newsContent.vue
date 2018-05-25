@@ -123,7 +123,15 @@
               this.newsInfo = response.data.data
               this.panelInfo.type = response.data.data.type
               this.panelInfo.title = response.data.data.title
+              this.editMode = this.$route.query.hasOwnProperty('mode') && this.$route.query.mode === '1'
               document.title = `${response.data.data.title} - ${this.defaultTitle}`
+              if (this.editMode) {
+                this.editContent = this.newsInfo.content
+                this.setEditorHeight()
+              }
+              else {
+                this.editContent = null
+              }
             } else {
               process.env.NODE_ENV === "development" && console.log(response.data)
               // this.$router.replace({name: 'error404'})
@@ -133,8 +141,9 @@
             process.env.NODE_ENV === "development" && console.log(error)
             // this.$router.replace({name: 'error404'})
           })
-        this.editMode = false
-        this.editContent = null
+
+        // this.editMode = false
+        // this.editContent = null
 
       },
       handleOnMouseEnterPanel(enter, component) {
@@ -163,10 +172,7 @@
       },
       handleClickEditBtn() {
         this.editMode = !this.editMode
-        if (this.editMode) {
-          this.editContent = this.editContent !== null ? this.editContent : this.newsInfo.content
-          this.setEditorHeight()
-        }
+        this.$router.push({path: this.$route.fullPath, query: {mode: this.editMode ? '1' : '0'}})
       },
       handleOnClickClosePanel() {
         this.$confirm('此操作将删除这篇文章, 是否继续?', '提示', {
@@ -195,6 +201,7 @@
       }
     },
     mounted() {
+      console.log('editmode:', this.editMode, this.$route)
       // katex.render("L_{0m}^{k+1}=\\min\\{L_{01}^k+l_{1m},L_{02}^k+l_{2m},L_{03}^k+l_{3m},...,L_{0(n-1)}^k+l_{(n-1)m}\\}", this.$refs.content);
       this.loadData()
       // console.log(this.newsMap)
@@ -209,17 +216,24 @@
           this.setEditorHeight()
         }, 100)
       }
-
     },
     computed: {
       watchNeeds() {
         return this.$route.params.newstype + this.$route.params.newsid
       },
-      ...mapState(['defaultTitle', 'newsMap'])
+      ...mapState(['defaultTitle', 'newsMap']),
+      query() {
+        return this.$route.query
+      }
     },
     watch: {
       watchNeeds() {
         this.loadData()
+      },
+      query(val) {
+        this.editMode = this.$route.query.hasOwnProperty('mode') && this.$route.query.mode === '1'
+        this.editContent = this.editContent !== null ? this.editContent : this.newsInfo.content
+        this.setEditorHeight()
       }
     }
   }

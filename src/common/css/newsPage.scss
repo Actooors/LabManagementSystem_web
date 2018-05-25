@@ -4,7 +4,9 @@ $color-deepBlue: #3E5D71;
 $color-lightBlue: #6E87AA;
 
 .page-wrapper {
-  margin-bottom: 10em;
+  margin-bottom: 7em;
+  padding-bottom: 3em;
+  border-bottom: 1px solid $color-deepBlue;
   position: relative;
   @media screen and (max-width: 624px) {
     /*手机端*/

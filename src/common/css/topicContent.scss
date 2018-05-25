@@ -1,0 +1,157 @@
+@import '../../common/css/newsContent.scss';
+@import '../../common/css/varies';
+
+.page-wrapper {
+  margin-bottom: 10em;
+  position: relative;
+  background: $-color-background;
+  @media screen and (max-width: 624px) {
+    /*手机端*/
+    top: 100px;
+  }
+  @media screen and (min-width: 625px) {
+    top: 61px;
+  }
+}
+
+.avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 12px;
+  flex-shrink: 0;
+  display: block;
+  text-decoration: none;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.avatar-small {
+  @extend .avatar;
+  height: 32.5px;
+  width: 32.5px;
+}
+
+.content {
+  position: relative;
+  transition: transform .3s ease-in;
+  padding: 1.5rem .7rem 0 .7rem;
+  &:first-of-type {
+    padding: 3rem .7rem 0 .7rem;
+  }
+  &:last-of-type {
+    padding: 1.5rem .7rem 3rem .7rem;
+  }
+  margin: {
+    left: auto;
+    right: auto;
+  }
+  max-width: 60%;
+}
+
+.name {
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+.wrapper {
+  background: white;
+  box-shadow: 0 1px 2px $-color-shadow;
+  .author-info-block {
+    display: flex;
+    padding: 2rem 3%;
+    .publish-time {
+      font-size: 12px;
+      color: $-color-vice-theme;
+    }
+  }
+
+  .title {
+    text-align: left;
+    font-weight: bold;
+    color: black;
+  }
+  .article-info {
+    border: none;
+  }
+
+  .comment-form {
+    width: 90%;
+    margin: 1.5rem auto;
+    background: $-color-background-light;
+    border: 1px solid $-color-gray-light;
+    border-radius: 3px;
+    .comment-box {
+      width: 100%;
+    }
+    .commit-submit {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1rem;
+    }
+    .comment-submit-btn {
+      float: right;
+    }
+  }
+
+  ul {
+    list-style: none;
+  }
+  .comment-list {
+    width: 90%;
+    margin: 2em auto;
+    &-item {
+      display: flex;
+      position: relative;
+      padding: 1.5rem 0;
+      &:not(:first-of-type):before {
+        content: "";
+        position: absolute;
+        left: 44.5px;
+        top: 0;
+        right: 0;
+        border-bottom: 1px solid $-color-gray-light2;
+      }
+      .comment-name {
+        @extend .name;
+        font-size: 1.4rem;
+      }
+      .comment-content {
+        margin: .3rem 0 .5rem;
+        font-size: 1.4rem;
+        line-height: 1.7;
+        color: #333;
+        &-span {
+          margin-right: .5em;
+          white-space: pre-wrap;
+        }
+      }
+      .comment-action {
+        display: flex;
+        align-items: center;
+        &-item {
+          color: $-color-vice-theme;
+          font-size: 1.2rem;
+          margin-right: 1.2rem;
+        }
+        .btn-like {
+          border: none;
+          outline: none;
+          padding: .3rem .7rem .3rem .5rem;
+          background-color: hsla(0, 0%, 95%, .8);
+          border-radius: 2px;
+          transition: all .25s;
+        }
+        .icon-liked {
+          color: $-color-primary-blue;
+          background-color: rgba($-color-primary-blue, .13);
+        }
+      }
+
+    }
+  }
+}

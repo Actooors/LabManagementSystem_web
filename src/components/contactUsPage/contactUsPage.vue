@@ -1,23 +1,17 @@
 <template>
     <div style="background-color:gainsboro">
-      <head-bar ref="headbar"></head-bar>
       <member-itroduction ></member-itroduction>
-      <footer-bar class="footerinterval"></footer-bar>
     </div>
 </template>
 
 <script>
-    import HeadBar from "../headBar/headBar";
-    import FooterBar from "../footer/footerBar";
-    import MemberItroduction from "../memberIntroduction/memberItroduction";
-    import Mymap from "../map/mymap";
+    import MemberItroduction from "components/memberIntroduction/memberItroduction";
+    import Mymap from "base/map/mymap";
 
     export default {
       components: {
         Mymap,
         MemberItroduction,
-        FooterBar,
-        HeadBar
       },
       name: "contact-us-page",
       mounted(){

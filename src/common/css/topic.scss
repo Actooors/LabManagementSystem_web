@@ -1,0 +1,132 @@
+@import 'varies';
+
+$-font-size-icon: 14px;
+.page-wrapper {
+  margin-bottom: 5em;
+  padding-bottom: 5em;
+  position: relative;
+  background: $-color-background;
+  @media screen and (max-width: 624px) {
+    /*手机端*/
+    top: 100px;
+  }
+  @media screen and (min-width: 625px) {
+    top: 61px;
+  }
+}
+
+.container {
+  .nav {
+    background-color: white;
+    margin: 2em auto;
+    height: 50px;
+    width: 700px;
+    display: flex;
+    box-shadow: 0 1px 2px $-color-shadow;
+    img {
+      height: 100%;
+      margin-right: 20px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      width: 100px;
+      color: #5778ff;
+      i {
+        margin: 0 .2em;
+      }
+      a, .share-item {
+        text-decoration: none;
+        color: #5778ff;
+        cursor: pointer;
+      }
+
+    }
+  }
+  .topic-list {
+    width: 700px;
+    background-color: white;
+    margin: 0 auto;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+    a {
+      text-decoration: none;
+    }
+    li {
+      list-style-type: none;
+    }
+    &-item {
+      padding: 1.5rem 2rem;
+      height: 120px;
+      border-bottom: 1px solid rgba(178, 186, 194, .15);
+      &:hover {
+        background-color: $-color-gray-hover-light;
+      }
+    }
+    .meta-list {
+      display: flex;
+      color: $-color-gray;
+      &-item {
+        a:not(:hover) {
+          color: $-color-gray;
+        }
+        &:not(:last-of-type):after {
+          content: '·';
+          margin: 0 .5em;
+        }
+      }
+    }
+    .topic-title {
+      font-size: 1.7rem;
+      font-weight: bold;
+      margin: .5rem 0 1rem;
+      a:not(:hover) {
+        color: black;
+      }
+    }
+    .topic-action-list {
+      display: flex;
+      color: $-color-gray;
+      font-weight: bold;
+      &-item {
+        line-height: 26px;
+        text-align: center;
+        height: 26px;
+        width: 80px;
+        border: 1px solid $-color-gray-light;
+        padding: 0 .8rem;
+        &:hover {
+          background-color: $-color-gray-hover;
+          cursor: pointer;
+        }
+        i {
+          font-size: $-font-size-icon;
+          margin-right: 2px;
+        }
+        .liked {
+          color: #ff1e00;
+          animation: liked-enter .5s;
+        }
+        @keyframes liked-enter {
+          0% {
+            font-size: $-font-size-icon * 0.1;
+            color: #dbb4d9;
+          }
+          50% {
+            font-size: $-font-size-icon * 1.4;
+          }
+        }
+        .commented {
+          color: cornflowerblue;
+        }
+      }
+      .share-item {
+        @extend .topic-action-list-item;
+        margin-left: 1rem;
+        width: 35px;
+      }
+    }
+  }
+}
+

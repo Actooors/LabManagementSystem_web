@@ -17,6 +17,8 @@ const express = require('express')
 const app = express()
 var apiRoutes = express.Router()
 var news = require('../mock/news')
+var topicList = require('../mock/topicList')
+var topic = require('../mock/topic')
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({extended: false})
@@ -74,6 +76,37 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             code: "SUCCESS",
             message: null,
             data: news.articles[body.newsid]
+          })
+        } else {
+          res.json({
+            code: "FAILED",
+            message: "Not found",
+            data: null
+          })
+        }
+      })
+      app.get('/api/topiclist', (req, res) => {
+        res.json({
+          code: "SUCCESS",
+          message: null,
+          data: topicList
+        })
+      })
+      app.all('/api/topic', jsonParser, (req, res) => {
+        let body = Object.keys(req.body).length ? req.body : req.query
+        if (!body || !Object.keys(body).length) {
+          res.json({
+            code: "FAILED",
+            message: "无此类型数据",
+            data: null
+          })
+        }
+        process.env.NODE_ENV === 'development' && console.log("/api/topic", body, req.query)
+        if (body.hasOwnProperty('topicId') && body.topicId && topic.hasOwnProperty(body.topicId)) {
+          res.json({
+            code: "SUCCESS",
+            message: null,
+            data: topic[body.topicId]
           })
         } else {
           res.json({

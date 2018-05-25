@@ -17,20 +17,11 @@
         <el-menu-item index="/student/news/academic">学界重要新闻</el-menu-item>
         <el-menu-item index="/student/news/others">其他新闻</el-menu-item>
       </el-submenu>
+      <el-menu-item index="/student/topic">话题</el-menu-item>
+      <el-menu-item index="notifications">
+        <router-link :to="{name: 'notifications'}">消息中心<span class="badge">5</span></router-link>
+      </el-menu-item>
 
-      <el-submenu index="2" :show-timeout=50 :hide-timeout=50>
-        <template slot="title">话题</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-submenu index="2-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="/student/message">消息中心</el-menu-item>
       <el-menu-item index="/student/contactus">联系我们</el-menu-item>
 
       <menu-item-cus item="5" class="align-right" :click-enable=false>
@@ -47,7 +38,7 @@
 </template>
 
 <script>
-  import MenuItemCus from '../../base/menuItemCus/menuItemCus'
+  import MenuItemCus from 'base/menuItemCus/menuItemCus'
 
   export default {
     name: "head-bar",

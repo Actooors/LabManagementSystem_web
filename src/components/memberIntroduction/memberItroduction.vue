@@ -83,7 +83,7 @@
 </template>
 
 <script>
-  import Mymap from "../map/mymap";
+  import Mymap from "../../base/map/mymap";
 
   export default {
     components: {Mymap},
