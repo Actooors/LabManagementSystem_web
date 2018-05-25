@@ -25,10 +25,10 @@
             </tr>
             <tr id="monitor">
               <td class="padleft" colspan="2"><button>19</button></td>
-              <td class="mark2"><button>20</button></td>
+              <td ><button >20</button></td>
               <td><button>21</button></td>
               <td><button>22</button></td>
-              <td class="mark2"><button>23</button></td>
+              <td ><button>23</button></td>
               <td><button>24</button></td>
               <td class="padright" colspan="2"><button>25</button></td>
             </tr>
@@ -36,14 +36,7 @@
         </div>
         <div class="detailed">
           <ul class="rclist">
-            <li><span class="time">10:30</span><span class="explain">我的日程表上已经排满了很多的事情。</span></li>
-            <li><span class="time">11:30</span><span class="explain">我抱怨我的日程表、我的家庭、我的处境和可能抱怨的一切，认为是它们让我陷入困境。</span></li>
-            <li><span class="time">12:30</span><span class="explain">把每周回顾列入我的日程表中是我要做的第一步.</span></li>
-            <li><span class="time">13:30</span><span class="explain">我一般在每周五下午做每周回顾.</span></li>
-            <li><span class="time">14:30</span><span class="explain">因为在周末之前让我感觉到一周就要结束了(应该总结一下了).</span></li>
-            <li><span class="time">15:30</span><span class="explain">有些人习惯于周日晚上作回顾,这样在下周一时对刚刚总结过的事情印象比较深刻.</span></li>
-            <li><span class="time">16:30</span><span class="explain">作好回顾的关键是把它列入日程表</span></li>
-
+            <li v-for="item in this.tasks"><span class="time">{{item.time}}</span><span class="explain">{{item.content}}</span></li>
           </ul>
           <!--<a class="downBtn" href="#" style="display:none;">显示更多</a>-->
         </div>
@@ -58,15 +51,54 @@
   import DATE from "../../assets/js/date"
   export default {
   name:"calender",
+    data(){
+    return {
+      tasks:[
+        {
+          time:'10:30',
+          content:'我的日程表上已经排满了很多的事情'
+        },
+        {
+          time:'11:30',
+          content:'我抱怨我的日程表、我的家庭、我的处境和可能抱怨的一切，认为是它们让我陷入困境。'
+        },
+        {
+          time:'12:30',
+          content:'把每周回顾列入我的日程表中是我要做的第一步.'
+        },
+        {
+          time:'13:30',
+          content:'我一般在每周五下午做每周回顾.'
+        },
+        {
+          time:'13:30',
+          content:'我一般在每周五下午做每周回顾.'
+        },
+        {
+          time:'14:30',
+          content:'因为在周末之前让我感觉到一周就要结束了(应该总结一下了).'
+        },
+        {
+          time:'15:30',
+          content:'有些人习惯于周日晚上作回顾,这样在下周一时对刚刚总结过的事情印象比较深刻.'
+        },
+        {
+          time:'16:30',
+          content:'作好回顾的关键是把它列入日程表'
+        }
+      ]
+    }
+    },
     mounted(){
-      $("#monitor td button").click(function(){
-        $(this).addClass('mark1')
-          .parent().siblings().children('button').removeClass('mark1');
-      });
+      // $("#monitor td button").click(function(){
+      //   $(this).addClass('mark1')
+      //     .parent().siblings().children('button').removeClass('mark1');
+      // });
       DATE();
     }
 }
 </script>
 <style scoped>
   @import "../../assets/css/index.css";
+
 </style>

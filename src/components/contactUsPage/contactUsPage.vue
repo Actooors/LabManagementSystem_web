@@ -17,7 +17,8 @@
         Mymap,
         MemberItroduction,
         FooterBar,
-        HeadBar},
+        HeadBar
+      },
       name: "contact-us-page",
       mounted(){
       //  console.log("挂在完成")

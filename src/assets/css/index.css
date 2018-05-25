@@ -90,6 +90,7 @@ table.dates tr td button{
 	text-align:center;
 	background: #fff;
 	cursor: pointer;
+  width: 30px;
 }
 .mark1{
 	background: #028BE0 !important;

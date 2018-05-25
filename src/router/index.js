@@ -11,6 +11,7 @@ import Error404 from 'components/error/error404'
 import NewsOverview from 'components/newsPage/newsOverview'
 import NewsContent from 'components/newsPage/newsContent'
 import Profile from 'components/profile/profile'
+import MessagePage from 'components/messagePage/messagePage'
 
 Vue.use(Router)
 let defaultTitle = store.state.defaultTitle
@@ -73,7 +74,13 @@ let router = new Router({
           path: 'profile',
           name: 'profile',
           component: Profile
-        }]
+        },{
+          path:'message',
+          name:'messagePage',
+          component:MessagePage
+        }
+
+        ]
     },
     {
       path: '/login',

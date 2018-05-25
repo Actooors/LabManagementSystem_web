@@ -38,7 +38,7 @@
               <div style="-webkit-border-radius: 50%;overflow: hidden">
                 <div :style="{background:'url(' + member.headshoturl+ ') center center'}" class="headshot" id="Tmemberhead">
                   <div style="background: rgba(255,255,255,0.5)" id="Tcover">
-                    <span>{{member.contaction}}</span><br>
+                    <span>{{member.name}}</span><br>
                     <span>{{member.position[1]}}</span>
                   </div>
                 </div>
@@ -62,7 +62,7 @@
               <div style="-webkit-border-radius: 50%;overflow: hidden">
                 <div :style="{background:'url(' + member.headshoturl+ ') center center'}" class="headshot" id="memberhead">
                   <div style="background: rgba(255,255,255,0.5)" id="cover">
-                    <span>{{member.contaction}}</span><br>
+                    <span>{{member.name}}</span><br>
                     <span>{{member.position[1]}}</span>
                   </div>
                 </div>
@@ -184,6 +184,7 @@
   }
   .container{
     background-color: rgba(255,255,255,0.9);
+    padding-top: 10px;
   }
   #memberItroduction{
     background-image: url('../../assets/img/上海.jpg');
