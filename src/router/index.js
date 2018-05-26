@@ -11,14 +11,11 @@ import Error404 from 'components/error/error404'
 import NewsOverview from 'components/newsPage/newsOverview'
 import NewsContent from 'components/newsPage/newsContent'
 import Profile from 'components/profile/profile'
-<<<<<<< HEAD
 import MessagePage from 'components/messagePage/messagePage'
-=======
 import NewNews from 'components/newNews/newNews'
 import Topic from 'components/topic/topic'
 import NewTopic from 'components/newTopic/newTopic'
 import TopicContent from 'components/topicContent/topicContent'
->>>>>>> ca08ced35ba07d862f12083b535ef7c81708fdc3
 
 Vue.use(Router)
 let defaultTitle = store.state.defaultTitle
@@ -80,21 +77,12 @@ let router = new Router({
         {
           path: 'notifications',
           name: 'notifications',
-          component: Notifiations
+          component: MessagePage
         },
         {
           path: 'profile',
           name: 'profile',
           component: Profile
-<<<<<<< HEAD
-        },{
-          path:'message',
-          name:'messagePage',
-          component:MessagePage
-        }
-
-        ]
-=======
         },
         {
           path: 'topic',
@@ -108,8 +96,8 @@ let router = new Router({
           path: 'topic/:topicid',
           name: 'topicContent',
           component: TopicContent
-        }]
->>>>>>> ca08ced35ba07d862f12083b535ef7c81708fdc3
+        }
+]
     },
     {
       path: '/login',

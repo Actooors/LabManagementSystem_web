@@ -84,14 +84,14 @@
 
 <script>
   import Mymap from "../../base/map/mymap";
-
+  import axios from 'axios';
   export default {
     components: {Mymap},
     name: "member-itroduction",
     data(){
       return{
         leader:{
-          name:'XXX',
+          name:'李晓强',
           position:['实验室总负责人','上海大学计算机工程与科学学院副教授','硕士生导师','理学博士学位'],
           research:['信息隐藏与数字水印','数字图像处理','模式识别','数字版权管理'],
           details:["  2004年6月毕业于复旦大学计算机科学与工程系计算机应用专业，获理学博士学位。主要研究兴趣为信息隐藏与数字水印、数字图像处理与模式识别、数字版权管理。",
@@ -148,6 +148,19 @@
           }],
       }
     },
+    mounted(){
+      axios({
+        url: '/api/memberIntroduction',
+        methods:'get'
+      }).then((response)=>{
+        if(response.data.code==="SUCCESS"){
+          this.teachers=response.data.date.teachers;
+          this.member=response.data.date.member;
+        }
+      }).catch((error)=>{
+        console.log("加载成员信息失败")
+      })
+    }
     // computed:{
     //   backgrounds(){
     //     var arr=[];

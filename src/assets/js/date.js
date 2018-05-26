@@ -28,9 +28,8 @@
         for(var i = 0;i<clen;i++){
             cells[i].innerHTML = formatDate(i==0 ? date : addDate(date,1));
             if (cells[i].innerHTML==today) {
-                cells[i].className='mark1';
-            };
-
+              cells[i].className = 'mark1';
+            }
             day1.innerHTML=date.getFullYear()+'年'+ (date.getMonth()+1)+'月'+cells[0].innerHTML+'日';
             day7.innerHTML=date.getFullYear()+'年'+ (date.getMonth()+1)+'月'+cells[6].innerHTML+'日';
         }
@@ -39,15 +38,35 @@
 
     document.getElementById('last-week').onclick = function(){
         setDate(addDate(currentFirstDate,-7));
+        for(var i=0;i<clen;i++){
+          if(cells[i].innerHTML!=today&&cells[i].className=='mark1'){
+            cells[i].className='';
+          }
+        }
     };
     document.getElementById('next-week').onclick = function(){
         setDate(addDate(currentFirstDate,7));
+      for(var i=0;i<clen;i++){
+        if(cells[i].innerHTML!=today&&cells[i].className=='mark1'){
+          cells[i].className='';
+        }
+      }
     };
     document.getElementById('lastM').onclick = function(){
         setDate(addDate(currentFirstDate,-30));
+      for(var i=0;i<clen;i++){
+        if(cells[i].innerHTML!=today&&cells[i].className=='mark1'){
+          cells[i].className='';
+        }
+      }
     };
     document.getElementById('nextM').onclick = function(){
         setDate(addDate(currentFirstDate,30));
+      for(var i=0;i<clen;i++){
+        if(cells[i].innerHTML!=today&&cells[i].className=='mark1'){
+          cells[i].className='';
+        }
+      }
     };
     setDate(new Date());
 

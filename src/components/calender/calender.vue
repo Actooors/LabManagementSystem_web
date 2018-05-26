@@ -49,10 +49,12 @@
 <script>
   import $ from "jquery"
   import DATE from "../../assets/js/date"
+  import axios from 'axios'
   export default {
   name:"calender",
     data(){
     return {
+      activeDay:'',
       tasks:[
         {
           time:'10:30',
@@ -89,13 +91,72 @@
       ]
     }
     },
+    computed: {
+      today() {
+        var date = new Date();
+        var today = date.getDate().toString();
+        return today;
+      }
+    },
+    created(){
+     this.activeDay=this.today;
+     // console.log(this.activeday)
+    }
+    ,
     mounted(){
       // $("#monitor td button").click(function(){
       //   $(this).addClass('mark1')
       //     .parent().siblings().children('button').removeClass('mark1');
       // });
       DATE();
+      this.updateActiveday();
+    },
+    methods:{
+    updateActiveday(){
+      var buttons=document.getElementById('monitor').getElementsByTagName("button");
+       // console.log(buttons)
+      var vm=this;
+      for(var i=0;i<buttons.length;i++){
+          // console.log(buttons[i].innerHTML)
+          buttons[i].addEventListener('click', function() {
+            // console.log("旧值"+vm.activeDay);
+              vm.activeDay=this.innerHTML;
+              // console.log(buttons[i].innerHTML);
+              // console.log(this);
+              console.log(this.innerHTML)
+              // console.log("新值"+vm.activeDay);
+          })
+        }
+      },
+      lodeTask(){
+        var now=this.activeday;
+        // 写成箭头就不用
+
+        console.log("运行！！")
+        axios({
+          url:'/api/calender',
+          method:'get',
+          params:{
+            now:now
+          }
+        })
+          .then((response) => {
+            if(response.data.code==="SUCCESS"&&response.data.data!=null) {
+              this.tasks = response.data.data;
+            }
+      }).catch((error)=>{
+        console.log("获取信息失败")
+        })
+      }
+    },
+    watch:{
+    activeDay(v,m){
+      console.log("新值"+v);
+      console.log("旧值"+m)
+      this.lodeTask();
     }
+    }
+
 }
 </script>
 <style scoped>

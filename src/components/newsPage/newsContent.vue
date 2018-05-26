@@ -226,16 +226,7 @@
         return this.$route.query
       }
     },
-    watch: {
-      watchNeeds() {
-        this.loadData()
-      },
-      query(val) {
-        this.editMode = this.$route.query.hasOwnProperty('mode') && this.$route.query.mode === '1'
-        this.editContent = this.editContent !== null ? this.editContent : this.newsInfo.content
-        this.setEditorHeight()
-      }
-    }
+
   }
 </script>
 
