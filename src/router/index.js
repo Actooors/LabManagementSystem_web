@@ -27,86 +27,79 @@ let router = new Router({
     {
       path: '/',
       name: 'root',
-      component: Login,
-      meta: {
-        title: `登录 - ${defaultTitle}`
-      }
+      // component: Login,
+      // meta: {
+      //   title: `登录 - ${defaultTitle}`
+      // }
+      redirect: {name: 'mainPage'}
     },
     {
-      path: '/student',
-      component: Student,
+      path: '/index',
+      name: 'mainPage',
+      component: MainPage,
+    },
+    {
+      path: '/news',//动态路由匹配
+      component: NewsPage,
+      meta: {
+        title: `新闻 - ${defaultTitle}`
+      },
       children: [{
         path: '',
-        redirect: {name: 'mainPage'},
+        redirect: {path: 'labnews'}
       },
         {
-          path: 'index',
-          name: 'mainPage',
-          component: MainPage,
+          path: ':newstype',
+          name: 'newsPage',
+          component: NewsOverview
         },
         {
-          path: 'news',//动态路由匹配
-          component: NewsPage,
-          meta: {
-            title: `新闻 - ${defaultTitle}`
-          },
-          children: [{
-            path: '',
-            redirect: {path: 'labnews'}
-          },
-            {
-              path: ':newstype',
-              name: 'newsPage',
-              component: NewsOverview
-            },
-            {
-              path: ':newstype/:newsid',
-              name: 'newsContent',
-              component: NewsContent
-            }]
-        },
-        {
-          path: 'newnews',
-          name: 'newNews',
-          component: NewNews
-        },
-        {
-          path: 'contactus',
-          name: 'contactUsPage',
-          component: contactUsPage
-        },
-        {
-          path: 'notifications',
-          name: 'notifications',
-          component: Notifiations
-        },
-        {
-          path: 'profile',
-          name: 'profile',
-          component: Profile
-        }, {
-          path: 'message',
-          name: 'messagePage',
-          component: MessagePage
-        },
-        {
-          path: 'topic',
-          name: 'topic',
-          component: Topic
-        }, {
-          path: 'newtopic',
-          name: 'newTopic',
-          component: NewTopic
-        }, {
-          path: 'topic/:topicid',
-          name: 'topicContent',
-          component: TopicContent
+          path: ':newstype/:newsid',
+          name: 'newsContent',
+          component: NewsContent
         }]
+    },
+    {
+      path: '/newnews',
+      name: 'newNews',
+      component: NewNews
+    },
+    {
+      path: '/contactus',
+      name: 'contactUsPage',
+      component: contactUsPage
+    },
+    {
+      path: '/notifications',
+      name: 'notifications',
+      component: Notifiations
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
+    }, {
+      path: '/message',
+      name: 'messagePage',
+      component: MessagePage
+    },
+    {
+      path: '/topic',
+      name: 'topic',
+      component: Topic
+    }, {
+      path: '/newtopic',
+      name: 'newTopic',
+      component: NewTopic
+    }, {
+      path: '/topic/:topicid',
+      name: 'topicContent',
+      component: TopicContent
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
     },
     {
       path: '/logout',
@@ -128,6 +121,7 @@ let router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  //自定义标题
   let customTitle = false
   for (let i = to.matched.length - 1; i >= 0; i--) {
     if (to.matched[i].meta.hasOwnProperty('title')) {

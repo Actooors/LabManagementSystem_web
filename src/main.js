@@ -12,16 +12,14 @@ import $ from "jquery"
 import './assets/css/bootstrap.min.css'
 import './assets/js/bootstrap.min'
 import 'iview/dist/styles/iview.css'
+import 'interceptor/interceptor'
 
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   attempt: 1,
 })
-// Vue.use(Bootstrap);
 Vue.use(Element)
 Vue.config.productionTip = false
-
-
 FastClick.attach(document.body)
 /* eslint-disable no-new */
 new Vue({

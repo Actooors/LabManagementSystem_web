@@ -70,12 +70,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           })
         }
         process.env.NODE_ENV === 'development' && console.log("/api/article", body, req.query)
-        if (body.hasOwnProperty('newsid') && body.hasOwnProperty('type') && body.newsid && news.articles.hasOwnProperty(body.newsid) &&
-          news.articles[body.newsid].hasOwnProperty('type') && news.articles[body.newsid].type === body.type) {
+        if (body.hasOwnProperty('newsId') && body.hasOwnProperty('type') && body.newsId && news.articles.hasOwnProperty(body.newsId) &&
+          news.articles[body.newsId].hasOwnProperty('type') && news.articles[body.newsId].type === body.type) {
           res.json({
             code: "SUCCESS",
             message: null,
-            data: news.articles[body.newsid]
+            data: news.articles[body.newsId]
           })
         } else {
           res.json({

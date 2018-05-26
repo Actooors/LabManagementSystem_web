@@ -4,6 +4,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 var webpack = require('webpack')
+
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -36,7 +37,8 @@ module.exports = {
       'components': resolve('src/components'),
       'group': resolve('src/group'),
       'router': resolve('src/router'),
-      'store': resolve('src/store')
+      'store': resolve('src/store'),
+      'interceptor': resolve('src/interceptor')
     }
   },
   module: {
@@ -93,11 +95,11 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty'
   },
-  plugins:[
+  plugins: [
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
-      "windows.jQuery":"jquery"
+      "windows.jQuery": "jquery"
     })
   ]
 }

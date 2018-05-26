@@ -210,7 +210,7 @@
                 type: 'success',
                 message: '删除成功!'
               });
-              this.$router.push({path: '/student/news'})
+              this.$router.push({path: '/news'})
             } else {
               this.$message.warning(`删除失败，错误提示: ${response.data.message}`)
             }

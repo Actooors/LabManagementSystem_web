@@ -6,12 +6,12 @@
           <article class="article">
             <header class="article-info clearfix">
               <div class="author-info-block">
-                <router-link class="avatar" :to="{name:'/student/profile',query:{uid:newsInfo.author.uid}}">
+                <router-link class="avatar" :to="{name:'/profile',query:{uid:newsInfo.author.uid}}">
                   <img :src="newsInfo.authorAvatar">
                 </router-link>
                 <div class="author-info-box">
                   <div>
-                    <router-link :to="{path:'/student/profile',query:{uid:newsInfo.author.uid}}" class="name">
+                    <router-link :to="{path:'/profile',query:{uid:newsInfo.author.uid}}" class="name">
                       {{newsInfo.author.name}}
                     </router-link>
                   </div>
@@ -92,7 +92,7 @@
               <img :src="item.avatar">
             </router-link>
             <div class="content-box">
-              <router-link :to="{path:'/student/profile'}" class="comment-name">{{item.username}}</router-link>
+              <router-link :to="{path:'/profile'}" class="comment-name">{{item.username}}</router-link>
               <div class="comment-content">
                 <span class="comment-content-span">{{item.content}}</span>
               </div>

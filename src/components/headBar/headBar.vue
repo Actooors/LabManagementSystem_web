@@ -10,19 +10,19 @@
       style="transition: background-color .5s ease-in-out"
       id="headbar-ul"
     >
-      <el-menu-item index="/student/index">首页</el-menu-item>
+      <el-menu-item index="/index">首页</el-menu-item>
       <el-submenu index="1" :show-timeout=50 :hide-timeout=50>
         <template slot="title">新闻</template>
-        <el-menu-item index="/student/news/labnews">实验室动态</el-menu-item>
-        <el-menu-item index="/student/news/academic">学界重要新闻</el-menu-item>
-        <el-menu-item index="/student/news/others">其他新闻</el-menu-item>
+        <el-menu-item index="/news/labnews">实验室动态</el-menu-item>
+        <el-menu-item index="/news/academic">学界重要新闻</el-menu-item>
+        <el-menu-item index="/news/others">其他新闻</el-menu-item>
       </el-submenu>
-      <el-menu-item index="/student/topic">话题</el-menu-item>
+      <el-menu-item index="/topic">话题</el-menu-item>
       <el-menu-item index="notifications">
         <router-link :to="{name: 'notifications'}">消息中心<span class="badge">5</span></router-link>
       </el-menu-item>
 
-      <el-menu-item index="/student/contactus">联系我们</el-menu-item>
+      <el-menu-item index="/contactus">联系我们</el-menu-item>
 
       <menu-item-cus item="5" class="align-right" :click-enable=false>
         <div class="HeaderRight">{{username}}</div>
@@ -30,7 +30,7 @@
           <p>欢迎，这是您第 {{loginTimes}} 次登录</p>
           <div class="link">
             <a href="/logout" class="link">注销</a>
-            <a href="/student/profile" class="link">个人资料</a>
+            <a href="/profile" class="link">个人资料</a>
           </div>
         </div>
       </menu-item-cus>
