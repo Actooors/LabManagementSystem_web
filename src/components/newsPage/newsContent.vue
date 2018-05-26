@@ -109,12 +109,13 @@
     },
     methods: {
       loadData() {
+        //待对接，news详情
         let cfg = {
           url: '/api/article',
           method: 'get',
           params: {
             type: this.$route.params.newstype,
-            newsid: this.$route.params.newsid
+            newsId: this.$route.params.newsid
           }
         }
         axios(cfg)
@@ -161,14 +162,31 @@
         }, 10)
       },
       handleClickSaveBtn() {
-        this.$notify({
-          title: '提示',
-          message: "文章已成功保存！"
+        let postData = {
+          newsId: this.$router.params.newsId,
+          title: this.newsInfo.title,
+          type: this.type
+        }
+        if (this.editMode) {
+          postData['content'] = this.newsInfo.content
+        }
+        axios({
+          url: '//localhost:8081/api/news/modifyNews',
+          method: 'post',
+          data: postData
+        }).then((response) => {
+          if (response.data.code === 'SUCCESS') {
+            this.$message({
+              type: 'success',
+              message: "文章已成功保存！"
+            })
+          } else {
+            this.$message.warning(`保存失败，错误提示: ${response.data.message}`)
+          }
+        }).catch((error) => {
+          this.$message.warning("保存失败，请检查网络连接！")
+          process.env.NODE_ENV === 'development' && console.log(error)
         })
-        if (this.editMode)
-          console.log("编辑模式下点击了保存")
-        else
-          console.log("普通模式下点击了保存")
       },
       handleClickEditBtn() {
         this.editMode = !this.editMode
@@ -180,16 +198,32 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
+          axios({
+            url: '//localhost:8081/api/news/deleteNews',
+            method: 'post',
+            data: {
+              newsId: this.$router.params.newsid
+            }
+          }).then((response) => {
+            if (response.data.code === 'SUCCESS') {
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+              this.$router.push({path: '/student/news'})
+            } else {
+              this.$message.warning(`删除失败，错误提示: ${response.data.message}`)
+            }
+          }).catch((error) => {
+            this.$message.error('删除失败，请检查网络连接！')
+            process.env.NODE_ENV==='development' && console.log(error)
+          })
         }).catch(() => {
           this.$message({
             type: 'info',
             message: '已取消删除'
-          });
-        });
+          })
+        })
       },
       setEditorHeight() {
         // document.getElementById()

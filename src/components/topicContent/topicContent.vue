@@ -6,12 +6,14 @@
           <article class="article">
             <header class="article-info clearfix">
               <div class="author-info-block">
-                <router-link class="avatar" :to="{path:'/student/profile'}">
+                <router-link class="avatar" :to="{name:'/student/profile',query:{uid:newsInfo.author.uid}}">
                   <img :src="newsInfo.authorAvatar">
                 </router-link>
                 <div class="author-info-box">
                   <div>
-                    <router-link :to="{path:'/student/profile'}" class="name">裤裆三重奏</router-link>
+                    <router-link :to="{path:'/student/profile',query:{uid:newsInfo.author.uid}}" class="name">
+                      {{newsInfo.author.name}}
+                    </router-link>
                   </div>
                   <time :datetime="newsInfo.datetime" itemprop="datePublished" class="publish-time">
                     {{rTime(newsInfo.datetime)}}
@@ -63,7 +65,7 @@
         </CollapsePanel>
       </div>
     </div>
-    <div class="content">
+    <div class="content" id="comment">
       <div class="wrapper">
         <div class="comment-form author-info-block">
           <div class="avatar">
@@ -144,7 +146,7 @@
         newsInfo: {
           title: '',
           author: {
-            name:'',
+            name: '',
             uid: 1,
           },
           authorAvatar: '',
@@ -256,7 +258,16 @@
             process.env.NODE_ENV === "development" && console.log(response.data)
             // this.$router.replace({name: 'error404'})
           }
+          //获取到之后重新定位过来(#comment)
+          if (location.hash.charAt(0) === '#')
+            setTimeout(() => {
+              document.getElementById(location.hash.substring(1)).scrollIntoView()
+            }, 200)
         }).catch((error) => {
+          if (location.hash.charAt(0) === '#')
+            setTimeout(() => {
+              document.getElementById(location.hash.substring(1)).scrollIntoView()
+            }, 200)
           process.env.NODE_ENV === "development" && console.log(error)
           // this.$router.replace({name: 'error404'})
         })
@@ -333,10 +344,12 @@
         return relativeTime(t)
       }
     },
+    created() {
+      this.loadData()
+    },
     mounted() {
       // console.log('editmode:', this.editMode, this.$route)
       // katex.render("L_{0m}^{k+1}=\\min\\{L_{01}^k+l_{1m},L_{02}^k+l_{2m},L_{03}^k+l_{3m},...,L_{0(n-1)}^k+l_{(n-1)m}\\}", this.$refs.content);
-      this.loadData()
       var timer = null
 
       window.onresize = () => {

@@ -76,16 +76,32 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
+          axios({
+            url: '//localhost:8081/api/news/deleteNews',
+            method: 'post',
+            data: {
+              newsId: this.$router.params.newsid
+            }
+          }).then((response) => {
+            if (response.data.code === 'SUCCESS') {
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+              this.$router.push({path: '/student/news'})
+            } else {
+              this.$message.warning(`删除失败，错误提示: ${response.data.message}`)
+            }
+          }).catch((error) => {
+            this.$message.error('删除失败，请检查网络连接！')
+            process.env.NODE_ENV==='development' && console.log(error)
+          })
         }).catch(() => {
           this.$message({
             type: 'info',
             message: '已取消删除'
-          });
-        });
+          })
+        })
       },
       handleOnClickEditButton(path) {
         this.$router.push({path: path, query: {mode: '1'}})
