@@ -27,9 +27,11 @@
       <menu-item-cus item="5" class="align-right" :click-enable=false>
         <div class="HeaderRight">{{username}}</div>
         <div slot="title">
-          <p>这是title</p>
-          <p>hello</p>
-          <a href="/student/profile" class="link">个人资料</a>
+          <p>欢迎，这是您第 {{loginTimes}} 次登录</p>
+          <div class="link">
+            <a href="/logout" class="link">注销</a>
+            <a href="/student/profile" class="link">个人资料</a>
+          </div>
         </div>
       </menu-item-cus>
     </el-menu>
@@ -57,6 +59,13 @@
         activeIndex: '',
         solid: false
       }
+    },
+    computed: {
+      loginTimes() {
+        let times = window.localStorage.getItem('loginTimes')
+        return times ? times : 1
+      }
+
     },
     methods: {
       handleSelect(key, keyPath) {

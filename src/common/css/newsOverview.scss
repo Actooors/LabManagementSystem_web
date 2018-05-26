@@ -2,6 +2,10 @@
 
 $color-deepBlue: #3E5D71;
 $color-lightBlue: #6E87AA;
+.wrapper {
+  min-height: 512px;
+}
+
 .newscard {
   margin: 2em auto;
   &:hover {

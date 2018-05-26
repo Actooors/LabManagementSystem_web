@@ -109,6 +109,14 @@ let router = new Router({
       component: Login
     },
     {
+      path: '/logout',
+      name: 'logout',
+      beforeEnter(to, from, next) {
+        //....
+        next({name: 'login'})
+      }
+    },
+    {
       path: '*',
       name: 'error404',
       component: Error404,

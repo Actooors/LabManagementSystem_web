@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <el-card shadow="hover" class="newscard" v-for="(item,index) of newsList" :key="item.value">
       <div class="card-head-container">
         <div class="card-title">
