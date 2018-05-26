@@ -8,7 +8,7 @@
       <div class="breadcrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item>新闻</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{path: '/student/news/'+$route.params.newstype}">{{newsType}}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{path: '/news/'+$route.params.newstype}">{{newsType}}</el-breadcrumb-item>
           <el-breadcrumb-item v-if="$route.params.hasOwnProperty('newsid')">新闻详情</el-breadcrumb-item>
         </el-breadcrumb>
       </div>

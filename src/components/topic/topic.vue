@@ -14,31 +14,34 @@
       </div>
 
       <ul class="topic-list">
-        <router-link :to="{path: `/student/topic/${item.topicId}`}" v-for="(item,index) in topicList" :key="item.value"
+        <router-link :to="{path: `/topic/${item.topicId}`}"
+                     v-for="(item,index) in topicList" :key="item.value"
                      @mouseenter.native="hoverTopic=index"
                      @mouseleave.native="hoverTopic=-1">
           <li class="topic-list-item">
             <ul class="meta-list">
               <li class="meta-list-item">
-                <router-link :to="{name:'profile'}">{{item.author.name}}</router-link>
+                <router-link :to="{path:'/profile',query:{uid:item.author.uid}}">{{item.author.name}}
+                </router-link>
               </li>
               <li class="meta-list-item">{{rTime(item.time)}}</li>
               <li class="meta-list-item">{{item.theme}}</li>
             </ul>
             <div class="topic-title">
-              <router-link :to="{path:`/student/topic/${item.topicId}`}">{{item.title}}</router-link>
+              <router-link :to="{path:`/topic/${item.topicId}`}">{{item.title}}</router-link>
             </div>
             <ul class="topic-action-list">
-              <li class="topic-action-list-item" @click="handleOnClickLikeButton(index)">
+              <router-link to="" tag="li" class="topic-action-list-item" @click.native="handleOnClickLikeButton(index)">
                 <i :class="{'icon-xin iconfont icon':true,liked:item.liked}"></i>
                 <span>{{item.like}}</span>
-              </li>
-              <li class="topic-action-list-item" @click="handleOnClickCommentButton(index)">
+              </router-link>
+              <router-link :to="{path:`/topic/${item.topicId}#comment`}" tag="li" class="topic-action-list-item"
+                           @click.native="handleOnClickCommentButton(index)">
                 <i :class="{'icon-pinglun2 iconfont icon':true,commented:item.commented}"></i>
                 <span>{{item.comment}}</span>
-              </li>
+              </router-link>
               <li class="share-item" v-show="hoverTopic===index"
-                  :data-clipboard-text="`/student/topic/${item.topicId}`">
+                  :data-clipboard-text="`/topic/${item.topicId}`">
                 <i class="icon-xiazai8 iconfont icon"></i>
               </li>
             </ul>

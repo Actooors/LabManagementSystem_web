@@ -7,10 +7,13 @@
   font-size: 16px;
 }
 
-.link{
+.link {
   color: #5b99b4;
   font-weight: bold;
-  &:hover{
+  margin-top: 1rem;
+  text-align: right;
+
+  &:hover {
     color: #C6D9EC;
   }
 }
@@ -25,7 +28,6 @@
   z-index: 500;
   background-color: rgb(84, 92, 100);
 }
-
 
 @media screen and (min-width: 1024px) {
   /*电脑端*/

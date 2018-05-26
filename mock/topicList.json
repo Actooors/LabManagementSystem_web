@@ -1,6 +1,9 @@
 [
   {
-    "author": "莫之章",
+    "author": {
+      "name": "莫之章",
+      "uid": 1
+    },
     "time": "2018-05-24 20:18:00",
     "theme": "前端",
     "title": "用纯前端的方式来实现图片转字符画",
@@ -11,7 +14,10 @@
     "commented": true
   },
   {
-    "author": "徐文",
+    "author": {
+      "name": "徐文",
+      "uid": 2
+    },
     "time": "2018-05-17 05:18:00",
     "theme": "React.js / koa",
     "title": "React + Koa 实现服务端渲染(SSR)",
@@ -22,7 +28,10 @@
     "commented": false
   },
   {
-    "author": "小小茂茂",
+    "author": {
+      "name": "小小茂茂",
+      "uid": 3
+    },
     "time": "2018-04-17 05:18:00",
     "theme": "Vue.js",
     "title": "Vue全家桶打造自适应 web 音乐播放器",
@@ -33,7 +42,10 @@
     "commented": true
   },
   {
-    "author": "假烟景满舟",
+    "author": {
+      "name": "假烟景满舟",
+      "uid": 4
+    },
     "time": "2018-03-11 12:23:04",
     "theme": "面试 / 前端",
     "title": "半年工作经验今日头条和美团面试题面经分享",
@@ -44,7 +56,10 @@
     "commented": false
   },
   {
-    "author": "王仕军",
+    "author": {
+      "name": "王仕军",
+      "uid": 5
+    },
     "time": "2018-01-17 15:09:01",
     "theme": "区块链",
     "title": "区块链开发入门：从 0 到 1 构建基于以太坊智能合约的 ICO DApp",

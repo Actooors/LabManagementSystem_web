@@ -3,7 +3,7 @@
     <el-menu :default-active="activeMenuItem" class="sidebar-menu"
              :collapse="isCollapse" @mouseover.native="handleMouseOverMenu(false)"
              @mouseout.native="handleMouseOverMenu(true)" router>
-      <el-menu-item v-for="(item,index) in itemList" :index="`/student/news/${item.type}/${item.newsId}`"
+      <el-menu-item v-for="(item,index) in itemList" :index="`/news/${item.type}/${item.newsId}`"
                     :key="index.key" class="menu-item">
         <i :class="item.iconClass" style="font-size: 14px;"></i>
         <span slot="title" style="font-size: 12px">{{item.title}}</span>
@@ -49,7 +49,7 @@
       // 第二个参数可以省略
       value(val) {
         if (val) {
-          // process.env.NODE_ENV === "development" && console.log('sidebar - update:', val, `/student/news/${this.itemList[0].type}/${this.itemList[0].newsId}`)
+          // process.env.NODE_ENV === "development" && console.log('sidebar - update:', val, `/news/${this.itemList[0].type}/${this.itemList[0].newsId}`)
           this.activeMenuItem = val
           console.log("val")
           console.log(val)

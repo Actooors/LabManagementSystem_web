@@ -3,7 +3,7 @@
     <div class="container">
       <div class="bread-crumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{path: '/student/news/'}">新闻</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{path: '/news/'}">新闻</el-breadcrumb-item>
           <el-breadcrumb-item>发布新闻</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
@@ -28,6 +28,9 @@
 </template>
 
 <script>
+
+  import axios from 'axios'
+
   // require styles
   import 'quill/dist/quill.core.css'
   import 'quill/dist/quill.snow.css'
@@ -63,8 +66,36 @@
     },
     methods: {
       handleOnSubmit() {
-        console.log("点击了提交")
+        axios({
+          url: '//localhost:8081/api/news/addNews',
+          method: 'post',
+          data: this.form
+        }).then((response) => {
+          if (response.data.code === 'SUCCESS') {
+            this.$message({
+              type: 'success',
+              message: '发布成功！'
+            })
+            this.$router.push({path: '/news'})
+          } else {
+            this.$message.warning(`保存失败，错误提示: ${response.data.message}`)
+          }
+        }).catch((error) => {
+          this.$message.error('发布失败，请检查网络连接！')
+          process.env.NODE_ENV === 'development' && console.log(error)
+        })
       }
+    },
+    created() {
+      axios({
+        url: '//localhost:8081/api/news/newsType',
+        method: 'get',
+      }).then((response) => {
+        this.newsTypeList = response.data.data
+      }).catch((error) => {
+        this.newsTypeList = []
+      })
+
     }
   }
 </script>
