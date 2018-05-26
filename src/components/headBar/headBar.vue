@@ -21,20 +21,35 @@
       <el-menu-item index="notifications">
         <router-link :to="{name: 'notifications'}">消息中心<span class="badge">5</span></router-link>
       </el-menu-item>
-
       <el-menu-item index="/contactus">联系我们</el-menu-item>
-
       <menu-item-cus item="5" class="align-right" :click-enable=false>
-        <div class="HeaderRight">{{username}}</div>
-        <div slot="title">
+        <div class="HeaderRight" @click="handleOnClickUsername">{{username}}</div>
+        <div slot="title" v-if="hasLogin">
           <p>欢迎，这是您第 {{loginTimes}} 次登录</p>
           <div class="link">
-            <a href="/logout" class="link">注销</a>
-            <a href="/profile" class="link">个人资料</a>
+            <router-link to="" @click.native="handleOnClickLogoutButton" class="link">注销</router-link>
+            <router-link to="/profile" class="link">个人资料</router-link>
           </div>
         </div>
       </menu-item-cus>
     </el-menu>
+
+
+    <el-dialog title="Login" :visible.sync="dialogLoginVisible" width="400px" center>
+      <el-form v-model="loginForm">
+        <el-form-item label="工号">
+          <el-input v-model="loginForm.uid"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input type="password" v-model="loginForm.password"></el-input>
+        </el-form-item>
+      </el-form>
+      <div class="btn-login" align="center">
+        <el-button type="primary" @click="dialogLoginVisible = false" plain>登录</el-button>
+      </div>
+    </el-dialog>
+
+
   </div>
 
 </template>
@@ -55,17 +70,27 @@
     },
     data() {
       return {
-        username: '沐雨之风',
         activeIndex: '',
-        solid: false
+        solid: false,
+        dialogLoginVisible: false,
+        loginForm: {
+          uid: '',
+          password: ''
+        }
       }
     },
     computed: {
       loginTimes() {
         let times = window.localStorage.getItem('loginTimes')
         return times ? times : 1
+      },
+      username() {
+        let username = window.localStorage.getItem('username')
+        return username ? username : '未登录'
+      },
+      hasLogin() {
+        return !!window.localStorage.getItem('token')
       }
-
     },
     methods: {
       handleSelect(key, keyPath) {
@@ -79,6 +104,18 @@
           this.solid = false
         } else if (!this.solid && scrollTop > this.keyHeight) {
           this.solid = true
+        }
+      },
+      handleOnClickLogoutButton() {
+        localStorage.removeItem('token')
+        localStorage.removeItem('username')
+        localStorage.removeItem('uid')
+        localStorage.removeItem('identity')
+        localStorage.removeItem('loginTimes')
+      },
+      handleOnClickUsername() {
+        if (!this.hasLogin) {
+          this.dialogLoginVisible = true
         }
       }
     },

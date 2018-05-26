@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from 'store/store'
-import Login from 'components/login/login'
-import Student from 'group/student'
+// import Login from 'components/login/login'
 import NewsPage from 'components/newsPage/newsPage'
 import MainPage from 'components/mainPage/mainPage'
 import contactUsPage from 'components/contactUsPage/contactUsPage'
@@ -96,19 +95,19 @@ let router = new Router({
       name: 'topicContent',
       component: TopicContent
     },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login,
-    },
-    {
-      path: '/logout',
-      name: 'logout',
-      beforeEnter(to, from, next) {
-        //....
-        next({name: 'login'})
-      }
-    },
+    // {
+    //   path: '/login',
+    //   name: 'login',
+    //   component: Login,
+    // },
+    // {
+    //   path: '/logout',
+    //   name: 'logout',
+    //   beforeEnter(to, from, next) {
+    //     //....
+    //     next({name: 'login'})
+    //   }
+    // },
     {
       path: '*',
       name: 'error404',
