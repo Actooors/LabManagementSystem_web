@@ -45,7 +45,7 @@
         </el-form-item>
       </el-form>
       <div class="btn-login" align="center">
-        <el-button type="primary" @click="dialogLoginVisible = false" plain>登录</el-button>
+        <el-button type="primary" @click="handleOnClickLoginButton" plain>登录</el-button>
       </div>
     </el-dialog>
 
@@ -56,6 +56,7 @@
 
 <script>
   import MenuItemCus from 'base/menuItemCus/menuItemCus'
+  import axios from 'axios'
 
   export default {
     name: "head-bar",
@@ -112,6 +113,40 @@
         localStorage.removeItem('uid')
         localStorage.removeItem('identity')
         localStorage.removeItem('loginTimes')
+      },
+      handleOnClickLoginButton() {
+        axios({
+          url: '/api/login',
+          method: 'post',
+          data: {
+            userId: this.loginForm.uid,
+            passWord: this.loginForm.password
+          }
+        }).then((response) => {
+          if (response.data.code === 'SUCCESS') {
+            this.dialogLoginVisible = false
+            localStorage.setItem('token', response.data.data.token)
+            localStorage.setItem('username', response.data.data.username)
+            localStorage.setItem('uid', response.data.data.uid)
+            localStorage.setItem('identity', response.data.data.identity)
+            localStorage.setItem('loginTimes', response.data.data.loginTimes)
+            this.$message({
+              type: 'success',
+              message: '登录成功!'
+            });
+          } else {
+            this.$message({
+              type: 'warning',
+              message: '登录失败，请检查工号和密码是否正确！'
+            });
+          }
+        }).catch((error) => {
+          this.$message({
+            type: 'warning',
+            message: '登录失败，请检查网络连接！'
+          });
+          console.log(error)
+        })
       },
       handleOnClickUsername() {
         if (!this.hasLogin) {

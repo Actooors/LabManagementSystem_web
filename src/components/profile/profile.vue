@@ -72,21 +72,30 @@
       setHeight() {
         // console.log(`height:${this.$refs.containerContent.offsetHeight - 460}px`)
         this.introStyle = `height:${this.$refs.containerContent.offsetHeight - 470}px`
+      },
+      initData() {
+        let query = this.$route.query
+        let uid = null
+        if (query.hasOwnProperty('uid')) {
+          uid = query.uid
+        }
+        axios({
+          url: '//localhost:8081/api/user/userMessage',
+          method: 'get',
+          query: {uid: uid}
+        }).then((response) => {
+          if (response.data.code === 'SUCCESS')
+            this.profile = response.data.data
+          else
+            this.$router.replace({name: 'error404'})
+        }).catch((error)=>{
+          console.log(error)
+          this.$router.replace({name: 'error404'})
+        })
       }
     },
     created() {
-      let query = this.$route.query
-      let uid = null
-      if (query.hasOwnProperty('uid')) {
-        uid = query.uid
-      }
-      // axios({
-      //   url: '',
-      //   method: '',
-      //   query: {uid: uid}
-      // }).then((response) => {
-      //
-      // })
+      this.initData()
     },
     mounted() {
       let timer = null
@@ -103,10 +112,4 @@
 
 <style lang="scss" scoped>
   @import '../../common/css/profile';
-</style>
-
-<style>
-  html, html > body, #app, #app > div {
-    height: 100%;
-  }
 </style>

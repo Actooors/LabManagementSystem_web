@@ -44,16 +44,26 @@
     data() {
       return {
         newsList: [],
-        identity: 3,
-        username: '徐文'
+      }
+    },
+    computed: {
+      newstype() {
+        return this.$route.params.newstype
+      },
+      identity() {
+        let identity = localStorage.getItem('identity')
+        return identity ? parseInt(identity) : 0
+      },
+      username() {
+        return localStorage.getItem('username')
       }
     },
     methods: {
       loadData() {
         let cfg = {
-          url: '/api/news',
-          method: 'post',
-          data: {
+          url: '//localhost:8081/api/news/assignationNews',
+          method: 'get',
+          params: {
             type: this.newstype
           }
         }
@@ -113,11 +123,6 @@
     },
     mounted() {
       this.loadData()
-    },
-    computed: {
-      newstype() {
-        return this.$route.params.newstype
-      }
     },
     watch: {
       newstype() {

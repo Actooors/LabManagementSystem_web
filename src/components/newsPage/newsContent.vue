@@ -111,10 +111,9 @@
       loadData() {
         //待对接，news详情
         let cfg = {
-          url: '/api/article',
+          url: '//localhost:8081/api/news/assignationArticle',
           method: 'get',
           params: {
-            type: this.$route.params.newstype,
             newsId: this.$route.params.newsid
           }
         }

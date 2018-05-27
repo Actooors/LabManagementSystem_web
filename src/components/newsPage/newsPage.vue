@@ -83,11 +83,8 @@
       loadData() {
         //侧边栏数据
         let cfg = {
-          url: '/api/news',
-          method: 'post',
-          data: {
-            type: 'matter'
-          }
+          url: '//localhost:8081/api/news/matterNews',
+          method: 'get'
         }
         axios(cfg)
           .then((response) => {
