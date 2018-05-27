@@ -180,7 +180,6 @@
 </script>
 
 <style scoped>
-  @import "../../assets/css/bootstrap-select.min.css";
 li{
   border:1px gray solid;
   border-radius: 10px;
