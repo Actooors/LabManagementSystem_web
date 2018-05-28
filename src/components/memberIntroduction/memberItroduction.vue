@@ -150,7 +150,7 @@
     },
     mounted(){
       axios({
-        url: '/api/memberIntroduction',
+        url: '//localhost:8081/api/memberIntroduction',
         methods:'get'
       }).then((response)=>{
         if(response.data.code==="SUCCESS"){

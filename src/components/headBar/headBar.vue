@@ -23,12 +23,12 @@
       </el-menu-item>
       <el-menu-item index="/contactus">联系我们</el-menu-item>
       <menu-item-cus item="5" class="align-right" :click-enable=false>
-        <div class="HeaderRight" @click="handleOnClickUsername">{{username}}</div>
-        <div slot="title" v-if="hasLogin">
-          <p>欢迎，这是您第 {{loginTimes}} 次登录</p>
+        <div class="HeaderRight" @click="handleOnClickUsername">{{miniProfile.username}}</div>
+        <div slot="title" v-if="miniProfile.loginState">
+          <p>欢迎，这是您第 {{miniProfile.loginTimes}} 次登录</p>
           <div class="link">
-            <router-link to="" @click.native="handleOnClickLogoutButton" class="link">注销</router-link>
-            <router-link to="/profile" class="link">个人资料</router-link>
+            <span @click="handleOnClickLogoutButton" class="link">注销</span>
+            <a href="/profile" class="link">个人资料</a>
           </div>
         </div>
       </menu-item-cus>
@@ -43,10 +43,10 @@
         <el-form-item label="密码">
           <el-input type="password" v-model="loginForm.password"></el-input>
         </el-form-item>
+        <el-form-item class="btn-login" align="center">
+          <el-button type="primary" @click="handleOnClickLoginButton" plain>登录</el-button>
+        </el-form-item>
       </el-form>
-      <div class="btn-login" align="center">
-        <el-button type="primary" @click="handleOnClickLoginButton" plain>登录</el-button>
-      </div>
     </el-dialog>
 
 
@@ -77,23 +77,24 @@
         loginForm: {
           uid: '',
           password: ''
+        },
+        miniProfile: {
+          loginState: false,//计算属性hasLogin不会实时渲染,
+          username: '',
+          loginTimes: 0
         }
-      }
-    },
-    computed: {
-      loginTimes() {
-        let times = window.localStorage.getItem('loginTimes')
-        return times ? times : 1
-      },
-      username() {
-        let username = window.localStorage.getItem('username')
-        return username ? username : '未登录'
-      },
-      hasLogin() {
-        return !!window.localStorage.getItem('token')
+
       }
     },
     methods: {
+      updateMiniProfile() {
+        //买个教训，以后再也不胡乱用computed了，还是这么搞比较好。两个小时，呵呵哒
+        this.miniProfile.loginState = !!localStorage.getItem('token')
+        let times = window.localStorage.getItem('loginTimes')
+        this.miniProfile.loginTimes = times ? times : 1
+        let username = window.localStorage.getItem('username')
+        this.miniProfile.username = username ? username : '未登录'
+      },
       handleSelect(key, keyPath) {
         this.activeIndex = key
         this.$router.push({path: key})
@@ -113,10 +114,15 @@
         localStorage.removeItem('uid')
         localStorage.removeItem('identity')
         localStorage.removeItem('loginTimes')
+        this.$message({
+          type: 'success',
+          message: '注销成功!'
+        });
+        this.updateMiniProfile()
       },
       handleOnClickLoginButton() {
         axios({
-          url: '/api/login',
+          url: '//localhost:8081/api/login',
           method: 'post',
           data: {
             userId: this.loginForm.uid,
@@ -130,6 +136,8 @@
             localStorage.setItem('uid', response.data.data.uid)
             localStorage.setItem('identity', response.data.data.identity)
             localStorage.setItem('loginTimes', response.data.data.loginTimes)
+            this.updateMiniProfile()
+
             this.$message({
               type: 'success',
               message: '登录成功!'
@@ -149,7 +157,7 @@
         })
       },
       handleOnClickUsername() {
-        if (!this.hasLogin) {
+        if (!this.miniProfile.loginState) {
           this.dialogLoginVisible = true
         }
       }
@@ -157,7 +165,7 @@
     watch: {
       keyHeight() {
         this.adjustHeadBarOnScroll()
-      }
+      },
     },
     created() {
       this.activeIndex = this.$route.fullPath;
@@ -167,6 +175,8 @@
       document.body.onscroll = () => {
         this.adjustHeadBarOnScroll()
       }
+
+      this.updateMiniProfile()
     }
   }
 </script>

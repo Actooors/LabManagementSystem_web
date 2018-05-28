@@ -107,8 +107,12 @@
     created() {
       this.updateComponents()
     },
-    beforeUpdate() {
-      this.updateComponents()
+    watch: {
+      '$route'() {
+        //路由变化的时候更新组件和侧边栏数据(因为分类被更变)
+        this.updateComponents()
+        this.loadData()
+      }
     }
   }
 </script>

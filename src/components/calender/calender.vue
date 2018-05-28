@@ -134,7 +134,7 @@
 
         console.log("运行！！")
         axios({
-          url:'/api/calender',
+          url:'//localhost:8081/api/calender',
           method:'get',
           params:{
             now:now

@@ -234,7 +234,7 @@
     methods: {
       loadData() {
         axios({
-          url: '/api/topic',
+          url: '//localhost:8081/api/topic',
           method: 'get',
           params: {
             topicId: this.$route.params.topicid

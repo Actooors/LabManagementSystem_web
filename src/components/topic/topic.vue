@@ -92,7 +92,7 @@
     },
     created() {
       axios({
-        url: '/api/topiclist',
+        url: '//localhost:8081/api/topiclist',
         method: 'get'
       }).then((response) => {
         this.topicList = response.data.data

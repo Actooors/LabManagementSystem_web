@@ -5,7 +5,9 @@
         <header class="article-info clearfix">
           <h1 class="title">{{newsInfo.title}}</h1>
           <p class="article-author" data-hc-id="408158643ed564c72fa092180000">By
-            <a href="#" :title="newsInfo.author" target="_self" itemprop="author">{{newsInfo.author}}</a>
+            <router-link :to="{path:'/profile',query:{uid: newsInfo.author.uid}}" :title="newsInfo.author.name"
+                         target="_self" itemprop="author">{{newsInfo.author.name}}
+            </router-link>
           </p>
           <p class="article-time">
             <time :datetime="newsInfo.datetime" itemprop="datePublished" class="el-icon-date"> 发表于 {{newsInfo.datetime}}
@@ -21,6 +23,7 @@
       </quillEditor>
     </div>
     <CollapsePanel class="sidebar-right"
+                   v-if="identity===3 || newsInfo.author.name===username"
                    @click.native="handleOnMouseClick(false,'title');handleOnMouseClick(false,'type')"
                    :show-close=true @onclose="handleOnClickClosePanel">
       <div class="panelContent">
@@ -87,7 +90,10 @@
         newsType: '',
         newsInfo: {
           title: '',
-          author: '',
+          author: {
+            uid: 0,
+            name: ''
+          },
           datetime: '',
           content: ''
         },
@@ -120,6 +126,8 @@
         axios(cfg)
           .then((response) => {
             if (response.data.code === "SUCCESS" && response.data.data !== null) {
+              if (response.data.data.type !== this.$route.params.newstype)
+                this.$router.replace({name: 'error404'})
               this.newsInfo = response.data.data
               this.panelInfo.type = response.data.data.type
               this.panelInfo.title = response.data.data.title
@@ -135,6 +143,7 @@
             } else {
               process.env.NODE_ENV === "development" && console.log(response.data)
               // this.$router.replace({name: 'error404'})
+              this.$router.replace({name: 'error404'})
             }
           })
           .catch((error) => {
@@ -162,13 +171,14 @@
       },
       handleClickSaveBtn() {
         let postData = {
-          newsId: this.$router.params.newsId,
-          title: this.newsInfo.title,
-          type: this.type
+          newsId: this.$route.params.newsid,
+          title: this.panelInfo.title,
+          type: this.panelInfo.type
         }
         if (this.editMode) {
-          postData['content'] = this.newsInfo.content
+          postData['content'] = this.editContent
         }
+        // console.log(this.newsInfo.title)
         axios({
           url: '//localhost:8081/api/news/modifyNews',
           method: 'post',
@@ -179,6 +189,11 @@
               type: 'success',
               message: "文章已成功保存！"
             })
+            this.newsInfo.title = this.panelInfo.title
+            this.newsInfo.type = this.panelInfo.type
+            if (this.editMode)
+              this.newsInfo.content = this.editContent
+            this.$router.replace(`/news/${this.panelInfo.type}/${this.$route.params.newsid}`)
           } else {
             this.$message.warning(`保存失败，错误提示: ${response.data.message}`)
           }
@@ -201,7 +216,7 @@
             url: '//localhost:8081/api/news/deleteNews',
             method: 'post',
             data: {
-              newsId: this.$router.params.newsid
+              newsId: this.$route.params.newsid
             }
           }).then((response) => {
             if (response.data.code === 'SUCCESS') {
@@ -215,13 +230,14 @@
             }
           }).catch((error) => {
             this.$message.error('删除失败，请检查网络连接！')
-            process.env.NODE_ENV==='development' && console.log(error)
+            process.env.NODE_ENV === 'development' && console.log(error)
           })
-        }).catch(() => {
+        }).catch((error) => {
           this.$message({
             type: 'info',
             message: '已取消删除'
           })
+          console.log(error)
         })
       },
       setEditorHeight() {
@@ -257,8 +273,19 @@
       ...mapState(['defaultTitle', 'newsMap']),
       query() {
         return this.$route.query
+      },
+      identity() {
+        return localStorage.getItem('identity')
+      },
+      username() {
+        return localStorage.getItem('username')
       }
     },
+    watch: {
+      '$route'() {
+        this.loadData()
+      }
+    }
 
   }
 </script>
