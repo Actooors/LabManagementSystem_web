@@ -47,7 +47,7 @@
     },
     methods: {
       handleOnSubmit() {
-        console.log("点击了提交")
+        process.env.NODE_ENV === "development" && console.log("点击了提交")
       }
     }
   }

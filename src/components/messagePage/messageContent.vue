@@ -92,7 +92,7 @@
       },
       methods:{
           changeheight(){
-              console.log(type)
+              // console.log(type)
           },
           lodeDetails(){
               // var vm=this;
@@ -112,8 +112,8 @@
             type: 'warning'
           }).then(() => {
 
-            console.log("运行到这里了")
-            console.log(title)
+            process.env.NODE_ENV === "development" && console.log("运行到这里了")
+            process.env.NODE_ENV === "development" && console.log(title)
             axios({
               url: '//localhost:8081/api/messageContent/delete',
               method:'post',

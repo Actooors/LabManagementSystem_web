@@ -24,9 +24,9 @@
     methods:{
       settop(){
         var height=document.getElementById("headbar").children[0].clientHeight;
-        console.log(height);
+        // console.log(height);
         var message=document.getElementById("messageContainer");
-        console.log(message)
+        // console.log(message)
         message.style.marginTop=height+'px';
       },
     }

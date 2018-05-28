@@ -3,7 +3,7 @@
     <div class="wavetext">
       <div class="wavetop">
         <div class="wavelx">
-          <img src="images/404.svg">
+          <img src="../../../../static/images/404.svg">
         </div>
         <div class="wavets">
           emm~ 此路不通！
@@ -25,15 +25,15 @@
     </div>
     <div class="waveWrapper waveAnimation">
       <div class="waveWrapperInner bgTop">
-        <div class="wave waveTop" style="background-image: url('images/wave-top.png')">
+        <div class="wave waveTop" style="background-image: url('../../../../static/images/wave-top.png')">
         </div>
       </div>
       <div class="waveWrapperInner bgMiddle">
-        <div class="wave waveMiddle" style="background-image: url('images/wave-mid.png')">
+        <div class="wave waveMiddle" style="background-image: url('../../../../static/images/wave-mid.png')">
         </div>
       </div>
       <div class="waveWrapperInner bgBottom">
-        <div class="wave waveBottom" style="background-image: url('images/wave-bot.png')">
+        <div class="wave waveBottom" style="background-image: url('../../../../static/images/wave-bot.png')">
         </div>
       </div>
     </div>
@@ -75,7 +75,7 @@
     overflow: hidden;
     height: 100%;
     bottom: -1px;
-    background-image: url(images/404bg.svg);
+    background-image: url('../../../../static/images/404bg.svg');
     background-repeat: no-repeat;
     background-size: 100%;
   }

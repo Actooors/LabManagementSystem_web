@@ -295,10 +295,10 @@
           title: '提示',
           message: "文章已成功保存！"
         })
-        if (this.editMode)
-          console.log("编辑模式下点击了保存")
-        else
-          console.log("普通模式下点击了保存")
+        // if (this.editMode)
+        //   console.log("编辑模式下点击了保存")
+        // else
+        //   console.log("普通模式下点击了保存")
       },
       handleClickEditBtn() {
         this.editMode = !this.editMode

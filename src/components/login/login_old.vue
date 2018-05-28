@@ -66,13 +66,13 @@
             password: this.password
           })
             .then((res) => {
-              console.log(res)
+              process.env.NODE_ENV === "development" && console.log(res)
               if (res.data.code === 'FAILED')
                 this.loginfault = true
               else {
                 //登录成功，将token添加到localStorage
                 let userIdentity = enumMap[res.data.data.userIdentity]
-                console.log(userIdentity)
+                process.env.NODE_ENV === "development" && console.log(userIdentity)
                 localStorage.setItem('userIdentity', userIdentity)
                 localStorage.setItem('token', res.data.data.token)
                 //是否有重定向参数

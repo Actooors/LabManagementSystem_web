@@ -250,7 +250,7 @@
       }
     },
     mounted() {
-      console.log('editmode:', this.editMode, this.$route)
+      // console.log('editmode:', this.editMode, this.$route)
       // katex.render("L_{0m}^{k+1}=\\min\\{L_{01}^k+l_{1m},L_{02}^k+l_{2m},L_{03}^k+l_{3m},...,L_{0(n-1)}^k+l_{(n-1)m}\\}", this.$refs.content);
       this.loadData()
       // console.log(this.newsMap)
