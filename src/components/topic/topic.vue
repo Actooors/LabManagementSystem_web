@@ -82,7 +82,7 @@
           this.topicList[index].like++;
         }
         this.topicList[index].liked = !this.topicList[index].liked;
-        //没写then，看行不行
+
         axios({
           url: apiRootPath + 'topic/setTopicLiked',
           methods: 'post',

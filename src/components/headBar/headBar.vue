@@ -25,7 +25,10 @@
       <menu-item-cus item="5" class="align-right" :click-enable=false>
         <div class="HeaderRight" @click="handleOnClickUsername">{{miniProfile.username}}</div>
         <div slot="title" v-if="miniProfile.loginState">
-          <p>欢迎，这是您第 {{miniProfile.loginTimes}} 次登录</p>
+          <div class="login-info">
+            <p>欢迎，这是您第 {{miniProfile.loginTimes}} 次登录</p>
+            <p>您的权限类型是: {{miniProfile.identityType}}</p>
+          </div>
           <div class="link">
             <span @click="handleOnClickLogoutButton" class="link">注销</span>
             <a href="/profile" class="link">个人资料</a>
@@ -81,7 +84,8 @@
         miniProfile: {
           loginState: false,//计算属性hasLogin不会实时渲染,
           username: '',
-          loginTimes: 0
+          loginTimes: 0,
+          identityType: ''
         }
 
       }
@@ -94,6 +98,9 @@
         this.miniProfile.loginTimes = times ? times : 1
         let username = window.localStorage.getItem('username')
         this.miniProfile.username = username ? username : '未登录'
+        let identity = window.localStorage.getItem('identity')
+        let identityMap = ['游客', '学生', '老师', '管理员']
+        this.miniProfile.identityType = identityMap[identity]
       },
       handleSelect(key, keyPath) {
         this.activeIndex = key
@@ -122,7 +129,7 @@
       },
       handleOnClickLoginButton() {
         axios({
-          url: apiRootPath+'login',
+          url: apiRootPath + 'login',
           method: 'post',
           data: {
             userId: this.loginForm.uid,

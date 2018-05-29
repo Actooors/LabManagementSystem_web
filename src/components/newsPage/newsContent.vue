@@ -115,9 +115,8 @@
     },
     methods: {
       loadData() {
-        //待对接，news详情
         let cfg = {
-          url: apiRootPath+'news/assignationArticle',
+          url: apiRootPath + 'news/assignationArticle',
           method: 'get',
           params: {
             newsId: this.$route.params.newsid
@@ -180,7 +179,7 @@
         }
         // console.log(this.newsInfo.title)
         axios({
-          url: apiRootPath+'news/modifyNews',
+          url: apiRootPath + 'news/modifyNews',
           method: 'post',
           data: postData
         }).then((response) => {
@@ -213,7 +212,7 @@
           type: 'warning'
         }).then(() => {
           axios({
-            url: apiRootPath+'news/deleteNews',
+            url: apiRootPath + 'news/deleteNews',
             method: 'post',
             data: {
               newsId: this.$route.params.newsid
@@ -275,7 +274,9 @@
         return this.$route.query
       },
       identity() {
-        return localStorage.getItem('identity')
+        console.log(localStorage.getItem('identity'))
+        let identity = localStorage.getItem('identity')
+        return identity ? parseInt(identity) : 0
       },
       username() {
         return localStorage.getItem('username')

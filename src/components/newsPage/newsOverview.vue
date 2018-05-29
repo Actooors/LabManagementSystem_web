@@ -61,7 +61,7 @@
     methods: {
       loadData() {
         let cfg = {
-          url: apiRootPath+'news/assignationNews',
+          url: apiRootPath + 'news/assignationNews',
           method: 'get',
           params: {
             type: this.newstype
@@ -87,7 +87,7 @@
           type: 'warning'
         }).then(() => {
           axios({
-            url: apiRootPath+'news/deleteNews',
+            url: apiRootPath + 'news/deleteNews',
             method: 'post',
             data: {
               newsId: newsId
@@ -98,7 +98,7 @@
                 type: 'success',
                 message: '删除成功!'
               });
-              this.$router.push({path: '/news'})
+              this.loadData()
             } else {
               this.$message.warning(`删除失败，错误提示: ${response.data.message}`)
             }

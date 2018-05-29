@@ -298,7 +298,7 @@
           this.commentList[index].like++;
         }
         this.commentList[index].liked = !this.commentList[index].liked
-        //没写then，试试看
+
         axios({
           url: apiRootPath + 'topic/setCommentLiked',
           method: 'post',
