@@ -83,7 +83,7 @@
       loadData() {
         //侧边栏数据
         let cfg = {
-          url: '//localhost:8081/api/news/matterNews',
+          url: '//localhost:8989/api/news/matterNews',
           method: 'get'
         }
         axios(cfg)

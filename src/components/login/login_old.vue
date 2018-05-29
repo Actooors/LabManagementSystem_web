@@ -60,8 +60,7 @@
           return !isNaN(x)
         }).join('').length
         if (lenUsername === 8 && this.password.length >= 6) {
-          // 這狗東西在哪裏
-          axios.post('http://localhost:8081/login', {
+          axios.post('//localhost:8989/login', {
             userId: this.username,
             password: this.password
           })

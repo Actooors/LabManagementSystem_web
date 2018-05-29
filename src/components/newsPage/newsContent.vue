@@ -117,7 +117,7 @@
       loadData() {
         //待对接，news详情
         let cfg = {
-          url: '//localhost:8081/api/news/assignationArticle',
+          url: '//localhost:8989/api/news/assignationArticle',
           method: 'get',
           params: {
             newsId: this.$route.params.newsid
@@ -180,7 +180,7 @@
         }
         // console.log(this.newsInfo.title)
         axios({
-          url: '//localhost:8081/api/news/modifyNews',
+          url: '//localhost:8989/api/news/modifyNews',
           method: 'post',
           data: postData
         }).then((response) => {
@@ -213,7 +213,7 @@
           type: 'warning'
         }).then(() => {
           axios({
-            url: '//localhost:8081/api/news/deleteNews',
+            url: '//localhost:8989/api/news/deleteNews',
             method: 'post',
             data: {
               newsId: this.$route.params.newsid

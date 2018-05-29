@@ -67,7 +67,7 @@
     methods: {
       handleOnSubmit() {
         axios({
-          url: '//localhost:8081/api/news/addNews',
+          url: '//localhost:8989/api/news/addNews',
           method: 'post',
           data: this.form
         }).then((response) => {
@@ -88,7 +88,7 @@
     },
     created() {
       axios({
-        url: '//localhost:8081/api/news/newsType',
+        url: '//localhost:8989/api/news/newsType',
         method: 'get',
       }).then((response) => {
         this.newsTypeList = response.data.data

@@ -97,7 +97,7 @@
           lodeDetails(){
               // var vm=this;
               axios({
-                url: '//localhost:8081/api/message/details',
+                url: '//localhost:8989/api/message/details',
                 method: 'get'
               }).then((response) => {
                 this.details = response.data.data
@@ -115,7 +115,7 @@
             process.env.NODE_ENV === "development" && console.log("运行到这里了")
             process.env.NODE_ENV === "development" && console.log(title)
             axios({
-              url: '//localhost:8081/api/messageContent/delete',
+              url: '//localhost:8989/api/messageContent/delete',
               method:'post',
               params:{
                 title:title
