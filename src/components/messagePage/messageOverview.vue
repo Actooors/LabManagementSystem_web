@@ -155,7 +155,7 @@
             }
           }
           axios({
-            url:'//localhost:8989/api/message/new',
+            url:'/api/message/new',
             methods:'post',
             params:{
                 title:title,

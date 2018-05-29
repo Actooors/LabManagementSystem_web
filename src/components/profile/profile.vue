@@ -80,7 +80,7 @@
           uid = query.uid
         }
         axios({
-          url: '//localhost:8989/api/user/userMessage',
+          url: '/api/user/userMessage',
           method: 'get',
           query: {uid: uid}
         }).then((response) => {

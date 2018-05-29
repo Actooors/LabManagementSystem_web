@@ -61,7 +61,7 @@
     methods: {
       loadData() {
         let cfg = {
-          url: '//localhost:8989/api/news/assignationNews',
+          url: '/api/news/assignationNews',
           method: 'get',
           params: {
             type: this.newstype
@@ -87,7 +87,7 @@
           type: 'warning'
         }).then(() => {
           axios({
-            url: '//localhost:8989/api/news/deleteNews',
+            url: '/api/news/deleteNews',
             method: 'post',
             data: {
               newsId: newsId

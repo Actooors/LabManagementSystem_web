@@ -122,7 +122,7 @@
       },
       handleOnClickLoginButton() {
         axios({
-          url: '//localhost:8989/api/login',
+          url: '/api/login',
           method: 'post',
           data: {
             userId: this.loginForm.uid,
