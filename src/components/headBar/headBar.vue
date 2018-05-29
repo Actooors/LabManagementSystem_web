@@ -122,7 +122,7 @@
       },
       handleOnClickLoginButton() {
         axios({
-          url: '/api/login',
+          url: apiRootPath+'login',
           method: 'post',
           data: {
             userId: this.loginForm.uid,
@@ -142,6 +142,7 @@
               type: 'success',
               message: '登录成功!'
             });
+            location.reload()
           } else {
             this.$message({
               type: 'warning',

@@ -83,7 +83,7 @@
       loadData() {
         //侧边栏数据
         let cfg = {
-          url: '/api/news/matterNews',
+          url: apiRootPath+'news/matterNews',
           method: 'get'
         }
         axios(cfg)

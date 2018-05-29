@@ -7,7 +7,7 @@
             <header class="article-info clearfix">
               <div class="author-info-block">
                 <router-link class="avatar" :to="{name:'/profile',query:{uid:newsInfo.author.uid}}">
-                  <img :src="newsInfo.authorAvatar">
+                  <img v-lazy="newsInfo.authorAvatar">
                 </router-link>
                 <div class="author-info-box">
                   <div>
@@ -69,7 +69,7 @@
       <div class="wrapper">
         <div class="comment-form author-info-block">
           <div class="avatar">
-            <img :src="personalInfo.avatar">
+            <img v-lazy="personalInfo.avatar">
           </div>
           <div class="comment-box">
             <el-input
@@ -81,7 +81,9 @@
               @focus="handleOnCommentInputFocus">
             </el-input>
             <div class="commit-submit" v-show="commentExtend">
-              <el-button size="medium" type="primary" class="comment-submit-btn">评论</el-button>
+              <el-button size="medium" type="primary" class="comment-submit-btn"
+                         @click="handleOnClickCommentSubmitButton">评论
+              </el-button>
             </div>
           </div>
         </div>
@@ -89,10 +91,10 @@
         <ul class="comment-list">
           <li class="comment-list-item" v-for="(item, index) in commentList">
             <router-link class="avatar-small" :to="{name:'profile'}">
-              <img :src="item.avatar">
+              <img v-lazy="item.avatar">
             </router-link>
             <div class="content-box">
-              <router-link :to="{path:'/profile'}" class="comment-name">{{item.username}}</router-link>
+              <router-link :to="{path:'/profile'}" class="comment-name">{{item.user.name}}</router-link>
               <div class="comment-content">
                 <span class="comment-content-span">{{item.content}}</span>
               </div>
@@ -154,7 +156,7 @@
           content: ''
         },
         personalInfo: {
-          avatar: 'http://avatars2.githubusercontent.com/u/30586220?s=400&u=f64b162702f2020f7be850ec132aec407ee502ff&v=4'
+          avatar: ''
         },
         panelEditable: {
           title: false,
@@ -172,69 +174,14 @@
         editContent: null,
         commentExtend: false,
         commentContent: '',
-        commentList: [{
-          commentId: 0,
-          avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
-          username: '徐文',
-          content: '看完了, 我说没鸽吧. 嗯……我觉得这个话题还是阔以',
-          time: '2018-05-24 19:18:00',
-          like: 18,
-          liked: false
-        }, {
-          commentId: 1,
-          avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
-          username: '徐文',
-          content: '等我好好看看这个话题哈, 别着急, 我读得比较慢, 你先等我一下, 我一定不鸽你, 我看完就回复, 真的. 从前有座山山上有座庙庙里有个老和尚和小和尚在讲故事.',
-          time: '2018-04-17 13:18:00',
-          like: 37,
-          liked: false
-        }, {
-          commentId: 2,
-          avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
-          username: '徐文',
-          content: '等我好好看看这个话题哈, 别着急, 我读得比较慢, 你先等我一下, 我一定不鸽你, 我看完就回复, 真的. 从前有座山山上有座庙庙里有个老和尚和小和尚在讲故事.',
-          time: '2018-04-17 13:18:00',
-          like: 37,
-          liked: false
-        }, {
-          commentId: 3,
-          avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
-          username: '徐文',
-          content: '等我好好看看这个话题哈, 别着急, 我读得比较慢, 你先等我一下, 我一定不鸽你, 我看完就回复, 真的. 从前有座山山上有座庙庙里有个老和尚和小和尚在讲故事.',
-          time: '2018-04-17 13:18:00',
-          like: 37,
-          liked: false
-        }, {
-          commentId: 4,
-          avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
-          username: '徐文',
-          content: '等我好好看看这个话题哈, 别着急, 我读得比较慢, 你先等我一下, 我一定不鸽你, 我看完就回复, 真的. 从前有座山山上有座庙庙里有个老和尚和小和尚在讲故事.',
-          time: '2018-04-17 13:18:00',
-          like: 37,
-          liked: false
-        }, {
-          commentId: 5,
-          avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
-          username: '徐文',
-          content: '等我好好看看这个话题哈, 别着急, 我读得比较慢, 你先等我一下, 我一定不鸽你, 我看完就回复, 真的. 从前有座山山上有座庙庙里有个老和尚和小和尚在讲故事.',
-          time: '2018-04-17 13:18:00',
-          like: 37,
-          liked: false
-        }, {
-          commentId: 6,
-          avatar: 'https://user-gold-cdn.xitu.io/2018/5/24/163904f56a0d5667?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1',
-          username: '徐文',
-          content: '等我好好看看这个话题哈, 别着急, 我读得比较慢, 你先等我一下, 我一定不鸽你, 我看完就回复, 真的. 从前有座山山上有座庙庙里有个老和尚和小和尚在讲故事.',
-          time: '2018-04-17 13:18:00',
-          like: 37,
-          liked: false
-        }]
+        commentList: []
       }
     },
     methods: {
       loadData() {
+        //获取话题文章内容
         axios({
-          url: '/api/topic',
+          url: apiRootPath + 'topic/topicDetail',
           method: 'get',
           params: {
             topicId: this.$route.params.topicid
@@ -256,7 +203,7 @@
             }
           } else {
             process.env.NODE_ENV === "development" && console.log(response.data)
-            // this.$router.replace({name: 'error404'})
+            this.$router.replace({name: 'error404'})
           }
           //获取到之后重新定位过来(#comment)
           if (location.hash.charAt(0) === '#')
@@ -272,8 +219,20 @@
           // this.$router.replace({name: 'error404'})
         })
 
-        // this.editMode = false
-        // this.editContent = null
+        //获取评论
+        axios({
+          url: apiRootPath + 'topic/commentDetail',
+          method: 'get',
+          params: {
+            topicId: this.$route.params.topicid
+          }
+        }).then((response) => {
+          if (response.data.code === 'SUCCESS') {
+            this.commentList = response.data.data
+          }
+        }).catch((error) => {
+          console.log(error)
+        })
 
       },
       handleOnMouseEnterPanel(enter, component) {
@@ -339,9 +298,38 @@
           this.commentList[index].like++;
         }
         this.commentList[index].liked = !this.commentList[index].liked
+        //没写then，试试看
+        axios({
+          url: apiRootPath + 'topic/setCommentLiked',
+          method: 'post',
+          data: {
+            "topicId": this.$route.params.topicid,
+            "commentId": this.commentList[index].commentId
+          }
+        })
       },
       rTime(t) {
         return relativeTime(t)
+      },
+      handleOnClickCommentSubmitButton() {
+        axios({
+          url: apiRootPath + 'topic/addTopicComment',
+          method: 'post',
+          data: {
+            "topicId": this.$route.params.topicid,
+            "content": this.commentContent
+          }
+        }).then((response) => {
+          if (response.data.code === 'SUCCESS') {
+            this.loadData()
+            this.$message.success('评论成功！')
+          } else {
+            this.$message.warning(`评论失败，错误提示: ${response.data.message}`)
+          }
+        }).catch((error) => {
+          this.$message.error('发布失败，请检查网络连接！')
+          process.env.NODE_ENV === 'development' && console.log(error)
+        })
       }
     },
     created() {

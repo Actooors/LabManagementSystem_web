@@ -172,7 +172,7 @@
 
         process.env.NODE_ENV === "development" && console.log("运行！！")
         axios({
-          url: '/api/calender',
+          url: apiRootPath + 'calender',
           method: 'get',
           params: {
             now: now

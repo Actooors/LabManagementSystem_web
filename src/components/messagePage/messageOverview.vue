@@ -155,7 +155,7 @@
             }
           }
           axios({
-            url:'/api/message/new',
+            url:apiRootPath+'message/new',
             methods:'post',
             params:{
                 title:title,

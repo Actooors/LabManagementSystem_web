@@ -2,7 +2,7 @@
   <div class="page-wrapper">
     <div class="container">
       <div class="nav">
-        <img :src="profile.avatar">
+        <img v-lazy="profile.avatar">
         <div class="nav-item">
           <i class="el-icon-edit-outline"></i>
           <router-link :to="{name:'newTopic'}" class="share-item">写话题</router-link>
@@ -40,10 +40,10 @@
                 <i :class="{'icon-pinglun2 iconfont icon':true,commented:item.commented}"></i>
                 <span>{{item.comment}}</span>
               </router-link>
-              <li class="share-item" v-show="hoverTopic===index"
-                  :data-clipboard-text="`/topic/${item.topicId}`">
+              <router-link to="" tag="li" class="share-item" v-show="hoverTopic===index"
+                           :data-clipboard-text="`${href}/${item.topicId}`">
                 <i class="icon-xiazai8 iconfont icon"></i>
-              </li>
+              </router-link>
             </ul>
           </li>
         </router-link>
@@ -62,7 +62,7 @@
     data() {
       return {
         profile: {
-          avatar: 'https://avatars2.githubusercontent.com/u/30586220?s=400&u=f64b162702f2020f7be850ec132aec407ee502ff&v=4'
+          avatar: ''
         },
         topicList: [],
         hoverTopic: -1
@@ -82,23 +82,48 @@
           this.topicList[index].like++;
         }
         this.topicList[index].liked = !this.topicList[index].liked;
+        //没写then，看行不行
+        axios({
+          url: apiRootPath + 'topic/setTopicLiked',
+          methods: 'post',
+          data: {
+            "topicId": this.topicList[index].topicId
+          }
+        })
       },
       handleOnClickCommentButton(index) {
 
       },
       rTime(t) {
         return relativeTime(t)
+      },
+      loadData() {
+        //初始化话题列表
+        axios({
+          url: apiRootPath + 'topic/allTopicInfo',
+          method: 'get'
+        }).then((response) => {
+          if (response.data.code === "SUCCESS")
+            this.topicList = response.data.data
+        }).catch((error) => {
+          process.env.NODE_ENV === 'development' && console.error(error)
+        })
+
+        //初始化个人信息
+        if (localStorage.getItem('token'))
+          axios({
+            url: apiRootPath + 'user/userMessage',
+            method: 'get',
+          }).then((response) => {
+            if (response.data.code === 'SUCCESS')
+              this.profile.avatar = response.data.data.avatar
+          }).catch((error) => {
+            process.env.NODE_ENV === 'development' && console.error(error)
+          })
       }
     },
     created() {
-      axios({
-        url: '/api/topiclist',
-        method: 'get'
-      }).then((response) => {
-        this.topicList = response.data.data
-      }).catch((error) => {
-        process.env.NODE_ENV === 'development' && console.error(error)
-      })
+      this.loadData()
     },
     mounted() {
       let clipboard = new ClipboardJS('.share-item');

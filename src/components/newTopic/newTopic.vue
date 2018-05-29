@@ -30,6 +30,8 @@
   import 'quill/dist/quill.snow.css'
   import 'quill/dist/quill.bubble.css'
   import {quillEditor} from 'vue-quill-editor'
+  import axios from 'axios'
+
 
   export default {
     name: "newNews",
@@ -41,13 +43,30 @@
         form: {
           title: '',
           type: '',
-          content:''
+          content: ''
         }
       }
     },
     methods: {
       handleOnSubmit() {
-        process.env.NODE_ENV === "development" && console.log("点击了提交")
+        axios({
+          url: apiRootPath+'topic/addTopic',
+          method: 'post',
+          data: this.form
+        }).then((response) => {
+          if (response.data.code === 'SUCCESS') {
+            this.$message({
+              type: 'success',
+              message: '发布成功！'
+            })
+            this.$router.push({path: '/topic'})
+          } else {
+            this.$message.warning(`发布失败，错误提示: ${response.data.message}`)
+          }
+        }).catch((error) => {
+          this.$message.error('发布失败，请检查网络连接！')
+          process.env.NODE_ENV === 'development' && console.log(error)
+        })
       }
     }
   }

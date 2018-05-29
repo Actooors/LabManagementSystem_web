@@ -6,7 +6,7 @@
           <a :href="`/news/${item.type}/${item.newsId}`" class="card-title-link"><h1 v-text="item.title"
                                                                                      class="card-title"></h1>
           </a>
-          <div class="card-article-management" v-if="identity===3 || item.author===username">
+          <div class="card-article-management" v-if="identity===3 || item.author.name===username">
             <el-button size="mini" type="success"
                        @click="handleOnClickEditButton(`/news/${item.type}/${item.newsId}`)" plain>编辑
             </el-button>
@@ -18,7 +18,7 @@
           <p><span class="el-icon-date"></span>
             <time :datetime="item.time">发表于{{item.time.split('T')[0]}}</time>
           </p>
-          <p>By {{item.author}}</p>
+          <p>By {{item.author.name}}</p>
         </div>
       </div>
       <div class="card-inner-container">
@@ -61,7 +61,7 @@
     methods: {
       loadData() {
         let cfg = {
-          url: '/api/news/assignationNews',
+          url: apiRootPath+'news/assignationNews',
           method: 'get',
           params: {
             type: this.newstype
@@ -87,7 +87,7 @@
           type: 'warning'
         }).then(() => {
           axios({
-            url: '/api/news/deleteNews',
+            url: apiRootPath+'news/deleteNews',
             method: 'post',
             data: {
               newsId: newsId

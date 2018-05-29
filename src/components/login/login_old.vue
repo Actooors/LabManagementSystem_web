@@ -60,7 +60,7 @@
           return !isNaN(x)
         }).join('').length
         if (lenUsername === 8 && this.password.length >= 6) {
-          axios.post('/api/login', {
+          axios.post(apiRootPath+'login', {
             userId: this.username,
             password: this.password
           })

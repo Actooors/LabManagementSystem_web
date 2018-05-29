@@ -17,6 +17,7 @@ import 'interceptor/interceptor'
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   attempt: 1,
+  error: '/static/images/defaultAvatar.jpg'
 })
 Vue.use(Element)
 Vue.config.productionTip = false

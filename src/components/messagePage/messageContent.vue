@@ -16,7 +16,7 @@
             {{item.time}}{{item.content}}
           </div>
           <div class="font" style="text-align: right;padding-right: 20%">
-            {{item.author}}
+            {{item.author.name}}
           </div>
           <div class="font" style="text-align: right;padding-right: 20%">
             {{item.publishTime}}
@@ -97,7 +97,7 @@
           lodeDetails(){
               // var vm=this;
               axios({
-                url: '/api/message/details',
+                url: apiRootPath+'message/details',
                 method: 'get'
               }).then((response) => {
                 this.details = response.data.data
@@ -115,7 +115,7 @@
             process.env.NODE_ENV === "development" && console.log("运行到这里了")
             process.env.NODE_ENV === "development" && console.log(title)
             axios({
-              url: '/api/messageContent/delete',
+              url: apiRootPath+'messageContent/delete',
               method:'post',
               params:{
                 title:title

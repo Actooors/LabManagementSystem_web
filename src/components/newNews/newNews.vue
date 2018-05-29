@@ -67,7 +67,7 @@
     methods: {
       handleOnSubmit() {
         axios({
-          url: '/api/news/addNews',
+          url: apiRootPath+'news/addNews',
           method: 'post',
           data: this.form
         }).then((response) => {
@@ -78,7 +78,7 @@
             })
             this.$router.push({path: '/news'})
           } else {
-            this.$message.warning(`保存失败，错误提示: ${response.data.message}`)
+            this.$message.warning(`发布失败，错误提示: ${response.data.message}`)
           }
         }).catch((error) => {
           this.$message.error('发布失败，请检查网络连接！')
@@ -88,7 +88,7 @@
     },
     created() {
       axios({
-        url: '/api/news/newsType',
+        url: apiRootPath+'news/newsType',
         method: 'get',
       }).then((response) => {
         this.newsTypeList = response.data.data

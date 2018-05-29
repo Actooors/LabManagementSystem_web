@@ -5,7 +5,7 @@
       <hr/>
       <div class="profile">
         <div class="avatar">
-          <img :src="profile.avatar" class="avatar-img">
+          <img v-lazy="profile.avatar" class="avatar-img">
         </div>
         <div class="profile-text">
           <div class="profile-text-col">
@@ -53,17 +53,13 @@
     data() {
       return {
         profile: {
-          username: '莫之章',
-          avatar: 'https://avatars2.githubusercontent.com/u/30586220?s=400&u=f64b162702f2020f7be850ec132aec407ee502ff&v=4',
-          department: '计算机学院',
-          phoneNumber: '18916999181',
-          registerDatetime: '2018.05.09　20:04:23',
-          lastLoginDatetime: '2018.05.09　21:15:02',
-          introduction: '这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。' +
-          '这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。' + '这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。' +
-          '这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。' + '这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。' +
-          '这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。' + '这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。' +
-          '这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。这是简介。'
+          username: '',
+          avatar: '',
+          department: '',
+          phoneNumber: '',
+          registerDatetime: '',
+          lastLoginDatetime: '',
+          introduction: ''
         },
         introStyle: 'height:100px'
       }
@@ -80,7 +76,7 @@
           uid = query.uid
         }
         axios({
-          url: '/api/user/userMessage',
+          url: apiRootPath+'user/userMessage',
           method: 'get',
           query: {uid: uid}
         }).then((response) => {
