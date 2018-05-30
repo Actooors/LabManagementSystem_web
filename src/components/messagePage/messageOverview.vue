@@ -58,7 +58,7 @@
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <el-button size="mini" @click="submitnot" >保存修改</el-button>
+              <el-button size="mini" @click="handleClickSaveBtn" >保存修改</el-button>
             </div>
           </div>
         </form>
@@ -131,48 +131,57 @@
         checkall() {
           this.type = '';
         },
-       handleClickSaveBtn() {
-        this.$notify({
-          title: '提示',
-          message: "新增通知成功！"
-        })
-       },
-        handleClickFailBtn() {
-          this.$notify({
-            title: '警告',
-            message: "新增通知失败！"
-          })
-        },
-        submitnot(){
-          var title=document.getElementById("title").innerText;
-          var content=document.getElementById("content").innerText;
-          var time=document.getElementById('time').innerText;
+        // handleClickSaveBtn()  {
+        //   this.$notify({
+        //     title: '警告',
+        //     message: "新增通知失败！"
+        //   })
+        // },
+        handleClickSaveBtn(){
+          var title=document.getElementById("title").value;
+          console.log(title)
+          var content=document.getElementById("content").value;
+          var time=document.getElementById('time').value;
           var types=document.getElementsByTagName('option')
           var type;
           for(var i=0;i<types.length;i++){
-            if(types[i].selected=true){
+            if(types[i].selected===true){
               type=types[i].value;
             }
           }
+
+          // console.log(title)
+          // console.log(content)
+          // console.log(time)
+          // console.log(type)
           axios({
-            url:apiRootPath+'message/new',
-            methods:'post',
-            params:{
-                title:title,
+            url:apiRootPath+'notice/addNotice',
+            method:'post',
+            data:{
+              title:title,
               content:content,
               time:time,
               type:type
             }
           }).then((response)=>{
+            console.log(response)
             if(response.data.code==="SUCCESS")
-              handleClickSaveBtn();
+            {
+              this.$notify({
+                title: '提示',
+                message: "新增通知成功！"
+              })
+            }
+            else{
+              // this.$message.warning(`失败消息提示${this.response.data.message}`)
+            }
           }).catch((error)=>{
-            console.log("增加通知失败")
-            this.handleClickFailBtn();
+            console.log(error)
+            // this.$message.warning(`失败消息提示${this.response.data.message}`)
           })
-          setTimeout(function () {
-            document.getElementById('newnotif').reset();
-          },2000)
+          // setTimeout(function () {
+          //   document.getElementById('newnotification').reset();
+          // },2000)
         }
       }
     }

@@ -36,15 +36,15 @@
             <div class="col-xs-3">
               <!--<div><img src="this.member.headshoturl"/></div>-->
               <div style="-webkit-border-radius: 50%;overflow: hidden">
-                <div :style="{background:'url(' + member.headshoturl+ ') center center'}" class="headshot" id="Tmemberhead">
+                <div :style="{background:'url(' + member.avatar+ ') center center'}" class="headshot" id="Tmemberhead">
                   <div style="background: rgba(255,255,255,0.5)" id="Tcover">
-                    <span>{{member.name}}</span><br>
+                    <span>{{member.phone}}</span><br>
                     <span>{{member.position[1]}}</span>
                   </div>
                 </div>
               </div>
               <div style="text-align: center">
-                <a href="#">{{member.name}}</a><br/>
+                <a href="#">{{member.username}}</a><br/>
                 <span>{{member.position[0]}}</span>
               </div>
             </div>
@@ -60,9 +60,9 @@
             <div class="col-xs-3" style="position: relative">
               <!--<div><img src="this.member.headshoturl"/></div>-->
               <div style="-webkit-border-radius: 50%;overflow: hidden">
-                <div :style="{background:'url(' + member.headshoturl+ ') center center'}" class="headshot" id="memberhead">
+                <div :style="{background:'url(' + member.avatar+ ') center center'}" class="headshot" id="memberhead">
                   <div style="background: rgba(255,255,255,0.5)" id="cover">
-                    <span>{{member.name}}</span><br>
+                    <span>{{member.phone}}</span><br>
                     <span>{{member.position[1]}}</span>
                   </div>
                 </div>
@@ -100,80 +100,35 @@
         },
         teachers:[
           {
-            name:'XXX',
-            headshoturl:require('../../assets/img/headshot.jpg'),
-            contaction:'博客:xxx',
-            contaction:'博客:xxx',
+            username:'XXX',
+            avatar:require('../../assets/img/headshot.jpg'),
+            phone:'博客:xxx',
             position:['硕士生','上海交通大学'],
-          },{
-            name:'XXX',
-            headshoturl:require('../../assets/img/headshot.jpg'),
-            contaction:'博客:xxx',
-            position:['硕士生','复旦大学'],
-          },{
-            name:'XXX',
-            headshoturl:require('../../assets/img/headshot.jpg'),
-            contaction:'博客:xxx',
-            position:['硕士生','上海大学'],
-          }
-          ,{
-            name:'XXX',
-            headshoturl:require('../../assets/img/headshot.jpg'),
-            contaction:'博客:xxx',
-            position:['本科生','东华大学']
           }
         ],
         member:[{
           name:'XXX',
           headshoturl:require('../../assets/img/headshot.jpg'),
           contaction:'博客:xxx',
-          contaction:'博客:xxx',
           position:['硕士生','上海交通大学'],
-        },{
-          name:'XXX',
-          headshoturl:require('../../assets/img/headshot.jpg'),
-          contaction:'博客:xxx',
-          position:['硕士生','复旦大学'],
-        },{
-          name:'XXX',
-          headshoturl:require('../../assets/img/headshot.jpg'),
-          contaction:'博客:xxx',
-          position:['硕士生','上海大学'],
-        }
-          ,{
-            name:'XXX',
-            headshoturl:require('../../assets/img/headshot.jpg'),
-            contaction:'博客:xxx',
-            position:['本科生','东华大学']
-          }],
+        }],
       }
     },
     mounted(){
       axios({
-        url: apiRootPath+'memberIntroduction',
+        url: apiRootPath+'user/all',
         methods:'get'
       }).then((response)=>{
         if(response.data.code==="SUCCESS"){
-          this.teachers=response.data.date.teachers;
-          this.member=response.data.date.member;
+          console.log(response.data.data)
+          this.teachers=response.data.data.teachers;
+          this.member=response.data.data.member;
         }
       }).catch((error)=>{
-        console.log("加载成员信息失败")
+        console.log(error)
       })
-    }
-    // computed:{
-    //   backgrounds(){
-    //     var arr=[];
-    //     for(var item in this.member)
-    //     {
-    //       //console.log(item)
-    //       var temp={background: ` url(${this.member[item].headshoturl}) norepeat center ceter`};
-    //       arr.push(temp)
-    //     }
-    //     console.log(arr);
-    //     return arr;
-    //   }
-    // },
+    },
+
     // mounted(){
     //   console.log(`${backgrounds[1]}`)
     // }

@@ -70,13 +70,13 @@
             </tr>
           </table>
         </div>
-        <div class="detailed">
-          <ul class="rclist">
-            <li v-for="item in this.tasks"><span class="time">{{item.time}}</span><span
-              class="explain">{{item.content}}</span></li>
-          </ul>
-          <!--<a class="downBtn" href="#" style="display:none;">显示更多</a>-->
-        </div>
+        <!--<div class="detailed">-->
+          <!--<ul class="rclist">-->
+            <!--<li v-for="item in this.tasks"><span class="time">{{item.time}}</span><span-->
+              <!--class="explain">{{item.content}}</span></li>-->
+          <!--</ul>-->
+          <!--&lt;!&ndash;<a class="downBtn" href="#" style="display:none;">显示更多</a>&ndash;&gt;-->
+        <!--</div>-->
       </div>
     </div>
   </div>
@@ -166,33 +166,34 @@
           })
         }
       },
-      lodeTask() {
-        var now = this.activeday;
-        // 写成箭头就不用
-
-        process.env.NODE_ENV === "development" && console.log("运行！！")
-        axios({
-          url: apiRootPath + 'calender',
-          method: 'get',
-          params: {
-            now: now
-          }
-        })
-          .then((response) => {
-            if (response.data.code === "SUCCESS" && response.data.data != null) {
-              this.tasks = response.data.data;
-            }
-          }).catch((error) => {
-          process.env.NODE_ENV === "development" && console.log("获取信息失败")
-        })
-      }
+      //   lodeTask() {
+      //     var now = this.activeday;
+      //     // 写成箭头就不用
+      //     process.env.NODE_ENV === "development" && console.log("运行！！")
+      //     console.log("运行！！")
+      //     axios({
+      //       url: apiRootPath + 'calender',
+      //       method: 'get',
+      //       params: {
+      //         now: now
+      //       }
+      //     })
+      //       .then((response) => {
+      //         if (response.data.code === "SUCCESS" && response.data.data != null) {
+      //           this.tasks = response.data.data;
+      //         }
+      //       }).catch((error) => {
+      //       process.env.NODE_ENV === "development" && console.log("获取信息失败")
+      //     })
+      //   }
+      // },
     },
     watch: {
-      activeDay(v, m) {
-        process.env.NODE_ENV === "development" && console.log("新值" + v);
-        process.env.NODE_ENV === "development" && console.log("旧值" + m)
-        this.lodeTask();
-      }
+      // activeDay(v, m) {
+      //   process.env.NODE_ENV === "development" && console.log("新值" + v);
+      //   process.env.NODE_ENV === "development" && console.log("旧值" + m)
+      //   this.lodeTask();
+      // }
     }
 
   }

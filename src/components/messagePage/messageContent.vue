@@ -38,52 +38,7 @@
       data(){
         return{
           details:[
-            {
-              type:'meeting',
-              title:'关于XXX议会',
-              content:"全体工作员在办公室开会，请大家安排好工作，准时参加会议。\n",
-              author:"XXX 办公室",
-              time:'X年XX月XX日下午14：00点',
-              publishTime:"X年XX月XX日"
-            },
-            {
-              type:'meeting',
-              title:'关于XXX议会',
-              content:"             今天下午14：00点全体工作员在办公室开会，请大家安排好工作，准时参加会议。\n",
-              author:"XXX 办公室",
-              time:'X年XX月XX日下午14：00点',
-              publishTime:"X年XX月XX日"
-            },
-            {
-              type:'meeting',
-              title:'关于XXX议会',
-              content:"             今天下午14：00点全体工作员在办公室开会，请大家安排好工作，准时参加会议。\n",
-              author:"XXX 办公室",
-              time:'X年XX月XX日下午14：00点',
-              publishTime:"X年XX月XX日"
-            },
-            {
-              type:'outing',
-              title:'往深圳大学交流',
-              content:"猜你喜欢\n" +
-              "百度糯米\n" +
-              "京东商城\n",
-              author:"XXX 办公室",
-              time:'X年XX月XX日下午14：00点',
-              publishTime:"X年XX月XX日"
-            },
-            {
-              type:'competition',
-              title:'XXX大赛通知',
-              content:"猜你喜欢\n" +
-              "百度糯米\n" +
-              "京东商城\n" +
-              "1号店\n" +
-              "苏宁易购\n",
-              author:"XXX 办公室",
-              time:'X年XX月XX日下午14：00点',
-              publishTime:"X年XX月XX日"
-            }
+
           ],
         }
       },
@@ -97,42 +52,50 @@
           lodeDetails(){
               // var vm=this;
               axios({
-                url: apiRootPath+'message/details',
+                url: apiRootPath+'notice/allNotice',
                 method: 'get'
               }).then((response) => {
                 this.details = response.data.data
               }).catch((error) => {
-               console.log("请求公告详情失败")
+               console.log(error)
               })
           },
+
+
+
         handleOnClickDeleteButton(title) {
           this.$confirm('此操作将删除本通知, 是否继续?', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-
-            process.env.NODE_ENV === "development" && console.log("运行到这里了")
-            process.env.NODE_ENV === "development" && console.log(title)
+            console.log("title是"+title);
             axios({
-              url: apiRootPath+'messageContent/delete',
+              url: apiRootPath+'notice/deleteNotice',
               method:'post',
-              params:{
+              data:{
                 title:title
               }
             }).then(
               (response)=>{
+                console.log(response.data);
                 if(response.data.code==="SUCCESS")
                   // alert("删除成功")
-                this.$message({
-                    type: 'success',
-                    message: '删除成功!',
-                  }
-                );
+                {
+                  this.details=response.data.data;
+                  this.$message({
+                      type: 'success',
+                      message: '删除成功!',
+                    }
+                  );
+                  this.lodeDetails();
+                }
+
               }
             ).catch(
               (error)=>{
                 console.log("删除失败")
+                console.log(error)
                 this.$message({
                   type: 'warning',
                   message: '删除失败!',

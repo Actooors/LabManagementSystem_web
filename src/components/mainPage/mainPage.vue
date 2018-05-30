@@ -137,7 +137,7 @@
     height: 80%;
   }
   img{
-    max-width: 40%;
+    max-width: 60%;
     border-radius: 15px;
   }
   .outerset {
@@ -159,6 +159,7 @@
 
   .content{
     font-family:"Microsoft YaHei UI Light";
-    line-height: 30px;
+    font-size: 120%;
+    line-height: 200%;
   }
 </style>
