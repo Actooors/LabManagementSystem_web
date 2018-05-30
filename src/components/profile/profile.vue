@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrapper">
     <div class="container-content" ref="containerContent">
-      <div class="username">{{profile.username}}</div>
+      <div class="username">{{profile.userName}}</div>
       <hr/>
       <div class="profile">
         <div class="avatar">
@@ -11,7 +11,7 @@
           <div class="profile-text-col">
             <div class="profile-text-row">
               <p class="text-label">姓名</p>
-              <p class="text-value">{{profile.username}}</p>
+              <p class="text-value">{{profile.userName}}</p>
             </div>
             <div class="profile-text-row">
               <p class="text-label">学院/部门</p>
