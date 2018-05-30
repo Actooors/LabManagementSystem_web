@@ -78,7 +78,7 @@
         axios({
           url: apiRootPath+'user/userMessage',
           method: 'get',
-          query: {uid: uid}
+          params: {userId: uid}
         }).then((response) => {
           if (response.data.code === 'SUCCESS')
             this.profile = response.data.data

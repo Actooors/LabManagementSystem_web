@@ -6,7 +6,7 @@
           <article class="article">
             <header class="article-info clearfix">
               <div class="author-info-block">
-                <router-link class="avatar" :to="{name:'/profile',query:{uid:topicInfo.author.uid}}">
+                <router-link class="avatar" :to="{path:'/profile',query:{uid:topicInfo.author.uid}}">
                   <img v-lazy="topicInfo.authorAvatar">
                 </router-link>
                 <div class="author-info-box">
@@ -91,11 +91,11 @@
 
         <ul class="comment-list">
           <li class="comment-list-item" v-for="(item, index) in commentList">
-            <router-link class="avatar-small" :to="{name:'profile'}">
+            <router-link class="avatar-small" :to="{path:'/profile',query:{uid:item.user.uid}}">
               <img v-lazy="item.avatar">
             </router-link>
             <div class="content-box">
-              <router-link :to="{path:'/profile'}" class="comment-name">{{item.user.name}}</router-link>
+              <router-link :to="{path:'/profile',query:{uid:item.user.uid}}" class="comment-name">{{item.user.name}}</router-link>
               <div class="comment-content">
                 <span class="comment-content-span">{{item.content}}</span>
               </div>
