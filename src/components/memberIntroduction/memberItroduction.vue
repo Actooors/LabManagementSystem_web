@@ -44,7 +44,7 @@
                 </div>
               </div>
               <div style="text-align: center">
-                <a href="#">{{member.username}}</a><br/>
+                <router-link :to="{path:'/profile',query:{uid: member.author.uid}}">{{member.author.name}}</router-link><br/>
                 <span>{{member.position[0]}}</span>
               </div>
             </div>
@@ -68,7 +68,7 @@
                 </div>
               </div>
               <div style="text-align: center">
-                <a href="#">{{member.name}}</a><br/>
+                <router-link :to="{path:'/profile',query:{uid: member.author.uid}}">{{member.author.name}}</router-link><br/>
                 <span>{{member.position[0]}}</span>
               </div>
             </div>
