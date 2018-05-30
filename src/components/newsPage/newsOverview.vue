@@ -23,7 +23,7 @@
       </div>
       <div class="card-inner-container">
         <div class="card-content">
-          <p class="content-para" v-text="item.overview" v-once></p>
+          <p class="content-para" v-text="item.overview"></p>
         </div>
         <div class="card-image" v-if="item.imgurl">
           <img v-lazy="item.imgurl">
@@ -51,6 +51,9 @@
         return this.$route.params.newstype
       },
       identity() {
+        //管理员返回3
+        if (localStorage.getItem('admin') === '1')
+          return 3
         let identity = localStorage.getItem('identity')
         return identity ? parseInt(identity) : 0
       },
