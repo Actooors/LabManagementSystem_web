@@ -274,7 +274,9 @@
         return this.$route.query
       },
       identity() {
-        console.log(localStorage.getItem('identity'))
+        //管理员返回3
+        if (localStorage.getItem('admin') === '1')
+          return 3
         let identity = localStorage.getItem('identity')
         return identity ? parseInt(identity) : 0
       },

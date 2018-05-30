@@ -89,8 +89,10 @@ $color-lightBlue: #6E87AA;
   height: 5em;
   width: 5em;
   overflow: hidden;
-  display: table;
   z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   > button {
     height: 100%;
     width: 100%;

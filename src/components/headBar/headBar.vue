@@ -27,7 +27,8 @@
         <div slot="title" v-if="miniProfile.loginState">
           <div class="login-info">
             <p>欢迎，这是您第 {{miniProfile.loginTimes}} 次登录</p>
-            <p>您的权限类型是: {{miniProfile.identityType}}</p>
+            <p>您的身份类型是: {{miniProfile.identityType}}</p>
+            <p>您的权限类型是: {{miniProfile.adminType}}</p>
           </div>
           <div class="link">
             <span @click="handleOnClickLogoutButton" class="link">注销</span>
@@ -85,7 +86,8 @@
           loginState: false,//计算属性hasLogin不会实时渲染,
           username: '',
           loginTimes: 0,
-          identityType: ''
+          identityType: '',
+          adminType: ''
         }
 
       }
@@ -101,6 +103,9 @@
         let identity = window.localStorage.getItem('identity')
         let identityMap = ['游客', '学生', '老师', '管理员']
         this.miniProfile.identityType = identityMap[identity]
+        let admin = window.localStorage.getItem('admin')
+        let adminMap = ['普通权限', '管理员']
+        this.miniProfile.adminType = adminMap[admin]
       },
       handleSelect(key, keyPath) {
         this.activeIndex = key
@@ -138,12 +143,13 @@
         }).then((response) => {
           if (response.data.code === 'SUCCESS') {
             this.dialogLoginVisible = false
-            localStorage.setItem('token', response.data.data.token)
-            localStorage.setItem('username', response.data.data.username)
-            localStorage.setItem('uid', response.data.data.uid)
-            localStorage.setItem('identity', response.data.data.identity)
-            localStorage.setItem('loginTimes', response.data.data.loginTimes)
-            this.updateMiniProfile()
+            localStorage.setItem('token', response.data.data.token)//token
+            localStorage.setItem('username', response.data.data.username)//姓名
+            localStorage.setItem('uid', response.data.data.uid)//工号
+            localStorage.setItem('identity', response.data.data.identity)//身份,1是学生2是老师
+            localStorage.setItem('loginTimes', response.data.data.loginTimes)//登录次数
+            localStorage.setItem('admin', response.data.data.admin === true ? '1' : '0')//是否拥有管理员权限
+            this.updateMiniProfile()//更新headBar迷你资料卡
 
             this.$message({
               type: 'success',

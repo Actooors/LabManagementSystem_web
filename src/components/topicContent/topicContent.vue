@@ -344,13 +344,14 @@
           url: apiRootPath + 'topic/addTopicComment',
           method: 'post',
           data: {
-            "topicId": this.$route.params.topicid,
+            "topicId": parseInt(this.$route.params.topicid),
             "content": this.commentContent
           }
         }).then((response) => {
           if (response.data.code === 'SUCCESS') {
             this.loadData()
             this.$message.success('评论成功！')
+            this.commentContent = ""
           } else {
             this.$message.warning(`评论失败，错误提示: ${response.data.message}`)
           }
