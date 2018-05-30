@@ -14,6 +14,13 @@ import './assets/js/bootstrap.min'
 import 'iview/dist/styles/iview.css'
 import 'interceptor/interceptor'
 
+// quillEditor
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import VueQuillEditor from 'vue-quill-editor'
+Vue.use(VueQuillEditor, /* { default global options } */)
+
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   attempt: 1,

@@ -26,9 +26,9 @@
           </article>
         </div>
         <div id="edit-window" v-if="editMode">
-          <quillEditor
+          <quill-editor
             v-model="editContent" style="height: 90%">
-          </quillEditor>
+          </quill-editor>
         </div>
         <CollapsePanel class="sidebar-right"
                        v-if="identity===3 || topicInfo.author.name===username"
@@ -48,13 +48,13 @@
             </div>
             <div class="panel-row" @click="handleOnMouseClick(true,'type')">
               <p class="panel-para" v-if="panelEditable.type===false">
-                <label class="labelfont">分类</label>{{panelInfo.type}}
+                <label class="labelfont">主题</label>{{panelInfo.type}}
               </p>
               <el-input class="panel-para"
                         size="mini"
                         v-model="panelInfo.type"
                         v-else>
-                <label slot="prefix" class="panel-label">分类</label>
+                <label slot="prefix" class="panel-label">主题</label>
               </el-input>
             </div>
             <div class="bottom-operaton">
@@ -125,11 +125,6 @@
   import CollapsePanel from 'base/collapsePanel/collapsePanel'
   import {Option, Select} from 'iview'
 
-  // require styles
-  import 'quill/dist/quill.core.css'
-  import 'quill/dist/quill.snow.css'
-  import 'quill/dist/quill.bubble.css'
-  import {quillEditor} from 'vue-quill-editor'
   import relativeTime from '../../common/js/relativeTime'
 
   // import ElInputCus from 'base/inputCus/inputCus'
@@ -139,8 +134,7 @@
     components: {
       CollapsePanel,
       Select,
-      Option,
-      quillEditor
+      Option
     },
     data() {
       return {
@@ -251,14 +245,37 @@
         }, 10)
       },
       handleClickSaveBtn() {
-        this.$notify({
-          title: '提示',
-          message: "文章已成功保存！"
+        let postData = {
+          topicId: this.$route.params.topicid,
+          title: this.panelInfo.title,
+          type: this.panelInfo.type
+        }
+        if (this.editMode) {
+          postData['content'] = this.editContent
+        }
+        // console.log(this.newsInfo.title)
+        axios({
+          url: apiRootPath + 'topic/editTopic',
+          method: 'post',
+          data: postData
+        }).then((response) => {
+          if (response.data.code === 'SUCCESS') {
+            this.$message({
+              type: 'success',
+              message: "文章已成功保存！"
+            })
+            this.topicInfo.title = this.panelInfo.title
+            this.topicInfo.type = this.panelInfo.type
+            if (this.editMode)
+              this.topicInfo.content = this.editContent
+            this.$router.replace(`/topic/${this.$route.params.topicid}`)
+          } else {
+            this.$message.warning(`保存失败，错误提示: ${response.data.message}`)
+          }
+        }).catch((error) => {
+          this.$message.warning("保存失败，请检查网络连接！")
+          process.env.NODE_ENV === 'development' && console.log(error)
         })
-        // if (this.editMode)
-        //   console.log("编辑模式下点击了保存")
-        // else
-        //   console.log("普通模式下点击了保存")
       },
       handleClickEditBtn() {
         this.editMode = !this.editMode
@@ -270,16 +287,33 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
-        }).catch(() => {
+          axios({
+            url: apiRootPath + 'topic/deleteTopic',
+            method: 'post',
+            data: {
+              topicId: this.$route.params.topicid
+            }
+          }).then((response) => {
+            if (response.data.code === 'SUCCESS') {
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+              this.$router.push({path: '/topic'})
+            } else {
+              this.$message.warning(`删除失败，错误提示: ${response.data.message}`)
+            }
+          }).catch((error) => {
+            this.$message.error('删除失败，请检查网络连接！')
+            process.env.NODE_ENV === 'development' && console.log(error)
+          })
+        }).catch((error) => {
           this.$message({
             type: 'info',
             message: '已取消删除'
-          });
-        });
+          })
+          console.log(error)
+        })
       },
       setEditorHeight() {
         // document.getElementById()
