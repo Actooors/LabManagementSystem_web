@@ -292,20 +292,28 @@
         this.commentExtend = true
       },
       handleOnClickLikeButton(index) {
-        if (this.commentList[index].liked) {
-          this.commentList[index].like--;
-        } else {
-          this.commentList[index].like++;
-        }
-        this.commentList[index].liked = !this.commentList[index].liked
-
         axios({
-          url: apiRootPath + 'topic/setCommentLiked',
+          url: apiRootPath + 'topic/setTopicLiked',
           method: 'post',
           data: {
             "topicId": this.$route.params.topicid,
             "commentId": this.commentList[index].commentId
           }
+        }).then((response) => {
+          if (response.data.code === 'SUCCESS') {
+            if (this.commentList[index].liked) {
+              this.commentList[index].like--;
+            }
+            else {
+              this.commentList[index].like++;
+            }
+            this.commentList[index].liked = !this.commentList[index].liked;
+          }
+          else
+            this.$message.warning(response.data.message)
+        }).catch((error) => {
+          this.$message.warning('阿哦，出现了一点问题')
+          console.log(error)
         })
       },
       rTime(t) {

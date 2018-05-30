@@ -75,20 +75,27 @@
     },
     methods: {
       handleOnClickLikeButton(index) {
-        if (this.topicList[index].liked) {
-          this.topicList[index].like--;
-        }
-        else {
-          this.topicList[index].like++;
-        }
-        this.topicList[index].liked = !this.topicList[index].liked;
-
         axios({
           url: apiRootPath + 'topic/setTopicLiked',
-          methods: 'post',
+          method: 'post',
           data: {
             "topicId": this.topicList[index].topicId
           }
+        }).then((response) => {
+          if (response.data.code === 'SUCCESS') {
+            if (this.topicList[index].liked) {
+              this.topicList[index].like--;
+            }
+            else {
+              this.topicList[index].like++;
+            }
+            this.topicList[index].liked = !this.topicList[index].liked;
+          }
+          else
+            this.$message.warning(response.data.message)
+        }).catch((error) => {
+          this.$message.warning('阿哦，出现了一点问题')
+          console.log(error)
         })
       },
       handleOnClickCommentButton(index) {
