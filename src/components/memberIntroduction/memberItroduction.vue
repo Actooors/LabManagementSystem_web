@@ -111,6 +111,7 @@
           headshoturl:require('../../assets/img/headshot.jpg'),
           contaction:'博客:xxx',
           position:['硕士生','上海交通大学'],
+
         }],
       }
     },
