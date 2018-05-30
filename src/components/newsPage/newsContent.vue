@@ -18,9 +18,9 @@
       </article>
     </div>
     <div id="edit-window" v-if="editMode">
-      <quillEditor
+      <quill-editor
         v-model="editContent" style="height: 90%">
-      </quillEditor>
+      </quill-editor>
     </div>
     <CollapsePanel class="sidebar-right"
                    v-if="identity===3 || newsInfo.author.name===username"
@@ -67,12 +67,6 @@
   import CollapsePanel from 'base/collapsePanel/collapsePanel'
   import {Option, Select} from 'iview'
 
-  // require styles
-  import 'quill/dist/quill.core.css'
-  import 'quill/dist/quill.snow.css'
-  import 'quill/dist/quill.bubble.css'
-  import {quillEditor} from 'vue-quill-editor'
-
 
   // import ElInputCus from 'base/inputCus/inputCus'
   export default {
@@ -81,8 +75,7 @@
     components: {
       CollapsePanel,
       Select,
-      Option,
-      quillEditor
+      Option
     },
     data() {
       return {

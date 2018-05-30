@@ -8,7 +8,7 @@
       <div class="breadcrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item>新闻</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{path: '/news/'+$route.params.newstype}">{{newsType}}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{path: `/news/${$route.params.newstype}`}" :key="$route">{{newsType}}</el-breadcrumb-item>
           <el-breadcrumb-item v-if="$route.params.hasOwnProperty('newsid')">新闻详情</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
@@ -52,7 +52,6 @@
         }
       },
       updateComponents() {
-        //面包屑
         if (!this.newsMap.hasOwnProperty(this.$route.params.newstype)) {
           this.$router.replace('/404')
         }
@@ -83,7 +82,7 @@
       loadData() {
         //侧边栏数据
         let cfg = {
-          url: apiRootPath+'news/matterNews',
+          url: apiRootPath + 'news/matterNews',
           method: 'get'
         }
         axios(cfg)
@@ -109,6 +108,7 @@
     },
     watch: {
       '$route'() {
+        console.log('!',this.newstype)
         //路由变化的时候更新组件和侧边栏数据(因为分类被更变)
         this.updateComponents()
         this.loadData()
