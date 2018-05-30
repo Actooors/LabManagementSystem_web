@@ -101,8 +101,5 @@ module.exports = {
       jQuery: "jquery",
       "windows.jQuery": "jquery"
     }),
-    new webpack.DefinePlugin({
-      apiRootPath: "'//localhost:8989/api/'"
-    })
   ]
 }

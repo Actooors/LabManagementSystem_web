@@ -6,23 +6,23 @@
           <article class="article">
             <header class="article-info clearfix">
               <div class="author-info-block">
-                <router-link class="avatar" :to="{name:'/profile',query:{uid:newsInfo.author.uid}}">
-                  <img v-lazy="newsInfo.authorAvatar">
+                <router-link class="avatar" :to="{name:'/profile',query:{uid:topicInfo.author.uid}}">
+                  <img v-lazy="topicInfo.authorAvatar">
                 </router-link>
                 <div class="author-info-box">
                   <div>
-                    <router-link :to="{path:'/profile',query:{uid:newsInfo.author.uid}}" class="name">
-                      {{newsInfo.author.name}}
+                    <router-link :to="{path:'/profile',query:{uid:topicInfo.author.uid}}" class="name">
+                      {{topicInfo.author.name}}
                     </router-link>
                   </div>
-                  <time :datetime="newsInfo.datetime" itemprop="datePublished" class="publish-time">
-                    {{rTime(newsInfo.datetime)}}
+                  <time :datetime="topicInfo.datetime" itemprop="datePublished" class="publish-time">
+                    {{rTime(topicInfo.datetime)}}
                   </time>
                 </div>
               </div>
-              <h1 class="title">{{newsInfo.title}}</h1>
+              <h1 class="title">{{topicInfo.title}}</h1>
             </header>
-            <div class="article-content" v-html="newsInfo.content" ref="content"></div>
+            <div class="article-content" v-html="topicInfo.content" ref="content"></div>
           </article>
         </div>
         <div id="edit-window" v-if="editMode">
@@ -31,6 +31,7 @@
           </quillEditor>
         </div>
         <CollapsePanel class="sidebar-right"
+                       v-if="identity===3 || topicInfo.author.name===username"
                        @click.native="handleOnMouseClick(false,'title');handleOnMouseClick(false,'type')"
                        :show-close=true @onclose="handleOnClickClosePanel">
           <div class="panelContent">
@@ -144,8 +145,8 @@
     data() {
       return {
         // 利用vue-router传参
-        newsType: '',
-        newsInfo: {
+        topicType: '',
+        topicInfo: {
           title: '',
           author: {
             name: '',
@@ -189,13 +190,13 @@
         }).then((response) => {
           if (response.data.code === "SUCCESS" && response.data.data !== null) {
             // console.log(response.data.data)
-            this.newsInfo = response.data.data
+            this.topicInfo = response.data.data
             this.panelInfo.type = response.data.data.type
             this.panelInfo.title = response.data.data.title
             this.editMode = this.$route.query.hasOwnProperty('mode') && this.$route.query.mode === '1'
             document.title = `${response.data.data.title} - ${this.defaultTitle}`
             if (this.editMode) {
-              this.editContent = this.newsInfo.content
+              this.editContent = this.topicInfo.content
               this.setEditorHeight()
             }
             else {
@@ -292,8 +293,18 @@
         this.commentExtend = true
       },
       handleOnClickLikeButton(index) {
+        let plus
+        if (this.commentList[index].liked) {
+          plus = false
+          this.commentList[index].like--;
+        }
+        else {
+          plus = true
+          this.commentList[index].like++;
+        }
+        this.commentList[index].liked = !this.commentList[index].liked;
         axios({
-          url: apiRootPath + 'topic/setTopicLiked',
+          url: apiRootPath + 'topic/setCommentLiked',
           method: 'post',
           data: {
             "topicId": this.$route.params.topicid,
@@ -301,18 +312,27 @@
           }
         }).then((response) => {
           if (response.data.code === 'SUCCESS') {
-            if (this.commentList[index].liked) {
+            //success
+          }
+          else {
+            this.commentList[index].liked = !this.commentList[index].liked;
+            if (plus) {
               this.commentList[index].like--;
             }
             else {
               this.commentList[index].like++;
             }
-            this.commentList[index].liked = !this.commentList[index].liked;
-          }
-          else
             this.$message.warning(response.data.message)
+          }
         }).catch((error) => {
           this.$message.warning('阿哦，出现了一点问题')
+          this.commentList[index].liked = !this.commentList[index].liked;
+          if (plus) {
+            this.commentList[index].like--;
+          }
+          else {
+            this.commentList[index].like++;
+          }
           console.log(error)
         })
       },
@@ -359,11 +379,20 @@
     },
     computed: {
       watchNeeds() {
-        return this.$route.params.newstype + this.$route.params.newsid
+        return this.$route.params.topicid
       },
       ...mapState(['defaultTitle']),
       query() {
         return this.$route.query
+      },
+      identity() {
+        //0:,1:学生,2:老师,3:管理员
+        let identity = window.localStorage.getItem('identity')
+        return identity ? identity : 0
+      },
+      username() {
+        let username = window.localStorage.getItem('username')
+        return username ? username : '未登录'
       }
     },
     watch: {
@@ -372,7 +401,7 @@
       },
       query(val) {
         this.editMode = this.$route.query.hasOwnProperty('mode') && this.$route.query.mode === '1'
-        this.editContent = this.editContent !== null ? this.editContent : this.newsInfo.content
+        this.editContent = this.editContent !== null ? this.editContent : this.topicInfo.content
         this.setEditorHeight()
       }
     }
