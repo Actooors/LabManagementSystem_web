@@ -16,7 +16,7 @@
             {{item.time}}{{item.content}}
           </div>
           <div class="font" style="text-align: right;padding-right: 20%">
-            {{item.author.name}}
+            {{item.author}}
           </div>
           <div class="font" style="text-align: right;padding-right: 20%">
             {{item.publishTime}}
@@ -55,9 +55,12 @@
                 url: apiRootPath+'notice/allNotice',
                 method: 'get'
               }).then((response) => {
+                console.log("data");
+                console.log(response.data.data)
                 this.details = response.data.data
               }).catch((error) => {
                console.log(error)
+                console.log("有问题")
               })
           },
 
