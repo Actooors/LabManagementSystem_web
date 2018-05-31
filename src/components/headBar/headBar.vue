@@ -126,11 +126,13 @@
         localStorage.removeItem('uid')
         localStorage.removeItem('identity')
         localStorage.removeItem('loginTimes')
+        localStorage.removeItem('admin')
         this.$message({
           type: 'success',
           message: '注销成功!'
         });
         this.updateMiniProfile()
+        location.reload()
       },
       handleOnClickLoginButton() {
         axios({

@@ -45,7 +45,7 @@
               </div>
               <div style="text-align: center">
                 <router-link :to="{path:'/profile',query:{uid: member.author.uid}}">{{member.author.name}}</router-link><br/>
-                <span>{{member.position[0]}}</span>
+                <!--<span>{{member.position[0]}}</span>-->
               </div>
             </div>
           </div>
@@ -155,7 +155,21 @@
     background-color: rgba(255,255,255,0.9);
     padding-top: 10px;
   }
+  @media screen and (max-width: 624px) {
+    /*手机端*/
+    #memberItroduction {
+      top: 100px;
+    }
+  }
+  @media screen and (min-width: 625px) {
+    #memberItroduction {
+      top: 60px;
+    }
+  }
   #memberItroduction{
+    position: relative;
+    margin-bottom: 7em;
+    padding-bottom: 3em;
     background-image: url('../../assets/img/上海.jpg');
     background-size: cover;
   }
